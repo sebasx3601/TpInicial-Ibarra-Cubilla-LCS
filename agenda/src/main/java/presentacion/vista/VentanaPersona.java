@@ -20,7 +20,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtAltura;
 	private JTextField txtPiso;
 	private JTextField txtDepto;
-	private JTextField txtDireccionCorreo;
+	private JTextField txtDireccionEmail;
 	
 	public static VentanaPersona getInstance()
 	{
@@ -119,10 +119,10 @@ public class VentanaPersona extends JFrame
 		lblDireccionCorreo.setBounds(10, 329, 113, 14);
 		panel.add(lblDireccionCorreo);
 		
-		txtDireccionCorreo = new JTextField();
-		txtDireccionCorreo.setColumns(10);
-		txtDireccionCorreo.setBounds(133, 326, 164, 20);
-		panel.add(txtDireccionCorreo);
+		txtDireccionEmail = new JTextField();
+		txtDireccionEmail.setColumns(10);
+		txtDireccionEmail.setBounds(133, 326, 164, 20);
+		panel.add(txtDireccionEmail);
 		
 		JLabel lbltipoContacto = new JLabel("Tipo de contacto");
 		lbltipoContacto.setBounds(10, 379, 113, 14);
@@ -175,6 +175,33 @@ public class VentanaPersona extends JFrame
 		return btnAgregarPersona;
 	}
 
+	public JTextField getTxtCalle() 
+	{
+		return txtCalle;
+	}
+	
+	public JTextField getTxtAltura() 
+	{
+		return txtAltura;
+	}
+	
+	public JTextField getTxtPiso() 
+	{
+		return txtPiso;
+	}
+	
+	public JTextField getTxtDepto() 
+	{
+		return txtDepto;
+	}
+	
+	public JTextField getTxtDireccionEmail() 
+	{
+		return txtDireccionEmail;
+	}
+	
+	//FALTA PROVINCIA PAIS LOCALIDAD FECHA DE CUMPLEAÑOS Y TIPO DE CONTACTO
+	
 	public void cerrar()
 	{
 		this.txtNombre.setText(null);
