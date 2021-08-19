@@ -11,6 +11,8 @@ import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.PersonaDAO;
 import dto.PersonaDTO;
 
+import java. util. Date;
+
 public class PersonaDAOSQL implements PersonaDAO
 {
 	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
@@ -96,6 +98,6 @@ public class PersonaDAOSQL implements PersonaDAO
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel);
+		return new PersonaDTO(id, nombre, tel, "", "", "", "", "", "", new Date(), 0);
 	}
 }
