@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import dto.PersonaDTO;
+import dto.TipoContacto;
 
 import javax.swing.JButton;
 
@@ -22,11 +22,11 @@ import java.awt.event.ActionEvent;
 public class VistaContacto
 {
 	private JFrame frame;
-	private JTable tablaPersonas;
+	private JTable tablaTipoContacto;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
-	private JButton btnReporte;
-	private DefaultTableModel modelPersonas;
+	private JButton btnSalir;
+	private DefaultTableModel modelTipoContacto;
 	private  String[] nombreColumnas = {"Id tipo de contacto","Nombre de contacto"};
 
 	public VistaContacto() 
@@ -48,19 +48,19 @@ public class VistaContacto
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 414, 182);
-		panel.add(spPersonas);
+		JScrollPane spTipoContacto = new JScrollPane();
+		spTipoContacto.setBounds(10, 11, 414, 182);
+		panel.add(spTipoContacto);
 		
-		modelPersonas = new DefaultTableModel(null,nombreColumnas);
-		tablaPersonas = new JTable(modelPersonas);
+		modelTipoContacto = new DefaultTableModel(null,nombreColumnas);
+		tablaTipoContacto = new JTable(modelTipoContacto);
 		
-		tablaPersonas.getColumnModel().getColumn(0).setPreferredWidth(103);
-		tablaPersonas.getColumnModel().getColumn(0).setResizable(false);
-		tablaPersonas.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaPersonas.getColumnModel().getColumn(1).setResizable(false);
+		tablaTipoContacto.getColumnModel().getColumn(0).setPreferredWidth(103);
+		tablaTipoContacto.getColumnModel().getColumn(0).setResizable(false);
+		tablaTipoContacto.getColumnModel().getColumn(1).setPreferredWidth(100);
+		tablaTipoContacto.getColumnModel().getColumn(1).setResizable(false);
 		
-		spPersonas.setViewportView(tablaPersonas);
+		spTipoContacto.setViewportView(tablaTipoContacto);
 		
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(10, 228, 89, 23);
@@ -74,13 +74,13 @@ public class VistaContacto
 		btnBorrar.setBounds(208, 228, 89, 23);
 		panel.add(btnBorrar);
 		
-		btnReporte = new JButton("Salir");
-		btnReporte.addActionListener(new ActionListener() {
+		btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnReporte.setBounds(307, 228, 89, 23);
-		panel.add(btnReporte);
+		btnSalir.setBounds(307, 228, 89, 23);
+		panel.add(btnSalir);
 	}
 	
 	public void show()
@@ -91,7 +91,7 @@ public class VistaContacto
 			@Override
 		    public void windowClosing(WindowEvent e) {
 		        int confirm = JOptionPane.showOptionDialog(
-		             null, "¿Estás seguro que quieres salir de la Agenda?", 
+		             null, "¿Estás seguro que quieres salir de tipo de contacto?", 
 		             "Confirmación", JOptionPane.YES_NO_OPTION,
 		             JOptionPane.QUESTION_MESSAGE, null, null, null);
 		        if (confirm == 0) {
@@ -113,19 +113,19 @@ public class VistaContacto
 		return btnBorrar;
 	}
 	
-	public JButton getBtnReporte() 
+	public JButton getBtnSalir() 
 	{
-		return btnReporte;
+		return btnSalir;
 	}
 	
-	public DefaultTableModel getModelPersonas() 
+	public DefaultTableModel getModelTipoContacto() 
 	{
-		return modelPersonas;
+		return modelTipoContacto;
 	}
 	
 	public JTable getTablaPersonas()
 	{
-		return tablaPersonas;
+		return tablaTipoContacto;
 	}
 
 	public String[] getNombreColumnas() 
@@ -134,17 +134,17 @@ public class VistaContacto
 	}
 
 
-	public void llenarTabla(List<PersonaDTO> personasEnTabla) {
-		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
-		this.getModelPersonas().setColumnCount(0);
-		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
+	public void llenarTabla(List<TipoContacto> TipoContactoEnTabla) {
+		this.getModelTipoContacto().setRowCount(0); //Para vaciar la tabla
+		this.getModelTipoContacto().setColumnCount(0);
+		this.getModelTipoContacto().setColumnIdentifiers(this.getNombreColumnas());
 
-		for (PersonaDTO p : personasEnTabla)
+		for (TipoContacto p : TipoContactoEnTabla)
 		{
-			String nombre = p.getNombre();
-			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
-			this.getModelPersonas().addRow(fila);
+			String idTipoContacto = p.getIDTipoContacto();
+			String nombreContacto = p.getNombreContacto();
+			Object[] fila = {idTipoContacto, nombreContacto};
+			this.getModelTipoContacto().addRow(fila);
 		}
 		
 	}
