@@ -38,6 +38,7 @@ public class Agenda
 	public List<TipoContactoDTO> obtenerTiposDeContacto()
 	{
 		return this.tiposDeContacto.readAll();		
-	} 
+	}
+	
 	
 }
