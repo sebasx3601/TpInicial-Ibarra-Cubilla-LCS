@@ -134,7 +134,7 @@ public class VistaContacto
 	}
 
 
-	public void llenarTabla(List<TipoContacto> TipoContactoEnTabla) {
+/*	public void llenarTabla(List<TipoContacto> TipoContactoEnTabla) {
 		this.getModelTipoContacto().setRowCount(0); //Para vaciar la tabla
 		this.getModelTipoContacto().setColumnCount(0);
 		this.getModelTipoContacto().setColumnIdentifiers(this.getNombreColumnas());
@@ -147,5 +147,5 @@ public class VistaContacto
 			this.getModelTipoContacto().addRow(fila);
 		}
 		
-	}
+	}*/
 }
