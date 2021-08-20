@@ -13,6 +13,7 @@ import dto.TipoContactoDTO;
 
 import javax.swing.JComboBox;
 
+
 public class VentanaPersona extends JFrame 
 {
 	private static final long serialVersionUID = 1L;

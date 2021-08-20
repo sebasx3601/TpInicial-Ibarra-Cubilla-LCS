@@ -1,5 +1,6 @@
 package dto;
 
+
 public class TipoContactoDTO {
 	
 	private int idContacto;
