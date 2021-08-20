@@ -13,6 +13,7 @@ import persistencia.dao.interfaz.TipoContactoDAO;
 public class TipoContactoDAOSQL implements TipoContactoDAO {
 
 	private static final String insert = "INSERT INTO tipo_contacto(IdContacto, NombreContacto) VALUES(?, ?)";
+	private static final String delete = "DELETE FROM tipo_contacto WHERE IdContacto = ?";
 	
 	public boolean insert(TipoContactoDTO tipoContacto) {
 		PreparedStatement statement;
@@ -43,9 +44,23 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(TipoContactoDTO tipoContacto) {
+	public boolean delete(TipoContactoDTO tipoContactoAEliminar) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
-		
+		try 
+		{
+			statement = conexion.prepareStatement(delete);
+			statement.setString(1, Integer.toString(tipoContactoAEliminar.getIdContacto()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		}catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 		return isdeleteExitoso;
 	}
 	
@@ -58,6 +73,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 	public static void main(String[] args) 
 	{
 		TipoContactoDAOSQL hola = new TipoContactoDAOSQL();
-		hola.insert(new TipoContactoDTO(5,"Enemigo"));
+		//hola.insert(new TipoContactoDTO(5,"Enemigo"));
+		//hola.delete(new TipoContactoDTO(5,"Enemigo"));
 	}
 }
