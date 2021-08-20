@@ -12,7 +12,8 @@ public class Agenda
 {
 	private PersonaDAO persona;	
 
-	private TipoContactoDAO tiposDeContacto;
+	
+	private TipoContactoDAO tiposDeContacto; //el merge por alguna razon lo borra
 	
 	public Agenda(DAOAbstractFactory metodo_persistencia)
 	{
