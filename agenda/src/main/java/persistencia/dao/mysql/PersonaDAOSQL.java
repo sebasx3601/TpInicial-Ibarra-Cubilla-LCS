@@ -15,7 +15,8 @@ import java. util. Date;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, "
+			+ "piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 		
@@ -30,6 +31,17 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(1, persona.getIdPersona());
 			statement.setString(2, persona.getNombre());
 			statement.setString(3, persona.getTelefono());
+			
+			statement.setString(4, persona.getCalle());
+			statement.setString(5, persona.getAltura());
+			statement.setString(6, persona.getPiso());
+			statement.setString(7, persona.getDepto());
+			statement.setInt(8, persona.getLocalidad());
+			statement.setString(9, persona.getDireccionEmail());
+			//java. sql. Date fecha;
+			statement.setString(10, "1999-05-27"); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
+			statement.setInt(11, persona.getTipoContacto());
+			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -98,6 +110,16 @@ public class PersonaDAOSQL implements PersonaDAO
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel, "", "", "", "", "", "", new Date(), 0);
+		
+		String calle = resultSet.getString("Calle");
+		String altura = resultSet.getString("Altura");
+		String piso = resultSet.getString("Altura");
+		String depto = resultSet.getString("Depto");
+		int localidad = resultSet.getInt("Localidad");
+		String direccionEmail = resultSet.getString("DireccionEmail");
+		Date fechaCumple = resultSet.getDate("fechaCumple");
+		int tipoContacto = resultSet.getInt("tipoContacto");
+		
+		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto);
 	}
 }

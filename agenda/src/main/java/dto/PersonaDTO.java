@@ -11,13 +11,13 @@ public class PersonaDTO
 	private String altura;
 	private String piso;
 	private String depto;
-	private String localidad;
+	private int localidad;
 	private String direccionEmail;
 	private Date fechaCumple;
 	private int tipoContacto;
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, String altura,
-			String piso, String depto, String localidad, String direccionEmail, Date fechaCumple, int tipoContacto)
+			String piso, String depto, int localidad, String direccionEmail, Date fechaCumple, int tipoContacto)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -94,11 +94,11 @@ public class PersonaDTO
 		this.depto = depto;
 	}
 
-	public String getLocalidad() {
+	public int getLocalidad() {
 		return localidad;
 	}
 
-	public void setLocalidad(String localidad) {
+	public void setLocalidad(int localidad) {
 		this.localidad = localidad;
 	}
 
