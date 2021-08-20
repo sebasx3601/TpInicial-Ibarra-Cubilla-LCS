@@ -96,4 +96,17 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 		return new TipoContactoDTO(id,nombre);
 	}
 	
+	
+	public static void main(String[] args) 
+	{
+		TipoContactoDAOSQL hola = new TipoContactoDAOSQL();
+		//hola.insert(new TipoContactoDTO(5,"Enemigo"));
+		//hola.delete(new TipoContactoDTO(5,"Enemigo"));
+		List<TipoContactoDTO> lista = hola.readAll();
+		for(TipoContactoDTO dato : lista) {
+			System.out.println(dato.getIdContacto() +" "+dato.getNombreTipoContacto());
+		}
+		
+		
+	}
 }
