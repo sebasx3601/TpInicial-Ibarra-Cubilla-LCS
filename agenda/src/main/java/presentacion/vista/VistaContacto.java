@@ -16,6 +16,8 @@ import dto.PersonaDTO;
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VistaContacto
 {
@@ -72,7 +74,11 @@ public class VistaContacto
 		btnBorrar.setBounds(208, 228, 89, 23);
 		panel.add(btnBorrar);
 		
-		btnReporte = new JButton("Reporte");
+		btnReporte = new JButton("Salir");
+		btnReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnReporte.setBounds(307, 228, 89, 23);
 		panel.add(btnReporte);
 	}
