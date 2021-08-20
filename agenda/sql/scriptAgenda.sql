@@ -15,3 +15,12 @@ CREATE TABLE `personas`
   `fechaCumple` DATE NOT NULL,
   PRIMARY KEY (`idPersona`)
 );
+CREATE TABLE `tipo_contacto`
+(
+	`IdContacto` int(11) NOT NULL AUTO_INCREMENT,
+	`NombreContacto` varchar(20) NOT NULL,
+	PRIMARY KEY (`IdContacto`)
+);
+insert into tipo_contacto values(1,'trabajo');
+insert into tipo_contacto values(2,'familia');
+insert into tipo_contacto values(3,'amigos');
