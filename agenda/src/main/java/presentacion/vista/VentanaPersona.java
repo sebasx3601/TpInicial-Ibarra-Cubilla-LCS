@@ -1,11 +1,16 @@
 package presentacion.vista;
 
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import dto.TipoContactoDTO;
+
 import javax.swing.JComboBox;
 
 public class VentanaPersona extends JFrame 
@@ -22,7 +27,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtDepto;
 	private JTextField txtDireccionEmail;
 	
-	private JComboBox comboBoxTipoContacto;
+	private JComboBox<String> comboBoxTipoContacto = new JComboBox<String>();;
 	
 	public static VentanaPersona getInstance()
 	{
@@ -202,10 +207,18 @@ public class VentanaPersona extends JFrame
 		return txtDireccionEmail;
 	}
 	
-	public JComboBox getComboBoxTipoContacto() {
+	public JComboBox<String> getComboBoxTipoContacto() {
 		return comboBoxTipoContacto;
 	}
 	
+	public void llenarComboBoxTipoContacto(List<TipoContactoDTO> tiposDeContacto) {
+		JComboBox<String> comboBox = this.getComboBoxTipoContacto();
+		for (TipoContactoDTO t : tiposDeContacto)
+		{
+			comboBox.addItem(t.getNombreTipoContacto());
+			System.out.println(t.getIdContacto() +" "+t.getNombreTipoContacto());
+		}
+	}
 	//FALTA PROVINCIA PAIS LOCALIDAD FECHA DE CUMPLEAÑOS Y TIPO DE CONTACTO
 	
 	public void cerrar()

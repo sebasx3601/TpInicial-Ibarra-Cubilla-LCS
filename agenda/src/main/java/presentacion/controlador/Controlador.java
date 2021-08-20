@@ -10,6 +10,7 @@ import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.PersonaDTO;
+import dto.TipoContactoDTO;
 
 public class Controlador implements ActionListener
 {
@@ -17,6 +18,8 @@ public class Controlador implements ActionListener
 		private List<PersonaDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona; 
 		private Agenda agenda;
+		
+		private List<TipoContactoDTO> tiposDeContacto;
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -30,6 +33,7 @@ public class Controlador implements ActionListener
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
+			llenarComboBoxTipoContacto();
 			this.ventanaPersona.mostrarVentana();
 		}
 
@@ -78,6 +82,12 @@ public class Controlador implements ActionListener
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
 			this.vista.llenarTabla(this.personasEnTabla);
+		}
+		
+		private void llenarComboBoxTipoContacto()
+		{
+			this.tiposDeContacto = agenda.obtenerTiposDeContacto();
+			this.ventanaPersona.llenarComboBoxTipoContacto(tiposDeContacto);
 		}
 
 		@Override

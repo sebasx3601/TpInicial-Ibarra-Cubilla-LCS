@@ -96,7 +96,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 		return new TipoContactoDTO(id,nombre);
 	}
 	
-	
+	/*
 	public static void main(String[] args) 
 	{
 		TipoContactoDAOSQL hola = new TipoContactoDAOSQL();
@@ -108,5 +108,5 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 		}
 		
 		
-	}
+	}*/
 }
