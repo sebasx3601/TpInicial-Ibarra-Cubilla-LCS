@@ -5,6 +5,11 @@ public class TipoContactoDTO {
 	private int idContacto;
 	private String nombreTipoContacto;
 	
+	public TipoContactoDTO(int id, String nombre) {
+		idContacto = id;
+		nombreTipoContacto = nombre;
+	}
+	
 	public int getIdContacto() {
 		return idContacto;
 	}
