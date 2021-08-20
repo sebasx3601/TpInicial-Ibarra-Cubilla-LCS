@@ -5,11 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import dto.PersonaDTO;
+import dto.TipoContactoDTO;
 
 public class Controlador implements ActionListener
 {
@@ -17,6 +20,8 @@ public class Controlador implements ActionListener
 		private List<PersonaDTO> personasEnTabla;
 		private VentanaPersona ventanaPersona; 
 		private Agenda agenda;
+		
+		private List<TipoContactoDTO> tiposDeContacto;
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -30,6 +35,8 @@ public class Controlador implements ActionListener
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
+			this.ventanaPersona.reiniciarComboBoxTipoContacto();
+			llenarComboBoxTipoContacto();
 			this.ventanaPersona.mostrarVentana();
 		}
 
@@ -43,7 +50,8 @@ public class Controlador implements ActionListener
 			int localidad = 1; //FALTA
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
 			Date fechaCumple = new Date(); //FALTA
-			int tipoContacto = 0; //FALTA
+			
+			int tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
 			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
 					direccionEmail, fechaCumple, tipoContacto);
@@ -78,6 +86,12 @@ public class Controlador implements ActionListener
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
 			this.vista.llenarTabla(this.personasEnTabla);
+		}
+		
+		private void llenarComboBoxTipoContacto()
+		{
+			this.tiposDeContacto = agenda.obtenerTiposDeContacto();
+			this.ventanaPersona.llenarComboBoxTipoContacto(tiposDeContacto);
 		}
 
 		@Override
