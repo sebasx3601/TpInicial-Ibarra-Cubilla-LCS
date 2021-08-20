@@ -41,7 +41,7 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.mostrarVentana();
 		}
 
-		private void guardarPersona(ActionEvent p) {
+		private void guardarPersona(ActionEvent p) { //Parece que lo ignora github
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String calle = ventanaPersona.getTxtCalle().getText();
@@ -52,7 +52,7 @@ public class Controlador implements ActionListener
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
 			Date fechaCumple = new Date(); //FALTA
 			
-			int tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
+			int tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto(); //Parece que lo ignora github
 			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
 					direccionEmail, fechaCumple, tipoContacto);
@@ -89,7 +89,7 @@ public class Controlador implements ActionListener
 			this.vista.llenarTabla(this.personasEnTabla);
 		}
 		
-		private void llenarComboBoxTipoContacto()
+		private void llenarComboBoxTipoContacto()//Parece que lo ignora github
 		{
 			this.tiposDeContacto = agenda.obtenerTiposDeContacto();
 			this.ventanaPersona.llenarComboBoxTipoContacto(tiposDeContacto);

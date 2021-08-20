@@ -37,7 +37,7 @@ public class Agenda
 		return this.persona.readAll();		
 	}
 	
-	public List<TipoContactoDTO> obtenerTiposDeContacto()
+	public List<TipoContactoDTO> obtenerTiposDeContacto()//Parece que lo ignora github
 	{
 		return this.tiposDeContacto.readAll();		
 	}

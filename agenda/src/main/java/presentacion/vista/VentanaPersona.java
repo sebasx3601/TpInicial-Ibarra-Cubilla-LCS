@@ -208,11 +208,11 @@ public class VentanaPersona extends JFrame
 		return txtDireccionEmail;
 	}
 	
-	public JComboBox<String> getComboBoxTipoContacto() {
+	public JComboBox<String> getComboBoxTipoContacto() {//Parece que lo ignora github
 		return comboBoxTipoContacto;
 	}
 	
-	public void llenarComboBoxTipoContacto(List<TipoContactoDTO> tiposDeContacto) {
+	public void llenarComboBoxTipoContacto(List<TipoContactoDTO> tiposDeContacto) {//Parece que lo ignora github
 		JComboBox<String> comboBox = this.getComboBoxTipoContacto();
 		for (TipoContactoDTO t : tiposDeContacto)
 		{
@@ -221,12 +221,12 @@ public class VentanaPersona extends JFrame
 		}
 	}
 	
-	public int getValorSeleccionadoTipoContacto() {
+	public int getValorSeleccionadoTipoContacto() {//Parece que lo ignora github
 		JComboBox<String> comboBox = this.getComboBoxTipoContacto();
 		return comboBox.getSelectedIndex()+1;
 	}
 	
-	public void reiniciarComboBoxTipoContacto() {
+	public void reiniciarComboBoxTipoContacto() {//Parece que lo ignora github
 		this.comboBoxTipoContacto.removeAllItems();
 	}
 	//FALTA PROVINCIA PAIS LOCALIDAD FECHA DE CUMPLEAÑOS Y TIPO DE CONTACTO
