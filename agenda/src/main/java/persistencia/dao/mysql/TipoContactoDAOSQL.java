@@ -2,6 +2,7 @@ package persistencia.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 
 	private static final String insert = "INSERT INTO tipo_contacto(IdContacto, NombreContacto) VALUES(?, ?)";
 	private static final String delete = "DELETE FROM tipo_contacto WHERE IdContacto = ?";
+	private static final String readall = "SELECT * FROM tipo_contacto";
 	
 	public boolean insert(TipoContactoDTO tipoContacto) {
 		PreparedStatement statement;
@@ -67,13 +69,44 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 	public List<TipoContactoDTO> readAll() {
 		ArrayList<TipoContactoDTO> personas = new ArrayList<TipoContactoDTO>();
 		
-		return personas;
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<TipoContactoDTO> tiposContactos = new ArrayList<TipoContactoDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				tiposContactos.add(getTipoContactoDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return tiposContactos;
 	}
+	
+	private TipoContactoDTO getTipoContactoDTO(ResultSet resultSet) throws SQLException
+	{
+		int id = resultSet.getInt("idContacto");
+		String nombre = resultSet.getString("NombreContacto");
+		return new TipoContactoDTO(id,nombre);
+	}
+	
 	
 	public static void main(String[] args) 
 	{
 		TipoContactoDAOSQL hola = new TipoContactoDAOSQL();
 		//hola.insert(new TipoContactoDTO(5,"Enemigo"));
 		//hola.delete(new TipoContactoDTO(5,"Enemigo"));
+		List<TipoContactoDTO> lista = hola.readAll();
+		for(TipoContactoDTO dato : lista) {
+			System.out.println(dato.getIdContacto() +" "+dato.getNombreTipoContacto());
+		}
+		
+		
 	}
 }
