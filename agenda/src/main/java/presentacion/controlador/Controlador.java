@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
@@ -33,6 +35,7 @@ public class Controlador implements ActionListener
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
+			this.ventanaPersona.reiniciarComboBoxTipoContacto();
 			llenarComboBoxTipoContacto();
 			this.ventanaPersona.mostrarVentana();
 		}
@@ -47,7 +50,8 @@ public class Controlador implements ActionListener
 			int localidad = 1; //FALTA
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
 			Date fechaCumple = new Date(); //FALTA
-			int tipoContacto = 0; //FALTA
+			
+			int tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
 			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
 					direccionEmail, fechaCumple, tipoContacto);

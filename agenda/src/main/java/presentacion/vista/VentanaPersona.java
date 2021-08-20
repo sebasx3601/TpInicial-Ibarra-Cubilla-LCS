@@ -27,7 +27,7 @@ public class VentanaPersona extends JFrame
 	private JTextField txtDepto;
 	private JTextField txtDireccionEmail;
 	
-	private JComboBox<String> comboBoxTipoContacto = new JComboBox<String>();;
+	private JComboBox<String> comboBoxTipoContacto;
 	
 	public static VentanaPersona getInstance()
 	{
@@ -218,6 +218,15 @@ public class VentanaPersona extends JFrame
 			comboBox.addItem(t.getNombreTipoContacto());
 			System.out.println(t.getIdContacto() +" "+t.getNombreTipoContacto());
 		}
+	}
+	
+	public int getValorSeleccionadoTipoContacto() {
+		JComboBox<String> comboBox = this.getComboBoxTipoContacto();
+		return comboBox.getSelectedIndex()+1;
+	}
+	
+	public void reiniciarComboBoxTipoContacto() {
+		this.comboBoxTipoContacto.removeAllItems();
 	}
 	//FALTA PROVINCIA PAIS LOCALIDAD FECHA DE CUMPLEAÑOS Y TIPO DE CONTACTO
 	
