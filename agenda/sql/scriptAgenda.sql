@@ -24,3 +24,24 @@ CREATE TABLE `tipo_contacto`
 insert into tipo_contacto values(1,'trabajo');
 insert into tipo_contacto values(2,'familia');
 insert into tipo_contacto values(3,'amigos');
+
+CREATE TABLE `pais`
+(
+	`IdPais` int(11) NOT NULL AUTO_INCREMENT,
+	`NombrePais` varchar(20) NOT NULL,
+	PRIMARY KEY (`IdPais`)
+);
+CREATE TABLE `provincia`
+(
+	`IdProvincia` int(11) NOT NULL AUTO_INCREMENT,
+	`NombreProvincia` varchar(20) NOT NULL,
+	`IdPais` varchar(20) NOT NULL,
+	PRIMARY KEY (`IdProvincia`)
+);
+CREATE TABLE `localidad`
+(
+	`IdLocalidad` int(11) NOT NULL AUTO_INCREMENT,
+	`NombreLocalidad` varchar(20) NOT NULL,
+	`IdProvincia` varchar(20) NOT NULL,
+	PRIMARY KEY (`IdLocalidad`)
+);
