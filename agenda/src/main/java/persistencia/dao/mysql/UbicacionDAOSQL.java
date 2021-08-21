@@ -1,5 +1,6 @@
 package persistencia.dao.mysql;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +29,32 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	private static final String readallP = "SELECT * FROM localidad";
 
 	public boolean insertPais(PaisDTO pais) {
-		return true;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(insertPais);
+			statement.setInt(1, pais.getId());
+			statement.setString(2, pais.getNombrePais());
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
 	}
 	
 	public boolean deletePais(PaisDTO pais_a_eliminar) {
