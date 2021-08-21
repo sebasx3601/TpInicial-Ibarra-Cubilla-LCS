@@ -10,6 +10,17 @@ import persistencia.dao.interfaz.UbicacionDAO;
 
 public class UbicacionDAOSQL implements UbicacionDAO
 {
+	private static final String insertPais = "INSERT INTO pais(IdPais, NombrePais) VALUES(?, ?)";
+	private static final String deletePais = "DELETE FROM pais WHERE IdPais = ?";
+	private static final String readallPais = "SELECT * FROM pais";
+	
+	private static final String insertProvincia = "INSERT INTO provincia(IdProvincia, NombreProvincia, IdPais) VALUES(?, ?, ?)";
+	private static final String deleteProvincia = "DELETE FROM provincia WHERE IdProvincia = ?";
+	private static final String readallProvincia = "SELECT * FROM provincia";
+	
+	private static final String insertP = "INSERT INTO localidad(IdLocalidad, NombreLocalidad, IdProvincia) VALUES(?, ?, ?)";
+	private static final String deleteP = "DELETE FROM localidad WHERE IdLocalidad = ?";
+	private static final String readallP = "SELECT * FROM localidad";
 
 	public boolean insertPais(PaisDTO pais) {
 		return true;
