@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import dto.TipoContacto;
+import dto.TipoContactoDTO;
 
 import javax.swing.JButton;
 
