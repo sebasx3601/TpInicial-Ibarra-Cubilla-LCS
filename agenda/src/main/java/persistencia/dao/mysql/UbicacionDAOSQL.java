@@ -58,7 +58,24 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	}
 	
 	public boolean deletePais(PaisDTO pais_a_eliminar) {
-		return true;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(deletePais);
+			statement.setString(1, Integer.toString(pais_a_eliminar.getId()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
 	}
 	
 	public List<PaisDTO> readAllPais(){
