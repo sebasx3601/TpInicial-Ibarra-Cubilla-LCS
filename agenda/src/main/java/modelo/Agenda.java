@@ -6,6 +6,7 @@ import dto.TipoContactoDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.PersonaDAO;
 import persistencia.dao.interfaz.TipoContactoDAO;
+import persistencia.dao.interfaz.UbicacionDAO;
 
 
 
@@ -16,10 +17,13 @@ public class Agenda
 	
 	private TipoContactoDAO tiposDeContacto; //el merge por alguna razon lo borra
 	
+	private UbicacionDAO ubicacion;
+	
 	public Agenda(DAOAbstractFactory metodo_persistencia)
 	{
 		this.persona = metodo_persistencia.createPersonaDAO();
 		this.tiposDeContacto =  metodo_persistencia.createTipoContactoDAO();
+		this.ubicacion = metodo_persistencia.createUbicacionDAO();
 	}
 	
 	public void agregarPersona(PersonaDTO nuevaPersona)
