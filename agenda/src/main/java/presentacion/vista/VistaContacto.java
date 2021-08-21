@@ -134,18 +134,18 @@ public class VistaContacto
 	}
 
 
-/*	public void llenarTabla(List<TipoContacto> TipoContactoEnTabla) {
-		this.getModelTipoContacto().setRowCount(0); //Para vaciar la tabla
+	public void llenarTabla(List<TipoContactoDTO> TipoContactoEnTabla) {
+		this.getModelTipoContacto().setRowCount(0);
 		this.getModelTipoContacto().setColumnCount(0);
 		this.getModelTipoContacto().setColumnIdentifiers(this.getNombreColumnas());
 
-		for (TipoContacto p : TipoContactoEnTabla)
+		for (TipoContactoDTO p : TipoContactoEnTabla)
 		{
-			String idTipoContacto = p.getIDTipoContacto();
-			String nombreContacto = p.getNombreContacto();
+			String idTipoContacto = String.valueOf(p.getIdContacto());
+			String nombreContacto = p.getNombreTipoContacto();
 			Object[] fila = {idTipoContacto, nombreContacto};
 			this.getModelTipoContacto().addRow(fila);
 		}
 		
-	}*/
+	}
 }

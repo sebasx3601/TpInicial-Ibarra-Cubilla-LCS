@@ -12,7 +12,7 @@ import presentacion.vista.VistaContacto;
 public class ControladorTipoContacto {
 	
 	private VistaContacto vista;
-	private List<TipoContactoDTO> personasEnTabla;
+	private List<TipoContactoDTO> tiposContacto;
 	private Agenda agenda;
 	private VentanaAgregarTipoContacto ventanaContacto;
 	
@@ -24,6 +24,7 @@ public class ControladorTipoContacto {
 		this.ventanaContacto = VentanaAgregarTipoContacto.getInstance();
 		this.ventanaContacto.getBtnAgregarContacto().addActionListener(p->guardarTipoContacto(p));
 		this.agenda = agenda;
+		refrescarTabla();
 	}
 	
 	private void mostrarVentanaAgregarTipoContacto(ActionEvent a) {
@@ -41,11 +42,12 @@ public class ControladorTipoContacto {
 		TipoContactoDTO nuevoContacto = new TipoContactoDTO(0,contacto);
 		this.agenda.agregarTipoContacto(nuevoContacto);
 		this.ventanaContacto.cerrar();
+		refrescarTabla();
 	}
 	
 	private boolean existeTipoContacto(String nombreTipoContacto) {
 		boolean existe = false;
-		personasEnTabla = agenda.obtenerTiposDeContacto();
+		this.tiposContacto = agenda.obtenerTiposDeContacto();
 		for(TipoContactoDTO t: agenda.obtenerTiposDeContacto()) {
 			if(t.getNombreTipoContacto().equals(nombreTipoContacto)) {
 				existe = true;
@@ -64,7 +66,14 @@ public class ControladorTipoContacto {
 	
 	public void inicializar()
 	{
+		refrescarTabla();
 		this.vista.show();
+	}
+	
+	private void refrescarTabla()
+	{
+		this.tiposContacto = agenda.obtenerTiposDeContacto();
+		this.vista.llenarTabla(this.tiposContacto);
 	}
 
 }
