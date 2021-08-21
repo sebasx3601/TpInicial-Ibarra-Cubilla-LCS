@@ -1,11 +1,16 @@
 package persistencia.dao.mysql;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
+import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.UbicacionDAO;
 
 public class UbicacionDAOSQL implements UbicacionDAO
@@ -31,8 +36,32 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	}
 	
 	public List<PaisDTO> readAllPais(){
+		PreparedStatement statement;
+		ResultSet resultSet;
 		List<PaisDTO> res = new ArrayList<PaisDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallPais);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				System.out.println(getPersonaDTO(resultSet).getId() + " " + getPersonaDTO(resultSet).getNombrePais());
+				res.add(getPersonaDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 		return res;
+	}
+	
+	private PaisDTO getPersonaDTO(ResultSet resultSet) throws SQLException
+	{
+		int id = resultSet.getInt("IdPais");
+		String nombre = resultSet.getString("NombrePais");
+		return new PaisDTO(id, nombre);
 	}
 	
 	public boolean insertProvincia(ProvinciaDTO provincia) {
