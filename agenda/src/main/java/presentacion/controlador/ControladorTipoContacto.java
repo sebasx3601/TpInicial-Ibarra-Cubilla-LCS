@@ -57,7 +57,13 @@ public class ControladorTipoContacto {
 	}
 	
 	private void borrarTipoContacto(ActionEvent a) {
+		int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+		for (int fila : filasSeleccionadas)
+		{
+			this.agenda.borrarTipoContacto(this.tiposContacto.get(fila));
+		}
 		
+		this.refrescarTabla();
 	}
 	
 	private void ventanaAgregarPersona() {
