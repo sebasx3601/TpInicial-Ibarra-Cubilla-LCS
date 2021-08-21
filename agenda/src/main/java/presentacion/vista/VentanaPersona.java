@@ -226,6 +226,11 @@ public class VentanaPersona extends JFrame
 		return comboBox.getSelectedIndex()+1;
 	}
 	
+	public String getSeleccionadoTipoContacto() {//Parece que lo ignora github
+		JComboBox<String> comboBox = this.getComboBoxTipoContacto();
+		return String.valueOf(comboBox.getSelectedItem());
+	}
+	
 	public void reiniciarComboBoxTipoContacto() {//Parece que lo ignora github
 		this.comboBoxTipoContacto.removeAllItems();
 	}

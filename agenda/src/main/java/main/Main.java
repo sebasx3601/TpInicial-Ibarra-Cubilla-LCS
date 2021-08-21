@@ -19,8 +19,8 @@ public class Main
 		Controlador controlador = new Controlador(vista, modelo);
 		controlador.inicializar();
 		
-		//ControladorTipoContacto contro = new ControladorTipoContacto(new VistaContacto(), modelo);
-		//contro.inicializar();
+		ControladorTipoContacto contro = new ControladorTipoContacto(new VistaContacto(), modelo);
+		contro.inicializar();
 		
 	}
 }

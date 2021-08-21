@@ -52,13 +52,27 @@ public class Controlador implements ActionListener
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
 			Date fechaCumple = new Date(); //FALTA
 			
-			int tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto(); //Parece que lo ignora github
+			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
+			String tipoContacto = ventanaPersona.getSeleccionadoTipoContacto(); //Parece que lo ignora github
+			int intTipoContacto = obtenerIdTipoContacto(tipoContacto);
+			
 			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
-					direccionEmail, fechaCumple, tipoContacto);
+					direccionEmail, fechaCumple, intTipoContacto);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
+		}
+		
+		private int obtenerIdTipoContacto(String tipoContacto) {
+			int intTipoContacto = 0;
+			List<TipoContactoDTO> listaDeTiposContacto = agenda.obtenerTiposDeContacto();
+			for(TipoContactoDTO l: listaDeTiposContacto) {
+				if(tipoContacto.equals(l.getNombreTipoContacto())) {
+					intTipoContacto = l.getIdContacto();
+				}
+			}
+			return intTipoContacto;
 		}
 
 		private void mostrarReporte(ActionEvent r) {
