@@ -72,8 +72,8 @@ public class UbicacionDAOSQL implements UbicacionDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				System.out.println(getPersonaDTO(resultSet).getId() + " " + getPersonaDTO(resultSet).getNombrePais());
-				res.add(getPersonaDTO(resultSet));
+				System.out.println(getPaisDTO(resultSet).getId() + " " + getPaisDTO(resultSet).getNombrePais());
+				res.add(getPaisDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
@@ -83,7 +83,7 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		return res;
 	}
 	
-	private PaisDTO getPersonaDTO(ResultSet resultSet) throws SQLException
+	private PaisDTO getPaisDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("IdPais");
 		String nombre = resultSet.getString("NombrePais");
