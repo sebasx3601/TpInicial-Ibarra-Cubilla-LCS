@@ -42,5 +42,14 @@ public class Agenda
 		return this.tiposDeContacto.readAll();		
 	}
 	
+	public void agregarPersona(TipoContactoDTO tipoContacto_a_eliminar)
+	{
+		this.tiposDeContacto.insert(tipoContacto_a_eliminar);
+	}
+
+	public void borrarPersona(TipoContactoDTO persona_a_eliminar) 
+	{
+		this.tiposDeContacto.delete(persona_a_eliminar);
+	}
 	
 }
