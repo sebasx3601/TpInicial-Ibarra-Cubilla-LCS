@@ -25,7 +25,6 @@ public class VistaContacto
 	private JTable tablaTipoContacto;
 	private JButton btnAgregar;
 	private JButton btnBorrar;
-	private JButton btnSalir;
 	private DefaultTableModel modelTipoContacto;
 	private  String[] nombreColumnas = {"Id tipo de contacto","Nombre de contacto"};
 
@@ -73,14 +72,6 @@ public class VistaContacto
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(208, 228, 89, 23);
 		panel.add(btnBorrar);
-		
-		btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSalir.setBounds(307, 228, 89, 23);
-		panel.add(btnSalir);
 	}
 	
 	public void show()
@@ -111,11 +102,6 @@ public class VistaContacto
 	public JButton getBtnBorrar() 
 	{
 		return btnBorrar;
-	}
-	
-	public JButton getBtnSalir() 
-	{
-		return btnSalir;
 	}
 	
 	public DefaultTableModel getModelTipoContacto() 
