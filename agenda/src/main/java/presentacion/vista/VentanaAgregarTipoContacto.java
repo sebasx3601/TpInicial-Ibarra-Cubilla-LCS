@@ -13,7 +13,7 @@ public class VentanaAgregarTipoContacto extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombre;
+	private JTextField txtContacto;
 	private JButton btnAgregarPersona;
 	private static VentanaAgregarTipoContacto INSTANCE;
 	
@@ -44,14 +44,14 @@ public class VentanaAgregarTipoContacto extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNombreYApellido = new JLabel("Nombre del nuevo tipo de contacto");
-		lblNombreYApellido.setBounds(10, 11, 183, 14);
-		panel.add(lblNombreYApellido);
+		JLabel lblContacto = new JLabel("Nombre del nuevo tipo de contacto");
+		lblContacto.setBounds(10, 11, 183, 14);
+		panel.add(lblContacto);
 		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(208, 8, 246, 20);
-		panel.add(txtNombre);
-		txtNombre.setColumns(10);
+		txtContacto = new JTextField();
+		txtContacto.setBounds(208, 8, 246, 20);
+		panel.add(txtContacto);
+		txtContacto.setColumns(10);
 		
 		btnAgregarPersona = new JButton("Agregar");
 		btnAgregarPersona.setBounds(365, 39, 89, 23);
@@ -65,9 +65,9 @@ public class VentanaAgregarTipoContacto extends JFrame
 		this.setVisible(true);
 	}
 	
-	public JTextField getTxtNombre() 
+	public JTextField getTxtContacto() 
 	{
-		return txtNombre;
+		return txtContacto;
 	}
 
 	public JButton getBtnAgregarContacto() 
@@ -77,7 +77,7 @@ public class VentanaAgregarTipoContacto extends JFrame
 	
 	public void cerrar()
 	{
-		this.txtNombre.setText(null);
+		this.txtContacto.setText(null);
 		this.dispose();
 	}
 }
