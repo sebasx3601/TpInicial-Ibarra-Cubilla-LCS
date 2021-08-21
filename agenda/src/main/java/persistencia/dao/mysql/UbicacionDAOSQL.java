@@ -10,6 +10,7 @@ import java.util.List;
 
 import dto.LocalidadDTO;
 import dto.PaisDTO;
+import dto.PersonaDTO;
 import dto.ProvinciaDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.UbicacionDAO;
@@ -24,9 +25,9 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	private static final String deleteProvincia = "DELETE FROM provincia WHERE IdProvincia = ?";
 	private static final String readallProvincia = "SELECT * FROM provincia";
 	
-	private static final String insertP = "INSERT INTO localidad(IdLocalidad, NombreLocalidad, IdProvincia) VALUES(?, ?, ?)";
-	private static final String deleteP = "DELETE FROM localidad WHERE IdLocalidad = ?";
-	private static final String readallP = "SELECT * FROM localidad";
+	private static final String insertLocalidad = "INSERT INTO localidad(IdLocalidad, NombreLocalidad, IdProvincia) VALUES(?, ?, ?)";
+	private static final String deleteLocalidad = "DELETE FROM localidad WHERE IdLocalidad = ?";
+	private static final String readallLocalidad = "SELECT * FROM localidad";
 
 	public boolean insertPais(PaisDTO pais) {
 		PreparedStatement statement;
@@ -189,15 +190,82 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	}
 
 	public boolean insertLocalidad(LocalidadDTO localidad) {
-		return true;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(insertLocalidad);
+			statement.setInt(1, localidad.getId());
+			statement.setString(2, localidad.getNombreLocalidad());
+			statement.setInt(3, localidad.getIdProvincia());
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
 	}
 
 	public boolean deleteLocalidad(LocalidadDTO localidad_a_eliminar) {
-		return true;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(deleteLocalidad);
+			statement.setString(1, Integer.toString(localidad_a_eliminar.getId()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
 	}
 	
 	public List<LocalidadDTO> readAllLocalidad(){
 		List<LocalidadDTO> res = new ArrayList<LocalidadDTO>();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallLocalidad);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				res.add(getLocalidadDTO(resultSet));
+				System.out.println(getLocalidadDTO(resultSet).getId()+" "+getLocalidadDTO(resultSet).getNombreLocalidad()+" "+getLocalidadDTO(resultSet).getIdProvincia());
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
 		return res;
+	}
+
+	private LocalidadDTO getLocalidadDTO(ResultSet resultSet) throws SQLException {
+		String nombre = resultSet.getString("NombreLocalidad");
+		int id = resultSet.getInt("IdLocalidad");
+		int idProvincia = resultSet.getInt("IdProvincia");
+		return new LocalidadDTO(id, nombre, idProvincia);
 	}
 }
