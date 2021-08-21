@@ -138,7 +138,7 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		return isInsertExitoso;
 	}
 
-	public boolean deleteP(ProvinciaDTO provincia_a_eliminar) {
+	public boolean deleteProvincia(ProvinciaDTO provincia_a_eliminar) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;

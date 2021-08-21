@@ -16,7 +16,7 @@ public interface UbicacionDAO {
 	
 	public boolean insertProvincia(ProvinciaDTO provincia);
 
-	public boolean deleteP(ProvinciaDTO provincia_a_eliminar);
+	public boolean deleteProvincia(ProvinciaDTO provincia_a_eliminar);
 	
 	public List<ProvinciaDTO> readAllProvincia();
 	
