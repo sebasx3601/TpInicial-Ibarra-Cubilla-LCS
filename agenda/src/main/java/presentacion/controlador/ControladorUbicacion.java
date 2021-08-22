@@ -29,6 +29,8 @@ public class ControladorUbicacion implements ActionListener {
 	
 	private AgregarLocalidad vistaAgregarLocalidad;
 	
+	private PaisDTO paisEditando;
+	
 	public ControladorUbicacion(VistaDomicilio vista, Agenda agenda) {
 		this.vista = vista;
 		this.agenda = agenda;
@@ -50,6 +52,9 @@ public class ControladorUbicacion implements ActionListener {
 		this.vistaAgregarLocalidad = AgregarLocalidad.getInstance();
 		this.vista.getBtnAgregarLocalidad().addActionListener(s->abrirVentanaLocalidad(s));
 		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().addActionListener(s->agregarLocalidad(s));
+		
+		this.vista.getBtnEditarPais().addActionListener(s->abrirVentanaEditarPais(s));
+		
 	}
 	
 	public void inicializar()
@@ -101,14 +106,21 @@ public class ControladorUbicacion implements ActionListener {
 	
 	private void agregarPais(ActionEvent s) {
 		String nombre = this.vistaAgregarPais.getTxtNombrePais().getText();
-		if(nombre == null || nombre.equals("")) {
-			return;
-		}
-		if(yaExistePaisConNombre(nombre)) {
+		if(!esValidoNombrePais(nombre)) {
 			return;
 		}
 		agenda.agregarPais(new PaisDTO(0,nombre));
 		refrescarTablaPais();
+	}
+	
+	private boolean esValidoNombrePais(String nombre) {
+		if(nombre == null || nombre.equals("")) {
+			return false;
+		}
+		if(yaExistePaisConNombre(nombre)) {
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean yaExistePaisConNombre(String nombrePais) {
@@ -246,6 +258,32 @@ public class ControladorUbicacion implements ActionListener {
 			}
 		}
 		return yaExiste;
+	}
+	
+	//
+	private void abrirVentanaEditarPais(ActionEvent s) {
+		int[] filasSeleccionadas = this.vista.getTablaPais().getSelectedRows();
+		if(filasSeleccionadas.length == 0) {
+			return;
+		}
+		this.vistaAgregarPais.getLblAgregarPais().setText("Editar pais: ");
+		this.vistaAgregarPais.getLblNombre().setText("Nuevo nombre");
+		this.vistaAgregarPais.getBtnAgregarPais().setText("Editar");
+		this.vistaAgregarPais.getTxtNombrePais().setText(paisEnTablas.get(filasSeleccionadas[0]).getNombrePais());
+		this.vistaAgregarPais.getBtnAgregarPais().addActionListener(a->editarPais(a));
+		paisEditando = paisEnTablas.get(filasSeleccionadas[0]);
+		this.vistaAgregarPais.mostrarVentana();
+	}
+	
+	private void editarPais(ActionEvent s) {
+		String nombre = this.vistaAgregarPais.getTxtNombrePais().getText();
+		if(!esValidoNombrePais(nombre)) {
+			return;
+		}
+		paisEditando.setNombrePais(nombre);
+		agenda.editarPais(paisEditando);
+		refrescarTablaPais();
+		this.vistaAgregarPais.cerrar();
 	}
 	
 	@Override

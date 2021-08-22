@@ -18,6 +18,10 @@ public class AgregarPais extends JFrame
 	private JButton btnAgregarPais;
 	private static AgregarPais INSTANCE;
 	
+	private JLabel lblAgregarPais;
+	
+	private JLabel lblNombre;
+
 	public static AgregarPais getInstance()
 	{
 		if(INSTANCE == null)
@@ -45,7 +49,7 @@ public class AgregarPais extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblAgregarPais = new JLabel("Agrega el Pais");
+		lblAgregarPais = new JLabel("Agrega el Pais");
 		lblAgregarPais.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		lblAgregarPais.setBounds(157, 11, 126, 31);
 		panel.add(lblAgregarPais);
@@ -59,8 +63,8 @@ public class AgregarPais extends JFrame
 		btnAgregarPais.setBounds(365, 76, 89, 23);
 		panel.add(btnAgregarPais);
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 80, 53, 14);
+		lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(10, 80, 70, 14);
 		panel.add(lblNombre);
 		
 		this.setVisible(false);
@@ -79,6 +83,14 @@ public class AgregarPais extends JFrame
 	public JButton getBtnAgregarPais() 
 	{
 		return btnAgregarPais;
+	}
+	
+	public JLabel getLblAgregarPais() {
+		return lblAgregarPais;
+	}
+	
+	public JLabel getLblNombre() {
+		return lblNombre;
 	}
 	
 	public void cerrar()

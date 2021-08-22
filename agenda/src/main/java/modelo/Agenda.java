@@ -81,6 +81,10 @@ public class Agenda
 		this.ubicacion.deletePais(pais_a_borrar);
 	}
 	
+	public void editarPais(PaisDTO pais_a_editar) {
+		this.ubicacion.editPais(pais_a_editar);
+	}
+	
 	//PROVINCIA
 	public List<ProvinciaDTO> obtenerProvincia(){
 		return this.ubicacion.readAllProvincia();
