@@ -1,6 +1,8 @@
 package modelo;
 
 import java.util.List;
+
+import dto.PaisDTO;
 import dto.PersonaDTO;
 import dto.TipoContactoDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
@@ -56,4 +58,18 @@ public class Agenda
 		this.tiposDeContacto.delete(persona_a_eliminar);
 	}
 	
+	// PAIS
+	public List<PaisDTO> obtenerPaises(){
+		return this.ubicacion.readAllPais();
+	}
+	
+	public void agregarPais(PaisDTO pais_a_agregar)
+	{
+		this.ubicacion.insertPais(pais_a_agregar);
+	}
+	
+	public void borrarPais(PaisDTO pais_a_borrar)
+	{
+		this.ubicacion.deletePais(pais_a_borrar);
+	}
 }
