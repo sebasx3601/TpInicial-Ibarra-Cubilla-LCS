@@ -29,7 +29,6 @@ public class Agenda
 		this.tiposDeContacto =  metodo_persistencia.createTipoContactoDAO();
 		this.ubicacion = metodo_persistencia.createUbicacionDAO();
 		
-		//this.ubicacion.editProvincia(new ProvinciaDTO(1,1,"Buenos Aires."));
 	}
 	
 	public void agregarPersona(PersonaDTO nuevaPersona)

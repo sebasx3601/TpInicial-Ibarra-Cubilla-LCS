@@ -319,8 +319,31 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	
 	//
 	
+	private static final String editLocalidad= "UPDATE localidad SET NombreLocalidad = ?, IdProvincia = ? WHERE IdLocalidad = ?";
+	
 	public boolean editLocalidad(LocalidadDTO localidad) {
-		return true;
+		String nuevoNombre = localidad.getNombreLocalidad();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean iseditExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(editLocalidad);
+			statement.setString(1, nuevoNombre);
+			statement.setString(2, Integer.toString(localidad.getIdProvincia()));
+			statement.setString(3, Integer.toString(localidad.getId()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				iseditExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return iseditExitoso;
 	}
 	
 	private static final String editProvincia= "UPDATE provincia SET NombreProvincia = ?, IdPais = ? WHERE IdProvincia = ?";
