@@ -7,8 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dto.PaisDTO;
 import dto.TipoContactoDTO;
 import java.awt.Font;
+import java.util.List;
+
 import javax.swing.JComboBox;
 
 public class AgregarProvincia extends JFrame 
@@ -18,6 +21,9 @@ public class AgregarProvincia extends JFrame
 	private JTextField txtProvincia;
 	private JButton btnAgregarProvincia;
 	private static AgregarProvincia INSTANCE;
+	
+	private JComboBox comboBoxPais;
+	private List<PaisDTO> todosLosPaises;
 	
 	public static AgregarProvincia getInstance()
 	{
@@ -64,7 +70,7 @@ public class AgregarProvincia extends JFrame
 		lblNombre.setBounds(10, 80, 53, 14);
 		panel.add(lblNombre);
 		
-		JComboBox comboBoxPais = new JComboBox();
+		comboBoxPais = new JComboBox();
 		comboBoxPais.setBounds(80, 108, 164, 22);
 		panel.add(comboBoxPais);
 		
@@ -88,6 +94,23 @@ public class AgregarProvincia extends JFrame
 	public JButton getBtnAgregarProvincia() 
 	{
 		return btnAgregarProvincia;
+	}
+	
+	public JComboBox getComboBoxPais() {
+		return comboBoxPais;
+	}
+	
+	public void llenarComboBoxPais(List<PaisDTO> paises) {
+		todosLosPaises = paises;
+		JComboBox com = getComboBoxPais();
+		com.removeAllItems();
+		for (PaisDTO p: paises) {
+			com.addItem(p.getNombrePais());
+		}
+	}
+	
+	public int getIdPaisSeleccionado() {
+		return todosLosPaises.get(getComboBoxPais().getSelectedIndex()).getId();
 	}
 	
 	public void cerrar()
