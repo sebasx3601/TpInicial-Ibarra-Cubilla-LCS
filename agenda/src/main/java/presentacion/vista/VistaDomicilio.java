@@ -11,7 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.LocalidadDTO;
+import dto.PaisDTO;
 import dto.PersonaDTO;
+import dto.ProvinciaDTO;
 
 import javax.swing.JButton;
 
@@ -33,7 +36,7 @@ public class VistaDomicilio
 	private DefaultTableModel modelLocalidad;
 	private  String[] paisColumnas = {"Pais"};
 	private  String[] provinciaColumnas = {"Provincia"};
-	private  String[] localidadColumnas = {"Localidad"};
+	private  String[] localidadColumnas = {"Pais"};
 	private JScrollPane spProvincia;
 	private JScrollPane spLocalidad;
 	private JTable tablaProvincia;
@@ -44,6 +47,11 @@ public class VistaDomicilio
 	private JButton btnAgregarLocalidad;
 	private JButton btnEditarLocalidad;
 	private JButton btnBorrarLocalidad;
+	
+	private JButton btnMostrarProvincias;
+	
+	private JScrollPane spPais;
+	private JButton btnMostrarLocalidades;
 
 	public VistaDomicilio() 
 	{
@@ -64,7 +72,7 @@ public class VistaDomicilio
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JScrollPane spPais = new JScrollPane();
+		spPais = new JScrollPane();
 		spPais.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		spPais.setBounds(10, 11, 130, 337);
 		panel.add(spPais);
@@ -74,8 +82,6 @@ public class VistaDomicilio
 		
 		tablaPais.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaPais.getColumnModel().getColumn(0).setResizable(false);
-		tablaPais.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaPais.getColumnModel().getColumn(1).setResizable(false);
 		
 		spPais.setViewportView(tablaPais);
 		
@@ -84,20 +90,18 @@ public class VistaDomicilio
 		
 		tablaProvincia.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaProvincia.getColumnModel().getColumn(0).setResizable(false);
-		tablaProvincia.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaProvincia.getColumnModel().getColumn(1).setResizable(false);
 		
-		spPais.setViewportView(tablaProvincia);
+		spProvincia = new JScrollPane();
+		spProvincia.setBounds(168, 11, 130, 337);
+		panel.add(spProvincia);
+		
+		spProvincia.setViewportView(tablaProvincia);
 		
 		modelLocalidad = new DefaultTableModel(null,localidadColumnas);
 		tablaLocalidad = new JTable(modelLocalidad);
 		
 		tablaLocalidad.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaLocalidad.getColumnModel().getColumn(0).setResizable(false);
-		tablaLocalidad.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaLocalidad.getColumnModel().getColumn(1).setResizable(false);
-		
-		spPais.setViewportView(tablaLocalidad);
 		
 		btnAgregarPais = new JButton("Agregar");
 		btnAgregarPais.setBounds(10, 359, 130, 38);
@@ -123,32 +127,11 @@ public class VistaDomicilio
 		btnSalir.setBounds(376, 521, 89, 23);
 		panel.add(btnSalir);
 		
-		spProvincia = new JScrollPane();
-		spProvincia.setBounds(168, 11, 130, 337);
-		panel.add(spProvincia);
 		
-		tablaProvincia = new JTable();
-		tablaProvincia.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Provincia"
-			}
-		));
-		spProvincia.setViewportView(tablaProvincia);
 		
 		spLocalidad = new JScrollPane();
 		spLocalidad.setBounds(318, 11, 130, 337);
 		panel.add(spLocalidad);
-		
-		tablaLocalidad = new JTable();
-		tablaLocalidad.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Localidad"
-			}
-		));
 		spLocalidad.setViewportView(tablaLocalidad);
 		
 		btnAgregarProvincia = new JButton("Agregar");
@@ -178,8 +161,39 @@ public class VistaDomicilio
 		btnBorrarLocalidad = new JButton("Borrar");
 		btnBorrarLocalidad.setBounds(318, 457, 130, 38);
 		panel.add(btnBorrarLocalidad);
+		
+		btnMostrarProvincias = new JButton("Mostrar provincias");
+		btnMostrarProvincias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnMostrarProvincias.setBounds(10, 506, 130, 38);
+		panel.add(btnMostrarProvincias);
+		
+		btnMostrarLocalidades = new JButton("Mostrar localidades");
+		btnMostrarLocalidades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnMostrarLocalidades.setBounds(168, 506, 130, 38);
+		panel.add(btnMostrarLocalidades);
 	}
 	
+	public JButton getBtnBorrarProvincia() {
+		return btnBorrarProvincia;
+	}
+
+
+	public JButton getBtnBorrarLocalidad() {
+		return btnBorrarLocalidad;
+	}
+
+
+	public JScrollPane getSpPais() {
+		return spPais;
+	}
+
+
 	public void show()
 	{
 		this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -220,29 +234,81 @@ public class VistaDomicilio
 		return modelPais;
 	}
 	
+	public DefaultTableModel getModelProvincia() {
+		return modelProvincia;
+	}
+	
+	private DefaultTableModel getModelLocalidad() {
+		return modelLocalidad;
+	}
+	
 	public JTable getTablaPais()
 	{
 		return tablaPais;
 	}
+	
+	public JTable getTablaProvincia()
+	{
+		return tablaProvincia;
+	}
 
+	public JTable getTablaLocalidad()
+	{
+		return tablaLocalidad;
+	}
+	
 	public String[] getNombreColumnas() 
 	{
 		return paisColumnas;
 	}
 
+	public String[] getNombreColumnaPais() 
+	{
+		return paisColumnas;//pais
+	}
+	
+	public JButton getBtnMostrarProvincias() {
+		return btnMostrarProvincias;
+	}
+	
+	public JButton getBtnMostrarLocalidades() {
+		return btnMostrarLocalidades;
+	}
 
-/*	public void llenarTabla(List<PersonaDTO> personasEnTabla) {
-		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
-		this.getModelPersonas().setColumnCount(0);
-		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
-
-		for (PersonaDTO p : personasEnTabla)
-		{
-			String nombre = p.getNombre();
-			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
-			this.getModelPersonas().addRow(fila);
+	public void llenarTablaPais(List<PaisDTO> paisEnTablas) {
+		this.getModelPais().setRowCount(0); //Para vaciar la tabla
+		this.getModelPais().setColumnCount(0);
+		this.getModelPais().setColumnIdentifiers(this.getNombreColumnas());
+		
+		for (PaisDTO p: paisEnTablas) {
+			String nombre = p.getNombrePais();
+			String [] fila = {nombre};
+			this.getModelPais().addRow(fila);
 		}
 		
-	}*/
+	}
+	
+	public void llenarTablaProvincia(List<ProvinciaDTO> provinciasEnTablas) {
+		this.getModelProvincia().setRowCount(0); //Para vaciar la tabla
+		this.getModelProvincia().setColumnCount(0);
+		this.getModelProvincia().setColumnIdentifiers(this.getNombreColumnas());
+		
+		for (ProvinciaDTO p: provinciasEnTablas) {
+			String nombre = p.getNombreProvincia();
+			String [] fila = {nombre};
+			this.getModelProvincia().addRow(fila);
+		}
+	}
+	
+	public void llenarTablaLocalidad(List<LocalidadDTO> localidadesEnTablas) {
+		this.getModelLocalidad().setRowCount(0); //Para vaciar la tabla
+		this.getModelLocalidad().setColumnCount(0);
+		this.getModelLocalidad().setColumnIdentifiers(this.getNombreColumnas());
+		
+		for (LocalidadDTO p: localidadesEnTablas) {
+			String nombre = p.getNombreLocalidad();
+			String [] fila = {nombre};
+			this.getModelLocalidad().addRow(fila);
+		}
+	}
 }
