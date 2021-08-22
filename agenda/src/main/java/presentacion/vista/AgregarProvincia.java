@@ -15,8 +15,8 @@ public class AgregarProvincia extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtContacto;
-	private JButton btnAgregarPersona;
+	private JTextField txtProvincia;
+	private JButton btnAgregarProvincia;
 	private static AgregarProvincia INSTANCE;
 	
 	public static AgregarProvincia getInstance()
@@ -46,19 +46,19 @@ public class AgregarProvincia extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblAgregarPais = new JLabel("Agrega la provincia");
-		lblAgregarPais.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		lblAgregarPais.setBounds(157, 11, 169, 31);
-		panel.add(lblAgregarPais);
+		JLabel lblAgregarProvincia = new JLabel("Agrega la provincia");
+		lblAgregarProvincia.setFont(new Font("Times New Roman", Font.BOLD, 17));
+		lblAgregarProvincia.setBounds(157, 11, 169, 31);
+		panel.add(lblAgregarProvincia);
 		
-		txtContacto = new JTextField();
-		txtContacto.setBounds(80, 77, 246, 20);
-		panel.add(txtContacto);
-		txtContacto.setColumns(10);
+		txtProvincia = new JTextField();
+		txtProvincia.setBounds(80, 77, 246, 20);
+		panel.add(txtProvincia);
+		txtProvincia.setColumns(10);
 		
-		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(365, 76, 89, 23);
-		panel.add(btnAgregarPersona);
+		btnAgregarProvincia = new JButton("Agregar");
+		btnAgregarProvincia.setBounds(365, 76, 89, 23);
+		panel.add(btnAgregarProvincia);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(10, 80, 53, 14);
@@ -80,19 +80,19 @@ public class AgregarProvincia extends JFrame
 		this.setVisible(true);
 	}
 	
-	public JTextField getTxtContacto() 
+	public JTextField getTxtProvincia() 
 	{
-		return txtContacto;
+		return txtProvincia;
 	}
 
-	public JButton getBtnAgregarContacto() 
+	public JButton getBtnAgregarProvincia() 
 	{
-		return btnAgregarPersona;
+		return btnAgregarProvincia;
 	}
 	
 	public void cerrar()
 	{
-		this.txtContacto.setText(null);
+		this.txtProvincia.setText(null);
 		this.dispose();
 	}
 }
