@@ -15,8 +15,8 @@ public class AgregarLocalidad extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtContacto;
-	private JButton btnAgregarPersona;
+	private JTextField txtLocalidad;
+	private JButton btnAgregarLocalidad;
 	private static AgregarLocalidad INSTANCE;
 	
 	public static AgregarLocalidad getInstance()
@@ -46,31 +46,31 @@ public class AgregarLocalidad extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblAgregarPais = new JLabel("Agrega la provincia");
-		lblAgregarPais.setFont(new Font("Times New Roman", Font.BOLD, 17));
-		lblAgregarPais.setBounds(157, 11, 169, 31);
-		panel.add(lblAgregarPais);
+		JLabel lblAgregarLocalidad = new JLabel("Agrega la localidad");
+		lblAgregarLocalidad.setFont(new Font("Times New Roman", Font.BOLD, 17));
+		lblAgregarLocalidad.setBounds(157, 11, 169, 31);
+		panel.add(lblAgregarLocalidad);
 		
-		txtContacto = new JTextField();
-		txtContacto.setBounds(80, 77, 246, 20);
-		panel.add(txtContacto);
-		txtContacto.setColumns(10);
+		txtLocalidad = new JTextField();
+		txtLocalidad.setBounds(80, 77, 246, 20);
+		panel.add(txtLocalidad);
+		txtLocalidad.setColumns(10);
 		
-		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(365, 76, 89, 23);
-		panel.add(btnAgregarPersona);
+		btnAgregarLocalidad = new JButton("Agregar");
+		btnAgregarLocalidad.setBounds(365, 76, 89, 23);
+		panel.add(btnAgregarLocalidad);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(10, 80, 53, 14);
 		panel.add(lblNombre);
 		
-		JComboBox comboBoxPais = new JComboBox();
-		comboBoxPais.setBounds(80, 108, 164, 22);
-		panel.add(comboBoxPais);
+		JLabel lblProvincia = new JLabel("Provincias");
+		lblProvincia.setBounds(10, 112, 60, 14);
+		panel.add(lblProvincia);
 		
-		JLabel lblPais = new JLabel("Pais");
-		lblPais.setBounds(10, 112, 46, 14);
-		panel.add(lblPais);
+		JComboBox comboBoxProvincia = new JComboBox();
+		comboBoxProvincia.setBounds(80, 108, 164, 22);
+		panel.add(comboBoxProvincia);
 		
 		this.setVisible(false);
 	}
@@ -80,19 +80,19 @@ public class AgregarLocalidad extends JFrame
 		this.setVisible(true);
 	}
 	
-	public JTextField getTxtContacto() 
+	public JTextField getTxtLocalidad() 
 	{
-		return txtContacto;
+		return txtLocalidad;
 	}
 
-	public JButton getBtnAgregarContacto() 
+	public JButton getBtnAgregarLocalidad() 
 	{
-		return btnAgregarPersona;
+		return btnAgregarLocalidad;
 	}
 	
 	public void cerrar()
 	{
-		this.txtContacto.setText(null);
+		this.txtLocalidad.setText(null);
 		this.dispose();
 	}
 }
