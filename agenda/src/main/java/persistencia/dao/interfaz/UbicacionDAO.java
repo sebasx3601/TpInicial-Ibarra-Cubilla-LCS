@@ -29,5 +29,11 @@ public interface UbicacionDAO {
 	public List<ProvinciaDTO> readProvincia(int idPais);
 	
 	public List<LocalidadDTO> readLocalidad(int idProvincia);
+	
+	public boolean editLocalidad(LocalidadDTO localidad);
+	
+	public boolean editProvincia(ProvinciaDTO provincia);
+	
+	public boolean editPais(PaisDTO pais);
 
 }

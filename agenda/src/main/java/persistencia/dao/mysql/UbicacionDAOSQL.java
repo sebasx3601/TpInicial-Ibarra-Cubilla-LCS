@@ -316,4 +316,19 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		int idProvincia = resultSet.getInt("IdProvincia");
 		return new LocalidadDTO(id, nombre, idProvincia);
 	}
+	
+	//
+	
+	public boolean editLocalidad(LocalidadDTO localidad) {
+		return true;
+	}
+	
+	public boolean editProvincia(ProvinciaDTO provincia) {
+		return true;
+	}
+	
+	public boolean editPais(PaisDTO pais) {
+		return true;
+	}
+	
 }
