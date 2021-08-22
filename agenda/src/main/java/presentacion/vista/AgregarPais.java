@@ -14,8 +14,8 @@ public class AgregarPais extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtContacto;
-	private JButton btnAgregarPersona;
+	private JTextField txtNombrePais;
+	private JButton btnAgregarPais;
 	private static AgregarPais INSTANCE;
 	
 	public static AgregarPais getInstance()
@@ -50,14 +50,14 @@ public class AgregarPais extends JFrame
 		lblAgregarPais.setBounds(157, 11, 126, 31);
 		panel.add(lblAgregarPais);
 		
-		txtContacto = new JTextField();
-		txtContacto.setBounds(80, 77, 246, 20);
-		panel.add(txtContacto);
-		txtContacto.setColumns(10);
+		txtNombrePais = new JTextField();
+		txtNombrePais.setBounds(80, 77, 246, 20);
+		panel.add(txtNombrePais);
+		txtNombrePais.setColumns(10);
 		
-		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(365, 76, 89, 23);
-		panel.add(btnAgregarPersona);
+		btnAgregarPais = new JButton("Agregar");
+		btnAgregarPais.setBounds(365, 76, 89, 23);
+		panel.add(btnAgregarPais);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(10, 80, 53, 14);
@@ -71,19 +71,19 @@ public class AgregarPais extends JFrame
 		this.setVisible(true);
 	}
 	
-	public JTextField getTxtContacto() 
+	public JTextField getTxtNombrePais() 
 	{
-		return txtContacto;
+		return txtNombrePais;
 	}
 
-	public JButton getBtnAgregarContacto() 
+	public JButton getBtnAgregarPais() 
 	{
-		return btnAgregarPersona;
+		return btnAgregarPais;
 	}
 	
 	public void cerrar()
 	{
-		this.txtContacto.setText(null);
+		this.txtNombrePais.setText(null);
 		this.dispose();
 	}
 }

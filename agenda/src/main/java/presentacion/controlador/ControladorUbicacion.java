@@ -10,6 +10,7 @@ import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 import modelo.Agenda;
+import presentacion.vista.AgregarPais;
 import presentacion.vista.Vista;
 import presentacion.vista.VistaDomicilio;
 
@@ -21,6 +22,8 @@ public class ControladorUbicacion implements ActionListener {
 	private List<ProvinciaDTO> provinciaEnTablas;
 	private List<LocalidadDTO> localidadEnTablas;
 	
+	private AgregarPais vistaAgregarPais;
+	
 	public ControladorUbicacion(VistaDomicilio vista, Agenda agenda) {
 		this.vista = vista;
 		this.agenda = agenda;
@@ -31,6 +34,9 @@ public class ControladorUbicacion implements ActionListener {
 		this.vista.getBtnBorrarProvincia().addActionListener(s->borrarProvinciaBoton(s));
 		this.vista.getBtnBorrarLocalidad().addActionListener(s->borrarLocalidadBoton(s));
 		
+		this.vistaAgregarPais = AgregarPais.getInstance();
+		this.vistaAgregarPais.getBtnAgregarPais().addActionListener(s->agregarPais(s));
+		this.vista.getBtnAgregarPais().addActionListener(s->abrirVentanaAgregarPais(s));
 	}
 	
 	public void inicializar()
@@ -76,10 +82,12 @@ public class ControladorUbicacion implements ActionListener {
 	}
 	
 	//Acciones
+	private void abrirVentanaAgregarPais(ActionEvent s) {
+		this.vistaAgregarPais.mostrarVentana();
+	}
+	
 	private void agregarPais(ActionEvent s) {
-		//programa para agregar un pais
-		//getTxtNombre().getText();
-		String nombre = "";
+		String nombre = this.vistaAgregarPais.getTxtNombrePais().getText();
 		if(nombre == null || nombre.equals("")) {
 			return;
 		}
