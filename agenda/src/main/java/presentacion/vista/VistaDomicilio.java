@@ -252,6 +252,11 @@ public class VistaDomicilio
 		return tablaProvincia;
 	}
 
+	public JTable getTablaLocalidad()
+	{
+		return tablaLocalidad;
+	}
+	
 	public String[] getNombreColumnas() 
 	{
 		return paisColumnas;
