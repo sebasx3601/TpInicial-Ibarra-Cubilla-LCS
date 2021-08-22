@@ -70,6 +70,30 @@ public class ControladorUbicacion implements ActionListener {
 		this.vista.llenarTablaLocalidad(this.localidadEnTablas);
 	}
 	
+	private void agregarPais(ActionEvent s) {
+		//programa para agregar un pais
+		//getTxtNombre().getText();
+		String nombre = "";
+		if(nombre == null || nombre.equals("")) {
+			return;
+		}
+		if(yaExistePaisConNombre(nombre)) {
+			return;
+		}
+		agenda.agregarPais(new PaisDTO(0,nombre));
+	}
+	
+	private boolean yaExistePaisConNombre(String nombrePais) {
+		boolean yaExiste = false;
+		List<PaisDTO> listaPaises = agenda.obtenerPaises();
+		for(PaisDTO p: listaPaises) {
+			if(p.getNombrePais().equals(nombrePais)) {
+				yaExiste = true;
+			}
+		}
+		return yaExiste;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) { }
 
