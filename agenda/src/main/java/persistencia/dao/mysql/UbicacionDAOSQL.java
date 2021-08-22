@@ -29,7 +29,7 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	private static final String insertLocalidad = "INSERT INTO localidad(IdLocalidad, NombreLocalidad, IdProvincia) VALUES(?, ?, ?)";
 	private static final String deleteLocalidad = "DELETE FROM localidad WHERE IdLocalidad = ?";
 	private static final String readallLocalidad = "SELECT * FROM localidad";
-	private static final String readLocalidad = "SELECT * FROM localidad WHERE IdLocalidad = ?";
+	private static final String readLocalidad = "SELECT * FROM localidad WHERE IdProvincia = ?";
 
 	public boolean insertPais(PaisDTO pais) {
 		PreparedStatement statement;
