@@ -28,6 +28,8 @@ public class Agenda
 		this.persona = metodo_persistencia.createPersonaDAO();
 		this.tiposDeContacto =  metodo_persistencia.createTipoContactoDAO();
 		this.ubicacion = metodo_persistencia.createUbicacionDAO();
+		
+		this.tiposDeContacto.edit(new TipoContactoDTO(4,"No compas"));
 	}
 	
 	public void agregarPersona(PersonaDTO nuevaPersona)

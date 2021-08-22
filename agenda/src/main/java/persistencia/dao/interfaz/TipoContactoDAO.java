@@ -12,5 +12,7 @@ public interface TipoContactoDAO {
 	
 	public List<TipoContactoDTO> readAll();
 	
+	public boolean edit(TipoContactoDTO tipoContacto);
+	
 }
 

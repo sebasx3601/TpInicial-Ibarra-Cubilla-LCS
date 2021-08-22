@@ -96,4 +96,32 @@ public class TipoContactoDAOSQL implements TipoContactoDAO {
 		return new TipoContactoDTO(id,nombre);
 	}
 	
+	private static final String editContacto = "UPDATE tipo_contacto SET NombreContacto = ? WHERE IdContacto = ?";
+			
+	public boolean edit(TipoContactoDTO tipoContacto)
+	{
+		String nuevoNombre = tipoContacto.getNombreTipoContacto();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean iseditExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(editContacto);
+			statement.setString(1, nuevoNombre);
+			statement.setString(2, Integer.toString(tipoContacto.getIdContacto()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				iseditExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return iseditExitoso;
+	}
+	
+	
 }
