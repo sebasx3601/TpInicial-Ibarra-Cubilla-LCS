@@ -227,7 +227,7 @@ public class VistaDomicilio
 
 	public String[] getNombreColumnas() 
 	{
-		return domicilioColumnas;
+		return paisColumnas;
 	}
 
 
