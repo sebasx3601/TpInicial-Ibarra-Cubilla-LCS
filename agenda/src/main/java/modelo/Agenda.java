@@ -2,8 +2,10 @@ package modelo;
 
 import java.util.List;
 
+import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.PersonaDTO;
+import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
 import persistencia.dao.interfaz.PersonaDAO;
@@ -72,4 +74,43 @@ public class Agenda
 	{
 		this.ubicacion.deletePais(pais_a_borrar);
 	}
+	
+	//PROVINCIA
+	public List<ProvinciaDTO> obtenerProvincia(){
+		return this.ubicacion.readAllProvincia();
+	}
+	
+	public void agregarProvincia(ProvinciaDTO provincia_a_agregar)
+	{
+		this.ubicacion.insertProvincia(provincia_a_agregar);
+	}
+	
+	public void borrarProvincia(ProvinciaDTO provincia_a_borrar)
+	{
+		this.ubicacion.deleteProvincia(provincia_a_borrar);
+	}
+	
+	public List<ProvinciaDTO> obtenerProvinciaDePaises(int idPais){
+		return this.ubicacion.readProvincia(idPais);
+	}
+	
+	//Localidad
+	public List<LocalidadDTO> obtenerLocalidad(){
+		return this.ubicacion.readAllLocalidad();
+	}
+	
+	public void agregarLocalidad(LocalidadDTO localidad_a_agregar)
+	{
+		this.ubicacion.insertLocalidad(localidad_a_agregar);
+	}
+	
+	public void borrarLocalidad(LocalidadDTO localidad_a_borrar)
+	{
+		this.ubicacion.deleteLocalidad(localidad_a_borrar);
+	}
+	
+	public List<LocalidadDTO> obtenerLocalidadDeProvincia(int idProvincia){
+		return this.ubicacion.readLocalidad(idProvincia);
+	}
+	
 }

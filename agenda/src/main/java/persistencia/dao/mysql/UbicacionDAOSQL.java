@@ -24,10 +24,12 @@ public class UbicacionDAOSQL implements UbicacionDAO
 	private static final String insertProvincia = "INSERT INTO provincia(IdProvincia, NombreProvincia, IdPais) VALUES(?, ?, ?)";
 	private static final String deleteProvincia = "DELETE FROM provincia WHERE IdProvincia = ?";
 	private static final String readallProvincia = "SELECT * FROM provincia";
+	private static final String readProvincia = "SELECT * FROM provincia WHERE IdPais = ?";
 	
 	private static final String insertLocalidad = "INSERT INTO localidad(IdLocalidad, NombreLocalidad, IdProvincia) VALUES(?, ?, ?)";
 	private static final String deleteLocalidad = "DELETE FROM localidad WHERE IdLocalidad = ?";
 	private static final String readallLocalidad = "SELECT * FROM localidad";
+	private static final String readLocalidad = "SELECT * FROM localidad WHERE IdLocalidad = ?";
 
 	public boolean insertPais(PaisDTO pais) {
 		PreparedStatement statement;
@@ -181,6 +183,29 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		return res;
 	}
 	
+	public List<ProvinciaDTO> readProvincia(int idPais){
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		List<ProvinciaDTO> res = new ArrayList<ProvinciaDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readProvincia);
+			statement.setString(1, Integer.toString(idPais));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				System.out.println(getProvinciaDTO(resultSet).getId() + " " + getProvinciaDTO(resultSet).getNombreProvincia() + " " + getProvinciaDTO(resultSet).getIdPais());
+				res.add(getProvinciaDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	private ProvinciaDTO getProvinciaDTO(ResultSet resultSet) throws SQLException 
 	{
 		int id = resultSet.getInt("IdProvincia");
@@ -262,6 +287,29 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		return res;
 	}
 
+	public List<LocalidadDTO> readLocalidad(int idProvincia){
+		List<LocalidadDTO> res = new ArrayList<LocalidadDTO>();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readLocalidad);
+			statement.setString(1, Integer.toString(idProvincia));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				res.add(getLocalidadDTO(resultSet));
+				System.out.println(getLocalidadDTO(resultSet).getId()+" "+getLocalidadDTO(resultSet).getNombreLocalidad()+" "+getLocalidadDTO(resultSet).getIdProvincia());
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	private LocalidadDTO getLocalidadDTO(ResultSet resultSet) throws SQLException {
 		String nombre = resultSet.getString("NombreLocalidad");
 		int id = resultSet.getInt("IdLocalidad");

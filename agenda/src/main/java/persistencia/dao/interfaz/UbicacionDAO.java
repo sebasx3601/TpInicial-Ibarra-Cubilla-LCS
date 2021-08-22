@@ -25,5 +25,9 @@ public interface UbicacionDAO {
 	public boolean deleteLocalidad(LocalidadDTO localidad_a_eliminar);
 	
 	public List<LocalidadDTO> readAllLocalidad();
+	
+	public List<ProvinciaDTO> readProvincia(int idPais);
+	
+	public List<LocalidadDTO> readLocalidad(int idProvincia);
 
 }
