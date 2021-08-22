@@ -101,6 +101,11 @@ public class ControladorUbicacion implements ActionListener {
 	
 	//Acciones
 	private void abrirVentanaAgregarPais(ActionEvent s) {
+		this.vistaAgregarPais.getLblAgregarPais().setText("Agregar pais: ");
+		this.vistaAgregarPais.getLblNombre().setText("Nombre");
+		this.vistaAgregarPais.getBtnAgregarPais().setText("Agregar");
+		this.vistaAgregarPais.getTxtNombrePais().setText("");
+		this.vistaAgregarPais.getBtnAgregarPais().addActionListener(a->agregarPais(a));
 		this.vistaAgregarPais.mostrarVentana();
 	}
 	
@@ -111,6 +116,7 @@ public class ControladorUbicacion implements ActionListener {
 		}
 		agenda.agregarPais(new PaisDTO(0,nombre));
 		refrescarTablaPais();
+		this.vistaAgregarPais.cerrar();
 	}
 	
 	private boolean esValidoNombrePais(String nombre) {
