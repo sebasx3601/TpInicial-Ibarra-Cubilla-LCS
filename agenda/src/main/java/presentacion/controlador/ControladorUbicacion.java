@@ -10,6 +10,7 @@ import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 import modelo.Agenda;
+import presentacion.vista.AgregarLocalidad;
 import presentacion.vista.AgregarPais;
 import presentacion.vista.AgregarProvincia;
 import presentacion.vista.Vista;
@@ -25,6 +26,8 @@ public class ControladorUbicacion implements ActionListener {
 	
 	private AgregarPais vistaAgregarPais;
 	private AgregarProvincia vistaAgregarProvincia;
+	
+	private AgregarLocalidad vistaAgregarLocalidad;
 	
 	public ControladorUbicacion(VistaDomicilio vista, Agenda agenda) {
 		this.vista = vista;
@@ -44,6 +47,9 @@ public class ControladorUbicacion implements ActionListener {
 		this.vista.getBtnAgregarProvincia().addActionListener(s->abrirVentanaAgregarProvincia(s));
 		this.vistaAgregarProvincia.getBtnAgregarProvincia().addActionListener(s->agregarProvincia(s));
 		
+		this.vistaAgregarLocalidad = AgregarLocalidad.getInstance();
+		this.vista.getBtnAgregarLocalidad().addActionListener(s->abrirVentanaLocalidad(s));
+		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().addActionListener(s->agregarLocalidad(s));
 	}
 	
 	public void inicializar()
@@ -203,6 +209,39 @@ public class ControladorUbicacion implements ActionListener {
 		List<ProvinciaDTO> listaProvincias = agenda.obtenerProvincia();
 		for(ProvinciaDTO p: listaProvincias) {
 			if(p.getNombreProvincia().equals(nombreProvincia)) {
+				yaExiste = true;
+			}
+		}
+		return yaExiste;
+	}
+	
+	private void abrirVentanaLocalidad(ActionEvent s) {
+		vistaAgregarLocalidad.setAgenda(agenda);
+		vistaAgregarLocalidad.llenarComboBoxPais(agenda.obtenerPaises());
+		this.vistaAgregarLocalidad.mostrarVentana();
+	}
+	
+	private void agregarLocalidad(ActionEvent s) {
+		String nombre = this.vistaAgregarLocalidad.getTxtLocalidad().getText();
+		int idProvincia = this.vistaAgregarLocalidad.getIdProvinciaSeleccionado();
+		if(nombre == null || nombre.equals("")) {
+			return;
+		}
+		if(idProvincia == -1) {
+			return;
+		}
+		
+		agenda.agregarLocalidad(new LocalidadDTO(0,nombre,idProvincia));
+		refrescarTablaPais();
+		refrescarTablaProvincia(-1);
+		refrescarTablaLocalidad(-1);
+	}
+	
+	private boolean yaExisteLocalidadConNombre(String nombreLocalidad) {
+		boolean yaExiste = false;
+		List<LocalidadDTO> listaLocalidad = agenda.obtenerLocalidad();
+		for(LocalidadDTO p: listaLocalidad) {
+			if(p.getNombreLocalidad().equals(nombreLocalidad)) {
 				yaExiste = true;
 			}
 		}

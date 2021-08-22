@@ -179,6 +179,11 @@ public class VistaDomicilio
 		panel.add(btnMostrarLocalidades);
 	}
 	
+	public JButton getBtnAgregarLocalidad() {
+		return btnAgregarLocalidad;
+	}
+
+
 	public JButton getBtnAgregarProvincia() {
 		return btnAgregarProvincia;
 	}
