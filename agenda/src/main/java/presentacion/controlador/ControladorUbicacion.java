@@ -47,6 +47,7 @@ public class ControladorUbicacion implements ActionListener {
 			return;
 		}
 		refrescarTablaProvincia(paisEnTablas.get(filasSeleccionadas[0]).getId());
+		refrescarTablaLocalidad(-1);
 	}
 	
 	private void refrescarTablaProvincia(int idPais)
