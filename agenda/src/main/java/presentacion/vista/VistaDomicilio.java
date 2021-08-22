@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.PaisDTO;
 import dto.PersonaDTO;
 
 import javax.swing.JButton;
@@ -33,7 +34,7 @@ public class VistaDomicilio
 	private DefaultTableModel modelLocalidad;
 	private  String[] paisColumnas = {"Pais"};
 	private  String[] provinciaColumnas = {"Provincia"};
-	private  String[] localidadColumnas = {"Localidad"};
+	private  String[] localidadColumnas = {"Pais"};
 	private JScrollPane spProvincia;
 	private JScrollPane spLocalidad;
 	private JTable tablaProvincia;
@@ -44,6 +45,8 @@ public class VistaDomicilio
 	private JButton btnAgregarLocalidad;
 	private JButton btnEditarLocalidad;
 	private JButton btnBorrarLocalidad;
+	
+	private JScrollPane spPais;
 
 	public VistaDomicilio() 
 	{
@@ -64,7 +67,7 @@ public class VistaDomicilio
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JScrollPane spPais = new JScrollPane();
+		spPais = new JScrollPane();
 		spPais.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		spPais.setBounds(10, 11, 130, 337);
 		panel.add(spPais);
@@ -74,8 +77,6 @@ public class VistaDomicilio
 		
 		tablaPais.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaPais.getColumnModel().getColumn(0).setResizable(false);
-		tablaPais.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaPais.getColumnModel().getColumn(1).setResizable(false);
 		
 		spPais.setViewportView(tablaPais);
 		
@@ -84,20 +85,16 @@ public class VistaDomicilio
 		
 		tablaProvincia.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaProvincia.getColumnModel().getColumn(0).setResizable(false);
-		tablaProvincia.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaProvincia.getColumnModel().getColumn(1).setResizable(false);
 		
-		spPais.setViewportView(tablaProvincia);
+		//spPais.setViewportView(tablaProvincia);
 		
 		modelLocalidad = new DefaultTableModel(null,localidadColumnas);
 		tablaLocalidad = new JTable(modelLocalidad);
 		
 		tablaLocalidad.getColumnModel().getColumn(0).setPreferredWidth(103);
 		tablaLocalidad.getColumnModel().getColumn(0).setResizable(false);
-		tablaLocalidad.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tablaLocalidad.getColumnModel().getColumn(1).setResizable(false);
 		
-		spPais.setViewportView(tablaLocalidad);
+		//spPais.setViewportView(tablaLocalidad);
 		
 		btnAgregarPais = new JButton("Agregar");
 		btnAgregarPais.setBounds(10, 359, 130, 38);
@@ -228,6 +225,24 @@ public class VistaDomicilio
 	public String[] getNombreColumnas() 
 	{
 		return paisColumnas;
+	}
+
+	public String[] getNombreColumnaPais() 
+	{
+		return paisColumnas;//pais
+	}
+
+	public void llenarTabla(List<PaisDTO> paisEnTablas) {
+		this.getModelPais().setRowCount(0); //Para vaciar la tabla
+		this.getModelPais().setColumnCount(0);
+		this.getModelPais().setColumnIdentifiers(this.getNombreColumnas());
+		
+		for (PaisDTO p: paisEnTablas) {
+			String nombre = p.getNombrePais();
+			String [] fila = {nombre};
+			this.getModelPais().addRow(fila);
+		}
+		
 	}
 
 
