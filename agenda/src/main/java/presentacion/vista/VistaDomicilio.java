@@ -30,8 +30,10 @@ public class VistaDomicilio
 	private JButton btnSalir;
 	private DefaultTableModel modelPais;
 	private DefaultTableModel modelProvincia;
-	private  String[] domicilioColumnas = {"Pais"};
-	private  String[] provinciasColumnas = {"Provincias"};
+	private DefaultTableModel modelLocalidad;
+	private  String[] paisColumnas = {"Pais"};
+	private  String[] provinciaColumnas = {"Provincia"};
+	private  String[] localidadColumnas = {"Localidad"};
 	private JScrollPane spProvincia;
 	private JScrollPane spLocalidad;
 	private JTable tablaProvincia;
@@ -40,7 +42,6 @@ public class VistaDomicilio
 	private JButton btnEditarProvincia;
 	private JButton btnBorrarProvincia;
 	private JButton btnAgregarLocalidad;
-	private JButton btnEditarLocalidad;
 	private JButton btnEditarLocalidad;
 	private JButton btnBorrarLocalidad;
 
@@ -68,7 +69,7 @@ public class VistaDomicilio
 		spPais.setBounds(10, 11, 130, 337);
 		panel.add(spPais);
 		
-		modelPais = new DefaultTableModel(null,domicilioColumnas);
+		modelPais = new DefaultTableModel(null,paisColumnas);
 		tablaPais = new JTable(modelPais);
 		
 		tablaPais.getColumnModel().getColumn(0).setPreferredWidth(103);
@@ -78,7 +79,7 @@ public class VistaDomicilio
 		
 		spPais.setViewportView(tablaPais);
 		
-		modelProvincia = new DefaultTableModel(null,provinciasColumnas);
+		modelProvincia = new DefaultTableModel(null,provinciaColumnas);
 		tablaProvincia = new JTable(modelProvincia);
 		
 		tablaProvincia.getColumnModel().getColumn(0).setPreferredWidth(103);
@@ -86,7 +87,17 @@ public class VistaDomicilio
 		tablaProvincia.getColumnModel().getColumn(1).setPreferredWidth(100);
 		tablaProvincia.getColumnModel().getColumn(1).setResizable(false);
 		
-		spPais.setViewportView(tablaPais);
+		spPais.setViewportView(tablaProvincia);
+		
+		modelLocalidad = new DefaultTableModel(null,localidadColumnas);
+		tablaLocalidad = new JTable(modelLocalidad);
+		
+		tablaLocalidad.getColumnModel().getColumn(0).setPreferredWidth(103);
+		tablaLocalidad.getColumnModel().getColumn(0).setResizable(false);
+		tablaLocalidad.getColumnModel().getColumn(1).setPreferredWidth(100);
+		tablaLocalidad.getColumnModel().getColumn(1).setResizable(false);
+		
+		spPais.setViewportView(tablaLocalidad);
 		
 		btnAgregarPais = new JButton("Agregar");
 		btnAgregarPais.setBounds(10, 359, 130, 38);
