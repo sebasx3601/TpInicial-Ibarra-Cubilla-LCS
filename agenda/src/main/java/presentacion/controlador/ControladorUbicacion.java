@@ -26,6 +26,9 @@ public class ControladorUbicacion implements ActionListener {
 		this.agenda = agenda;
 		this.vista.getBtnMostrarProvincias().addActionListener(s->seleccionPais(s));
 		this.vista.getBtnMostrarLocalidades().addActionListener(s->seleccionProvincia(s));
+		
+		this.vista.getBtnBorrarPais().addActionListener(s->borrarPaisBoton(s));
+		
 	}
 	
 	public void inicializar()
@@ -70,6 +73,7 @@ public class ControladorUbicacion implements ActionListener {
 		this.vista.llenarTablaLocalidad(this.localidadEnTablas);
 	}
 	
+	//Acciones
 	private void agregarPais(ActionEvent s) {
 		//programa para agregar un pais
 		//getTxtNombre().getText();
@@ -81,6 +85,7 @@ public class ControladorUbicacion implements ActionListener {
 			return;
 		}
 		agenda.agregarPais(new PaisDTO(0,nombre));
+		refrescarTablaPais();
 	}
 	
 	private boolean yaExistePaisConNombre(String nombrePais) {
@@ -92,6 +97,19 @@ public class ControladorUbicacion implements ActionListener {
 			}
 		}
 		return yaExiste;
+	}
+	
+	private void borrarPaisBoton(ActionEvent s) {
+		int[] filasSeleccionadas = this.vista.getTablaPais().getSelectedRows();
+		for (int fila : filasSeleccionadas)
+		{
+			int idPais = this.paisEnTablas.get(fila).getId();
+			//FALTA DECLARAR EN INTERFACE Y EN DAOSQL LA QUERY PARA BORRAR PROVINCIAS POR IDPAIS
+			this.agenda.borrarPais(this.paisEnTablas.get(fila));
+		}
+		refrescarTablaPais();
+		refrescarTablaProvincia(-1);
+		refrescarTablaLocalidad(-1);
 	}
 	
 	@Override
