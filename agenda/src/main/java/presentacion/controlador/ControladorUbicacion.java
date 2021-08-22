@@ -64,7 +64,7 @@ public class ControladorUbicacion implements ActionListener {
 		if(filasSeleccionadas.length == 0) {
 			return;
 		}
-		refrescarTablaLocalidad(paisEnTablas.get(filasSeleccionadas[0]).getId());
+		refrescarTablaLocalidad(provinciaEnTablas.get(filasSeleccionadas[0]).getId());
 	}
 	
 	private void refrescarTablaLocalidad(int idProvincia)
@@ -100,16 +100,36 @@ public class ControladorUbicacion implements ActionListener {
 	}
 	
 	private void borrarPaisBoton(ActionEvent s) {
+		int idPais;
 		int[] filasSeleccionadas = this.vista.getTablaPais().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
-			int idPais = this.paisEnTablas.get(fila).getId();
-			//FALTA DECLARAR EN INTERFACE Y EN DAOSQL LA QUERY PARA BORRAR PROVINCIAS POR IDPAIS
+			idPais = this.paisEnTablas.get(fila).getId();
+			borrarProvincias(idPais);
 			this.agenda.borrarPais(this.paisEnTablas.get(fila));
 		}
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
+	}
+	
+	private void borrarProvincias(int idPais) {
+		int idProvincia;
+		List<ProvinciaDTO> provinciasABorrar;
+		provinciasABorrar = agenda.obtenerProvinciaDePaises(idPais);
+		for(ProvinciaDTO p: provinciasABorrar) {
+			idProvincia = p.getId();
+			borrarLocalidades(idProvincia);
+			agenda.borrarProvincia(p);
+		}
+	}
+	
+	private void borrarLocalidades(int idProvincia) {
+		List<LocalidadDTO> localidadesABorrar;
+		localidadesABorrar = agenda.obtenerLocalidadDeProvincia(idProvincia);
+		for(LocalidadDTO l: localidadesABorrar) {
+			agenda.borrarLocalidad(l);
+		}
 	}
 	
 	@Override
