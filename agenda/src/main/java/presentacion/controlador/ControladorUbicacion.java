@@ -28,6 +28,8 @@ public class ControladorUbicacion implements ActionListener {
 		this.vista.getBtnMostrarLocalidades().addActionListener(s->seleccionProvincia(s));
 		
 		this.vista.getBtnBorrarPais().addActionListener(s->borrarPaisBoton(s));
+		this.vista.getBtnBorrarProvincia().addActionListener(s->borrarProvinciaBoton(s));
+		
 		
 	}
 	
@@ -130,6 +132,20 @@ public class ControladorUbicacion implements ActionListener {
 		for(LocalidadDTO l: localidadesABorrar) {
 			agenda.borrarLocalidad(l);
 		}
+	}
+	
+	private void borrarProvinciaBoton(ActionEvent e) {
+		int idProvincia;
+		int[] filasSeleccionadas = this.vista.getTablaProvincia().getSelectedRows();
+		for (int fila : filasSeleccionadas)
+		{
+			idProvincia = this.provinciaEnTablas.get(fila).getId();
+			borrarLocalidades(idProvincia);
+			this.agenda.borrarProvincia(this.provinciaEnTablas.get(fila));
+		}
+		refrescarTablaPais();
+		refrescarTablaProvincia(-1);
+		refrescarTablaLocalidad(-1);
 	}
 	
 	@Override
