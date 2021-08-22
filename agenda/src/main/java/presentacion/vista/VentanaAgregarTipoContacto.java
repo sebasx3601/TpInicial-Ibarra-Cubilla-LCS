@@ -17,6 +17,8 @@ public class VentanaAgregarTipoContacto extends JFrame
 	private JButton btnAgregarPersona;
 	private static VentanaAgregarTipoContacto INSTANCE;
 	
+	private JLabel lblContacto;
+	
 	public static VentanaAgregarTipoContacto getInstance()
 	{
 		if(INSTANCE == null)
@@ -44,7 +46,7 @@ public class VentanaAgregarTipoContacto extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblContacto = new JLabel("Nombre del nuevo tipo de contacto");
+		lblContacto = new JLabel("Nombre del nuevo tipo de contacto");
 		lblContacto.setBounds(10, 11, 183, 14);
 		panel.add(lblContacto);
 		
@@ -73,6 +75,10 @@ public class VentanaAgregarTipoContacto extends JFrame
 	public JButton getBtnAgregarContacto() 
 	{
 		return btnAgregarPersona;
+	}
+	
+	public JLabel getLblContacto() {
+		return lblContacto;
 	}
 	
 	public void cerrar()

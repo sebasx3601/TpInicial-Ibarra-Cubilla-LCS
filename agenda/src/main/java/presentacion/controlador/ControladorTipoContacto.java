@@ -16,33 +16,47 @@ public class ControladorTipoContacto {
 	private Agenda agenda;
 	private VentanaAgregarTipoContacto ventanaContacto;
 	
+	private TipoContactoDTO contactoSiendoEditado;
+	
 	public ControladorTipoContacto(VistaContacto vista, Agenda agenda)
 	{
 		this.vista = vista;
 		this.vista.getBtnAgregar().addActionListener(a->mostrarVentanaAgregarTipoContacto(a));
 		this.vista.getBtnBorrar().addActionListener(s->borrarTipoContacto(s));
 		this.ventanaContacto = VentanaAgregarTipoContacto.getInstance();
-		this.ventanaContacto.getBtnAgregarContacto().addActionListener(p->guardarTipoContacto(p));
+		
 		this.agenda = agenda;
 		refrescarTabla();
+		this.vista.getBtnEditar().addActionListener(p->mostrarVentanaEditarTipoContacto(p));
 	}
 	
 	private void mostrarVentanaAgregarTipoContacto(ActionEvent a) {
-		 ventanaAgregarPersona();
+		this.ventanaContacto.getLblContacto().setText("Nuevo tipo de Contacto: ");
+		this.ventanaContacto.getBtnAgregarContacto().setText("Agregar");
+		this.ventanaContacto.getTxtContacto().setText("");
+		this.ventanaContacto.getBtnAgregarContacto().addActionListener(p->guardarTipoContacto(p));
+		ventanaContacto();
 	}
 	
 	private void guardarTipoContacto(ActionEvent p) {
 		String contacto = this.ventanaContacto.getTxtContacto().getText();
-		if(contacto.isEmpty() || contacto.equals(" ")) {
-			return;
-		}
-		if(existeTipoContacto(contacto)) {
+		if(!esNombreTipoContactoValido(contacto)) {
 			return;
 		}
 		TipoContactoDTO nuevoContacto = new TipoContactoDTO(0,contacto);
 		this.agenda.agregarTipoContacto(nuevoContacto);
 		this.ventanaContacto.cerrar();
 		refrescarTabla();
+	}
+	
+	private boolean esNombreTipoContactoValido(String contacto) {
+		if(contacto.isEmpty() || contacto.equals(" ")) {
+			return false;
+		}
+		if(existeTipoContacto(contacto)) {
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean existeTipoContacto(String nombreTipoContacto) {
@@ -66,7 +80,7 @@ public class ControladorTipoContacto {
 		this.refrescarTabla();
 	}
 	
-	private void ventanaAgregarPersona() {
+	private void ventanaContacto() {
 		this.ventanaContacto.mostrarVentana();
 	}
 	
@@ -80,6 +94,34 @@ public class ControladorTipoContacto {
 	{
 		this.tiposContacto = agenda.obtenerTiposDeContacto();
 		this.vista.llenarTabla(this.tiposContacto);
+	}
+	
+	//
+	
+	private void mostrarVentanaEditarTipoContacto(ActionEvent a) {
+		int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+		if (filasSeleccionadas.length == 0) {
+			return;
+		}
+		this.ventanaContacto.getLblContacto().setText("Nuevo nombre: ");
+		this.ventanaContacto.getBtnAgregarContacto().setText("Editar");
+		this.ventanaContacto.getTxtContacto().setText(tiposContacto.get(filasSeleccionadas[0]).getNombreTipoContacto());
+		
+		this.ventanaContacto.getBtnAgregarContacto().addActionListener(p->editarTipoContacto(p));
+		
+		contactoSiendoEditado = tiposContacto.get(filasSeleccionadas[0]);
+		ventanaContacto();
+	}
+	
+	private void editarTipoContacto(ActionEvent a) {
+		String contacto = this.ventanaContacto.getTxtContacto().getText();
+		if(!esNombreTipoContactoValido(contacto)) {
+			return;
+		}
+		contactoSiendoEditado.setNombreTipoContacto(contacto);
+		agenda.editarTipoContacto(contactoSiendoEditado);
+		this.ventanaContacto.cerrar();
+		refrescarTabla();
 	}
 
 }

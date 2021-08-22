@@ -62,6 +62,11 @@ public class Agenda
 		this.tiposDeContacto.delete(persona_a_eliminar);
 	}
 	
+	public void editarTipoContacto(TipoContactoDTO tipoContacto_a_editar)
+	{
+		this.tiposDeContacto.edit(tipoContacto_a_editar);
+	}
+	
 	// PAIS
 	public List<PaisDTO> obtenerPaises(){
 		return this.ubicacion.readAllPais();

@@ -27,6 +27,8 @@ public class VistaContacto
 	private JButton btnBorrar;
 	private DefaultTableModel modelTipoContacto;
 	private  String[] nombreColumnas = {"Id tipo de contacto","Nombre de contacto"};
+	
+	private JButton btnEditar;
 
 	public VistaContacto() 
 	{
@@ -65,7 +67,7 @@ public class VistaContacto
 		btnAgregar.setBounds(10, 228, 89, 23);
 		panel.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(109, 228, 89, 23);
 		panel.add(btnEditar);
 		
@@ -119,6 +121,9 @@ public class VistaContacto
 		return nombreColumnas;
 	}
 
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
 
 	public void llenarTabla(List<TipoContactoDTO> TipoContactoEnTabla) {
 		this.getModelTipoContacto().setRowCount(0);
