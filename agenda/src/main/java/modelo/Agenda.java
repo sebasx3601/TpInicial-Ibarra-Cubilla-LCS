@@ -29,7 +29,7 @@ public class Agenda
 		this.tiposDeContacto =  metodo_persistencia.createTipoContactoDAO();
 		this.ubicacion = metodo_persistencia.createUbicacionDAO();
 		
-		this.tiposDeContacto.edit(new TipoContactoDTO(4,"No compas"));
+		this.ubicacion.editPais(new PaisDTO(4,"Uruguay(pais)"));
 	}
 	
 	public void agregarPersona(PersonaDTO nuevaPersona)

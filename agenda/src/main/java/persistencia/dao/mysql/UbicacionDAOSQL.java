@@ -327,8 +327,30 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		return true;
 	}
 	
+	private static final String editPais= "UPDATE pais SET NombrePais = ? WHERE IdPais = ?";
+	
 	public boolean editPais(PaisDTO pais) {
-		return true;
+		String nuevoNombre = pais.getNombrePais();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean iseditExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(editPais);
+			statement.setString(1, nuevoNombre);
+			statement.setString(2, Integer.toString(pais.getId()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				iseditExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return iseditExitoso;
 	}
 	
 }
