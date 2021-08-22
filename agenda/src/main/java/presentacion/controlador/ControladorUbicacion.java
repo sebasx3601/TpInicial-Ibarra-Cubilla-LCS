@@ -206,7 +206,11 @@ public class ControladorUbicacion implements ActionListener {
 		}
 		this.vistaAgregarProvincia.llenarComboBoxPais(agenda.obtenerPaises());
 		
+		this.vistaAgregarProvincia.getLblAgregarProvincia().setText("Agregar provincia");
+		this.vistaAgregarProvincia.getBtnAgregarProvincia().setText("Agregar");
+		
 		this.vistaAgregarProvincia.mostrarVentana();
+		this.vistaAgregarProvincia.getBtnAgregarProvincia().addActionListener(s->agregarProvincia(s));
 	}
 	
 	public void agregarProvincia(ActionEvent e) {
@@ -351,6 +355,10 @@ public class ControladorUbicacion implements ActionListener {
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
+	}
+	
+	private void editarLocalidadBoton(ActionEvent s) {
+		
 	}
 	
 	@Override
