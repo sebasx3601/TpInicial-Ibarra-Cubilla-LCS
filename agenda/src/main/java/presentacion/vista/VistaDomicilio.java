@@ -51,6 +51,7 @@ public class VistaDomicilio
 	private JButton btnMostrarProvincias;
 	
 	private JScrollPane spPais;
+	private JButton btnMostrarLocalidades;
 
 	public VistaDomicilio() 
 	{
@@ -131,15 +132,6 @@ public class VistaDomicilio
 		spLocalidad = new JScrollPane();
 		spLocalidad.setBounds(318, 11, 130, 337);
 		panel.add(spLocalidad);
-		
-		tablaLocalidad = new JTable();
-		tablaLocalidad.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Localidad"
-			}
-		));
 		spLocalidad.setViewportView(tablaLocalidad);
 		
 		btnAgregarProvincia = new JButton("Agregar");
@@ -177,6 +169,14 @@ public class VistaDomicilio
 		});
 		btnMostrarProvincias.setBounds(10, 506, 130, 38);
 		panel.add(btnMostrarProvincias);
+		
+		btnMostrarLocalidades = new JButton("Mostrar localidades");
+		btnMostrarLocalidades.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnMostrarLocalidades.setBounds(168, 506, 130, 38);
+		panel.add(btnMostrarLocalidades);
 	}
 	
 	public JScrollPane getSpPais() {
@@ -236,6 +236,11 @@ public class VistaDomicilio
 	{
 		return tablaPais;
 	}
+	
+	public JTable getTablaProvincia()
+	{
+		return tablaProvincia;
+	}
 
 	public String[] getNombreColumnas() 
 	{
@@ -249,6 +254,10 @@ public class VistaDomicilio
 	
 	public JButton getBtnMostrarProvincias() {
 		return btnMostrarProvincias;
+	}
+	
+	public JButton getBtnMostrarLocalidades() {
+		return btnMostrarLocalidades;
 	}
 
 	public void llenarTablaPais(List<PaisDTO> paisEnTablas) {
@@ -284,7 +293,7 @@ public class VistaDomicilio
 		for (LocalidadDTO p: localidadesEnTablas) {
 			String nombre = p.getNombreLocalidad();
 			String [] fila = {nombre};
-			this.getModelPais().addRow(fila);
+			this.getModelLocalidad().addRow(fila);
 		}
 	}
 }
