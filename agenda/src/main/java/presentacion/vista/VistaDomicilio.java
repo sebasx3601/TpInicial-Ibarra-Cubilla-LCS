@@ -179,6 +179,11 @@ public class VistaDomicilio
 		panel.add(btnMostrarLocalidades);
 	}
 	
+	public JButton getBtnEditarProvincia() {
+		return btnEditarProvincia;
+	}
+
+
 	public JButton getBtnEditarPais() {
 		return btnEditarPais;
 	}
@@ -289,6 +294,7 @@ public class VistaDomicilio
 		return btnMostrarLocalidades;
 	}
 
+	
 	public void llenarTablaPais(List<PaisDTO> paisEnTablas) {
 		this.getModelPais().setRowCount(0); //Para vaciar la tabla
 		this.getModelPais().setColumnCount(0);

@@ -30,6 +30,7 @@ public class ControladorUbicacion implements ActionListener {
 	private AgregarLocalidad vistaAgregarLocalidad;
 	
 	private PaisDTO paisEditando;
+	private ProvinciaDTO provinciaEditando;
 	
 	public ControladorUbicacion(VistaDomicilio vista, Agenda agenda) {
 		this.vista = vista;
@@ -54,6 +55,7 @@ public class ControladorUbicacion implements ActionListener {
 		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().addActionListener(s->agregarLocalidad(s));
 		
 		this.vista.getBtnEditarPais().addActionListener(s->abrirVentanaEditarPais(s));
+		this.vista.getBtnEditarProvincia().addActionListener(s->editarProvinciaBoton(s));
 		
 	}
 	
@@ -209,22 +211,30 @@ public class ControladorUbicacion implements ActionListener {
 	
 	public void agregarProvincia(ActionEvent e) {
 		String nombre = this.vistaAgregarProvincia.getTxtProvincia().getText();
-		if(nombre == null || nombre.equals("")) {
-			return;
-		}
-		if(yaExisteProvinciaConNombre(nombre)) {
-			return;
-		}
 		int idPaisSeleccionado = this.vistaAgregarProvincia.getIdPaisSeleccionado();
+		if(!esNombreValidoProvincia(nombre, idPaisSeleccionado)) {
+			return;
+		}
+		
 		agenda.agregarProvincia(new ProvinciaDTO(0,idPaisSeleccionado,nombre));
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
 	}
 	
-	private boolean yaExisteProvinciaConNombre(String nombreProvincia) {
+	private boolean esNombreValidoProvincia(String nombre,int idPais) {
+		if(nombre == null || nombre.equals("")) {
+			return false;
+		}
+		if(yaExisteProvinciaConNombre(nombre, idPais)) {
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean yaExisteProvinciaConNombre(String nombreProvincia, int idPais) {
 		boolean yaExiste = false;
-		List<ProvinciaDTO> listaProvincias = agenda.obtenerProvincia();
+		List<ProvinciaDTO> listaProvincias = agenda.obtenerProvinciaDePaises(idPais);
 		for(ProvinciaDTO p: listaProvincias) {
 			if(p.getNombreProvincia().equals(nombreProvincia)) {
 				yaExiste = true;
@@ -290,6 +300,57 @@ public class ControladorUbicacion implements ActionListener {
 		agenda.editarPais(paisEditando);
 		refrescarTablaPais();
 		this.vistaAgregarPais.cerrar();
+	}
+	
+	private void editarProvinciaBoton(ActionEvent s) {
+		/*
+		int idProvincia;
+		int[] filasSeleccionadas = this.vista.getTablaProvincia().getSelectedRows();
+		ProvinciaDTO p;
+		for (int fila : filasSeleccionadas)
+		{
+			p = this.provinciaEnTablas.get(fila);
+			p.setNombreProvincia("");
+			
+			editarProvincia(idProvincia);
+			this.agenda.borrarProvincia(this.provinciaEnTablas.get(fila));
+		}
+		refrescarTablaPais();
+		refrescarTablaProvincia(-1);
+		refrescarTablaLocalidad(-1);
+		 */
+		int idProvincia;
+		int[] filasSeleccionadas = this.vista.getTablaProvincia().getSelectedRows();
+		if(filasSeleccionadas.length == 0) {
+			return;
+		}
+		provinciaEditando = this.provinciaEnTablas.get(filasSeleccionadas[0]);
+		this.vistaAgregarProvincia.getLblAgregarProvincia().setText("Editar provincia");
+		this.vistaAgregarProvincia.getBtnAgregarProvincia().setText("Editar");
+		if(agenda.obtenerPaises().size() == 0) {
+			return;
+		}
+		this.vistaAgregarProvincia.llenarComboBoxPais(agenda.obtenerPaises());
+		this.vistaAgregarProvincia.getBtnAgregarProvincia().addActionListener(a->editarProvincia(a));
+		
+		this.vistaAgregarProvincia.getTxtProvincia().setText(provinciaEditando.getNombreProvincia());
+		this.vistaAgregarProvincia.getComboBoxPais().setSelectedIndex(provinciaEditando.getIdPais()-1);
+		
+		this.vistaAgregarProvincia.mostrarVentana();
+	}
+	
+	private void editarProvincia(ActionEvent s) {
+		String nombre = this.vistaAgregarProvincia.getTxtProvincia().getText();
+		int idPais = this.vistaAgregarProvincia.getIdPaisSeleccionado();
+		if(!this.esNombreValidoProvincia(nombre,idPais)) {
+			return;
+		}
+		provinciaEditando.setNombreProvincia(nombre);
+		provinciaEditando.setIdPais(idPais);
+		agenda.editarProvincia(provinciaEditando);
+		refrescarTablaPais();
+		refrescarTablaProvincia(-1);
+		refrescarTablaLocalidad(-1);
 	}
 	
 	@Override

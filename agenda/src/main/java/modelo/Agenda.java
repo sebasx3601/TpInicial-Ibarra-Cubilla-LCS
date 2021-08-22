@@ -104,6 +104,10 @@ public class Agenda
 		return this.ubicacion.readProvincia(idPais);
 	}
 	
+	public void editarProvincia(ProvinciaDTO provincia) {
+		this.ubicacion.editProvincia(provincia);
+	}
+	
 	//Localidad
 	public List<LocalidadDTO> obtenerLocalidad(){
 		return this.ubicacion.readAllLocalidad();

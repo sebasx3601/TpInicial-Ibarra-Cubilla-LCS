@@ -25,6 +25,8 @@ public class AgregarProvincia extends JFrame
 	private JComboBox comboBoxPais;
 	private List<PaisDTO> todosLosPaises;
 	
+	private JLabel lblAgregarProvincia;
+	
 	public static AgregarProvincia getInstance()
 	{
 		if(INSTANCE == null)
@@ -52,7 +54,7 @@ public class AgregarProvincia extends JFrame
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblAgregarProvincia = new JLabel("Agrega la provincia");
+		lblAgregarProvincia = new JLabel("Agrega la provincia");
 		lblAgregarProvincia.setFont(new Font("Times New Roman", Font.BOLD, 17));
 		lblAgregarProvincia.setBounds(157, 11, 169, 31);
 		panel.add(lblAgregarProvincia);
@@ -100,6 +102,10 @@ public class AgregarProvincia extends JFrame
 		return comboBoxPais;
 	}
 	
+	public JLabel getLblAgregarProvincia() {
+		return lblAgregarProvincia;
+	}
+
 	public void llenarComboBoxPais(List<PaisDTO> paises) {
 		todosLosPaises = paises;
 		JComboBox com = getComboBoxPais();
