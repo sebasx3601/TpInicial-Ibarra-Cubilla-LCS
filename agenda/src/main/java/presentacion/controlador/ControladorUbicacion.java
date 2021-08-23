@@ -227,6 +227,7 @@ public class ControladorUbicacion implements ActionListener {
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
+		this.vistaAgregarProvincia.cerrar();
 	}
 	
 	private boolean esNombreValidoProvincia(String nombre,int idPais) {
@@ -254,6 +255,7 @@ public class ControladorUbicacion implements ActionListener {
 		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().addActionListener(a->agregarLocalidad(a));
 		this.vistaAgregarLocalidad.getLblAgregarLocalidad().setText("Agregar localidad");
 		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().setText("Agregar");
+		this.vistaAgregarLocalidad.getTxtLocalidad().setText("");
 		vistaAgregarLocalidad.llenarComboBoxPais(agenda.obtenerPaises());
 		this.vistaAgregarLocalidad.mostrarVentana();
 	}
@@ -369,6 +371,7 @@ public class ControladorUbicacion implements ActionListener {
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
+		this.vistaAgregarProvincia.cerrar();
 	}
 	
 	private void editarLocalidadBoton(ActionEvent s) {
@@ -424,6 +427,7 @@ public class ControladorUbicacion implements ActionListener {
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
+		vistaAgregarLocalidad.cerrar();
 	}
 	
 	@Override
