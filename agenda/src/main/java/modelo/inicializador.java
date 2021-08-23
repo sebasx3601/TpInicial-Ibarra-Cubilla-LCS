@@ -76,29 +76,29 @@ public class inicializador {
 	private static final String crearTablaPersona = "CREATE TABLE `personas` "
 			+ "(`idPersona` int(11) NOT NULL AUTO_INCREMENT, "
 			+ "`Nombre` varchar(45) NOT NULL, `Telefono` varchar(20) NOT NULL, "
-			+ "`Calle` varchar(20) NOT NULL, `Altura` varchar(20) NOT NULL, `Piso` varchar(20) NOT NULL, "
-			+ "`Depto` varchar(20) NOT NULL, `Localidad` int(11) NOT NULL, "
+			+ "`Calle` varchar(30) NOT NULL, `Altura` varchar(20) NOT NULL, `Piso` varchar(20) NOT NULL, "
+			+ "`Depto` varchar(30) NOT NULL, `Localidad` int(11) NOT NULL, "
 			+ "`DireccionEmail` varchar(100) NOT NULL, `tipoContacto` int(20) NOT NULL, "
-			+ "`fechaCumple` varchar(20) NOT NULL, PRIMARY KEY (`idPersona`));";
+			+ "`fechaCumple` varchar(30) NOT NULL, PRIMARY KEY (`idPersona`));";
 	
 	private static final String crearTablaTipoContacto = "CREATE TABLE `tipo_contacto`\r\n"
 			+ "(\r\n"
 			+ "	`IdContacto` int(11) NOT NULL AUTO_INCREMENT,\r\n"
-			+ "	`NombreContacto` varchar(20) NOT NULL,\r\n"
+			+ "	`NombreContacto` varchar(30) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdContacto`)\r\n"
 			+ ");";
 	
 	private static final String crearTablaPais = "CREATE TABLE `pais`\r\n"
 			+ "(\r\n"
 			+ "	`IdPais` int(11) NOT NULL AUTO_INCREMENT,\r\n"
-			+ "	`NombrePais` varchar(20) NOT NULL,\r\n"
+			+ "	`NombrePais` varchar(30) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdPais`)\r\n"
 			+ ");";
 	
 	private static final String crearTablaProvincia = "CREATE TABLE `provincia`\r\n"
 			+ "(\r\n"
 			+ "	`IdProvincia` int(11) NOT NULL AUTO_INCREMENT,\r\n"
-			+ "	`NombreProvincia` varchar(20) NOT NULL,\r\n"
+			+ "	`NombreProvincia` varchar(30) NOT NULL,\r\n"
 			+ "	`IdPais` varchar(20) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdProvincia`)\r\n"
 			+ ");";
@@ -106,7 +106,7 @@ public class inicializador {
 	private static final String crearTablaLocalidad = "CREATE TABLE `localidad`\r\n"
 			+ "(\r\n"
 			+ "	`IdLocalidad` int(11) NOT NULL AUTO_INCREMENT,\r\n"
-			+ "	`NombreLocalidad` varchar(20) NOT NULL,\r\n"
+			+ "	`NombreLocalidad` varchar(30) NOT NULL,\r\n"
 			+ "	`IdProvincia` varchar(20) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdLocalidad`)\r\n"
 			+ ");";
