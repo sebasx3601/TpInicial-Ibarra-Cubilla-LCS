@@ -1,5 +1,8 @@
 package dto;
 import java. util. Date;
+import java.util.List;
+
+import javax.swing.JComboBox;
 
 
 public class PersonaDTO 
@@ -14,11 +17,11 @@ public class PersonaDTO
 	private String depto;
 	private int localidad;
 	private String direccionEmail;
-	private Date fechaCumple;
+	private String fechaCumple;
 	private int tipoContacto;
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, String altura,
-			String piso, String depto, int localidad, String direccionEmail, Date fechaCumple, int tipoContacto)
+			String piso, String depto, int localidad, String direccionEmail, String fechaCumple2, int tipoContacto)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -29,7 +32,7 @@ public class PersonaDTO
 		this.depto = depto;
 		this.localidad = localidad;
 		this.direccionEmail = direccionEmail;
-		this.fechaCumple = fechaCumple;
+		this.fechaCumple = fechaCumple2;
 		this.tipoContacto = tipoContacto;
 	}
 	
@@ -38,6 +41,14 @@ public class PersonaDTO
 		return this.idPersona;
 	}
 
+	
+
+	
+	
+	
+	
+	
+	
 	public void setIdPersona(int idPersona) 
 	{
 		this.idPersona = idPersona;
@@ -111,11 +122,11 @@ public class PersonaDTO
 		this.direccionEmail = direccionEmail;
 	}
 
-	public Date getFechaCumple() {
+	public String getFechaCumple() {
 		return fechaCumple;
 	}
 
-	public void setFechaCumple(Date fechaCumple) {
+	public void setFechaCumple(String fechaCumple) {
 		this.fechaCumple = fechaCumple;
 	}
 

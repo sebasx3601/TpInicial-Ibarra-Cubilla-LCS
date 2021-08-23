@@ -39,7 +39,7 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(8, persona.getLocalidad());
 			statement.setString(9, persona.getDireccionEmail());
 			//java. sql. Date fecha;
-			statement.setString(10, "1999-05-27"); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
+			statement.setString(10, persona.getFechaCumple()); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
 			statement.setInt(11, persona.getTipoContacto());
 			
 			if(statement.executeUpdate() > 0)
@@ -117,7 +117,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		String depto = resultSet.getString("Depto");
 		int localidad = resultSet.getInt("Localidad");
 		String direccionEmail = resultSet.getString("DireccionEmail");
-		Date fechaCumple = resultSet.getDate("fechaCumple");
+		String fechaCumple = resultSet.getString("fechaCumple");
 		int tipoContacto = resultSet.getInt("tipoContacto");
 		
 		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto);

@@ -10,9 +10,9 @@ CREATE TABLE `personas`
   `Piso` varchar(20) NOT NULL,
   `Depto` varchar(20) NOT NULL,
   `Localidad` int(11) NOT NULL,
-  `DireccionEmail` varchar(20) NOT NULL,
+  `DireccionEmail` varchar(100) NOT NULL,
   `tipoContacto` int(20) NOT NULL,
-  `fechaCumple` DATE NOT NULL,
+  `fechaCumple` varchar(20) NOT NULL,
   PRIMARY KEY (`idPersona`)
 );
 CREATE TABLE `tipo_contacto`
