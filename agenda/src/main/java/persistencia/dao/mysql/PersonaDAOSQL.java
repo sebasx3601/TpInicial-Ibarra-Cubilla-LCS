@@ -122,4 +122,8 @@ public class PersonaDAOSQL implements PersonaDAO
 		
 		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto);
 	}
+	
+	public boolean edit(PersonaDTO persona_a_editar) {
+		return true;
+	}
 }
