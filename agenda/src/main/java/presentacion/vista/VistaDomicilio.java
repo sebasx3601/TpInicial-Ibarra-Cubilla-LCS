@@ -36,7 +36,7 @@ public class VistaDomicilio
 	private DefaultTableModel modelLocalidad;
 	private  String[] paisColumnas = {"Pais"};
 	private  String[] provinciaColumnas = {"Provincia"};
-	private  String[] localidadColumnas = {"Pais"};
+	private  String[] localidadColumnas = {"Localidad"};
 	private JScrollPane spProvincia;
 	private JScrollPane spLocalidad;
 	private JTable tablaProvincia;
@@ -281,9 +281,13 @@ public class VistaDomicilio
 		return tablaLocalidad;
 	}
 	
-	public String[] getNombreColumnas() 
-	{
-		return paisColumnas;
+	public String[] getProvinciaColumnas() {
+		return provinciaColumnas;
+	}
+
+
+	public String[] getLocalidadColumnas() {
+		return localidadColumnas;
 	}
 
 	public String[] getNombreColumnaPais() 
@@ -303,7 +307,7 @@ public class VistaDomicilio
 	public void llenarTablaPais(List<PaisDTO> paisEnTablas) {
 		this.getModelPais().setRowCount(0); //Para vaciar la tabla
 		this.getModelPais().setColumnCount(0);
-		this.getModelPais().setColumnIdentifiers(this.getNombreColumnas());
+		this.getModelPais().setColumnIdentifiers(this.getNombreColumnaPais());
 		
 		for (PaisDTO p: paisEnTablas) {
 			String nombre = p.getNombrePais();
@@ -316,7 +320,7 @@ public class VistaDomicilio
 	public void llenarTablaProvincia(List<ProvinciaDTO> provinciasEnTablas) {
 		this.getModelProvincia().setRowCount(0); //Para vaciar la tabla
 		this.getModelProvincia().setColumnCount(0);
-		this.getModelProvincia().setColumnIdentifiers(this.getNombreColumnas());
+		this.getModelProvincia().setColumnIdentifiers(this.getProvinciaColumnas());
 		
 		for (ProvinciaDTO p: provinciasEnTablas) {
 			String nombre = p.getNombreProvincia();
@@ -328,7 +332,7 @@ public class VistaDomicilio
 	public void llenarTablaLocalidad(List<LocalidadDTO> localidadesEnTablas) {
 		this.getModelLocalidad().setRowCount(0); //Para vaciar la tabla
 		this.getModelLocalidad().setColumnCount(0);
-		this.getModelLocalidad().setColumnIdentifiers(this.getNombreColumnas());
+		this.getModelLocalidad().setColumnIdentifiers(this.getLocalidadColumnas());
 		
 		for (LocalidadDTO p: localidadesEnTablas) {
 			String nombre = p.getNombreLocalidad();
