@@ -399,4 +399,76 @@ public class UbicacionDAOSQL implements UbicacionDAO
 		return iseditExitoso;
 	}
 	
+	private static final String readOnePais = "SELECT * FROM pais WHERE IdPais = ?;";
+	
+	private static final String readOneProvincia = "SELECT * FROM provincia WHERE IdProvincia = ?;";
+	
+	private static final String readOneLocalidad = "SELECT * FROM localidad WHERE IdLocalidad = ?;";
+	
+	public PaisDTO readOnePais(int idPais){
+		PreparedStatement statement;
+		ResultSet resultSet;
+		PaisDTO res = new PaisDTO(0,"");
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readOnePais);
+			statement.setInt(1, idPais);
+			resultSet = statement.executeQuery();
+			if(resultSet.next())
+			{
+				res = getPaisDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public ProvinciaDTO readOneProvincia(int idProvincia){
+		PreparedStatement statement;
+		ResultSet resultSet;
+		ProvinciaDTO res = new ProvinciaDTO(0,0,"");
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readOneProvincia);
+			statement.setInt(1, idProvincia);
+			resultSet = statement.executeQuery();
+			if(resultSet.next())
+			{
+				res = getProvinciaDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public LocalidadDTO readOneLocalidad(int idLocalidad){
+		PreparedStatement statement;
+		ResultSet resultSet;
+		LocalidadDTO res = new LocalidadDTO(0,"",0);
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readOneLocalidad);
+			statement.setInt(1, idLocalidad);
+			resultSet = statement.executeQuery();
+			if(resultSet.next())
+			{
+				res = getLocalidadDTO(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 }

@@ -35,5 +35,11 @@ public interface UbicacionDAO {
 	public boolean editProvincia(ProvinciaDTO provincia);
 	
 	public boolean editPais(PaisDTO pais);
+	
+	public LocalidadDTO readOneLocalidad(int idLocalidad);
+	
+	public ProvinciaDTO readOneProvincia(int idProvincia);
+	
+	public PaisDTO readOnePais(int idPais);
 
 }
