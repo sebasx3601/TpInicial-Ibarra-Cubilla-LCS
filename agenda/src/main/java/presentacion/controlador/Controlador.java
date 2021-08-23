@@ -50,7 +50,8 @@ public class Controlador implements ActionListener
 			String depto = ventanaPersona.getTxtDepto().getText();
 			int localidad = 1; //FALTA
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
-			Date fechaCumple = new Date(); //FALTA
+			String fechaCumple= ventanaPersona.TomarCombobox(); //FALTA
+			//p.ll
 			
 			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
 			String tipoContacto = ventanaPersona.getSeleccionadoTipoContacto(); //Parece que lo ignora github

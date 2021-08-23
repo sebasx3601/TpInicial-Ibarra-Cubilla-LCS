@@ -26,7 +26,7 @@ public class Vista
 	private JButton btnBorrar;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Calle","altura","piso","departamento"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Calle","altura","piso","departamento","pais","provincia","localidad","E-Mail","cumpleaños","Tipo de contacto"};
 
 	public Vista() 
 	{
@@ -38,17 +38,17 @@ public class Vista
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 907, 300);
+		frame.setBounds(100, 100, 996, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 881, 262);
+		panel.setBounds(0, 0, 970, 262);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 861, 182);
+		spPersonas.setBounds(10, 11, 950, 182);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
@@ -66,6 +66,8 @@ public class Vista
 		tablaPersonas.getColumnModel().getColumn(4).setResizable(false);
 		tablaPersonas.getColumnModel().getColumn(5).setPreferredWidth(100);
 		tablaPersonas.getColumnModel().getColumn(5).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(6).setPreferredWidth(100);
+		tablaPersonas.getColumnModel().getColumn(6).setResizable(false);
 		
 		
 		spPersonas.setViewportView(tablaPersonas);
@@ -151,9 +153,26 @@ public class Vista
 			String altura= p.getAltura(); 
 			String piso = p.getPiso();
 			String departamento = p.getDepto();
+			String cumple= p.getFechaCumple();
+			int localidad = p.getLocalidad();
+			String direccion = p.getDireccionEmail();
+			String tipoCont = "nada";
 			
 			
-			Object[] fila = {nombre, tel,calle,altura,piso,departamento}; //aca tambien
+			if (p.getTipoContacto()==1) {
+				 tipoCont= "trabajo";
+			}
+			 if ( p.getTipoContacto()==2) {
+				 tipoCont= "familia";
+			 }
+			 if (p.getTipoContacto()==3) {
+				  tipoCont = "amigos";
+			 }
+			
+			
+			
+			
+			Object[] fila = {nombre, tel,calle,altura,piso,departamento,localidad, "asd" ,"asd", direccion, cumple, tipoCont}; //aca tambien
 			this.getModelPersonas().addRow(fila);
 		}
 		
