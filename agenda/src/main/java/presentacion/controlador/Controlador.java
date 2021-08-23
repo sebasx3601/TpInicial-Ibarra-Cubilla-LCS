@@ -29,6 +29,12 @@ public class Controlador implements ActionListener
 		
 		private List<TipoContactoDTO> tiposDeContacto;
 		
+		private List<PaisDTO> paisEnLista;
+		
+		private List<LocalidadDTO> localidadEnLista;
+		
+		private List<ProvinciaDTO> provinciaEnLista;
+		
 		public Controlador(Vista vista, Agenda agenda)
 		{
 			this.vista = vista;
@@ -134,20 +140,49 @@ public class Controlador implements ActionListener
 			if(idPaisSeleccionado == -1) {
 				return;
 			}
-			ventanaPersona.llenarComboBoxProvincia(agenda.obtenerProvinciaDePaises(agenda.getPais(idPaisSeleccionado+1).getId()));
+			paisEnLista = agenda.obtenerPaises();
+			if(paisEnLista.size() == 0) {
+				return;
+			}
+			int idPais = paisEnLista.get(idPaisSeleccionado).getId();
+			
+			ventanaPersona.llenarComboBoxProvincia(agenda.obtenerProvinciaDePaises(idPais));
+			provinciaEnLista = agenda.obtenerProvinciaDePaises(idPais);
+			if(provinciaEnLista.size() == 0) {
+				ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(-1));
+				this.localidadEnLista = agenda.obtenerLocalidadDeProvincia(-1);
+				return;
+			}
+			ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(provinciaEnLista.get(0).getId()));
+			this.localidadEnLista = agenda.obtenerLocalidadDeProvincia(provinciaEnLista.get(0).getId());
+			/*
 			int idProvincia = ventanaPersona.getComboBoxProvincia().getSelectedIndex();
 			if(idProvincia == -1) {
 				return;
 			}
-			ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(-1));
+			ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(provinciaEnLista.get(idProvincia).getId()));
+			*/
 		}
 		
 		public void cambioUnProvincia(ItemEvent e) {
+			/*
 			int idProvincia = ventanaPersona.getComboBoxProvincia().getSelectedIndex();
 			if(idProvincia == -1) {
 				return;
 			}
-			ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(agenda.getProvincias(idProvincia+1).getId()));
+			localidadEnLista = agenda.obtenerLocalidadDeProvincia(agenda.getProvincias(idProvincia+1).getId());
+			ventanaPersona.llenarComboBoxLocalidad(localidadEnLista);
+			*/
+			int idProvincia = ventanaPersona.getComboBoxProvincia().getSelectedIndex();
+			if(provinciaEnLista == null) {
+				return;
+			}
+			if(idProvincia == -1) {
+				return;
+			}
+			idProvincia = provinciaEnLista.get(idProvincia).getId();
+			localidadEnLista = agenda.obtenerLocalidadDeProvincia(idProvincia);
+			ventanaPersona.llenarComboBoxLocalidad(localidadEnLista);
 		}
 		
 		public void asignarCodigoAComboBoxes() {
