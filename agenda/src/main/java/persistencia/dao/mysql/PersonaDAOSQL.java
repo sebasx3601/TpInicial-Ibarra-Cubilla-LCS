@@ -123,7 +123,49 @@ public class PersonaDAOSQL implements PersonaDAO
 		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto);
 	}
 	
-	public boolean edit(PersonaDTO persona_a_editar) {
-		return true;
+	private static final String editPersona = "UPDATE personas SET Nombre = ?, Telefono = ?, Calle = ?,"
+			+ " Altura = ?, Piso = ?, Depto = ?, Localidad = ?, DireccionEmail = ?, tipoContacto = ?, "
+			+ "fechaCumple = ?,  WHERE idPersona = ?";
+	
+	public boolean edit(PersonaDTO persona) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(editPersona);
+			statement.setInt(1, persona.getIdPersona());
+			statement.setString(2, persona.getNombre());
+			statement.setString(3, persona.getTelefono());
+			
+			statement.setString(4, persona.getCalle());
+			statement.setString(5, persona.getAltura());
+			statement.setString(6, persona.getPiso());
+			statement.setString(7, persona.getDepto());
+			statement.setInt(8, persona.getLocalidad());
+			statement.setString(9, persona.getDireccionEmail());
+			//java. sql. Date fecha;
+			statement.setString(10, persona.getFechaCumple()); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
+			statement.setInt(11, persona.getTipoContacto());
+			
+			statement.setInt(12, persona.getIdPersona());
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
 	}
 }
