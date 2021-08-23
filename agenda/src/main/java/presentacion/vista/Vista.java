@@ -32,6 +32,8 @@ public class Vista
 	private DefaultTableModel modelPersonas;
 	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Calle","altura","piso","departamento","pais","provincia","localidad","E-Mail","cumpleaños","Tipo de contacto"};
 
+	private JButton btnEditar;
+
 	public Vista() 
 	{
 		super();
@@ -80,7 +82,7 @@ public class Vista
 		btnAgregar.setBounds(10, 228, 89, 23);
 		panel.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(109, 228, 89, 23);
 		panel.add(btnEditar);
 		
@@ -143,7 +145,10 @@ public class Vista
 		return nombreColumnas;
 	}
 
-
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+	
 	public void llenarTabla(List<PersonaDTO> personasEnTabla, List<PaisDTO> paises, List<ProvinciaDTO> provincias, List<LocalidadDTO> localidades, List<TipoContactoDTO> tipos) {
 		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
 		this.getModelPersonas().setColumnCount(0);

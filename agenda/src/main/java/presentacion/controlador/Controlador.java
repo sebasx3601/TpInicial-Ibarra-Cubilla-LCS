@@ -35,6 +35,8 @@ public class Controlador implements ActionListener
 		
 		private List<ProvinciaDTO> provinciaEnLista;
 		
+		private PersonaDTO personaEditando;
+		
 		public Controlador(Vista vista, Agenda agenda)
 		{
 			this.vista = vista;
@@ -45,6 +47,8 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
 			this.agenda = agenda;
 			asignarCodigoAComboBoxes();
+			
+			this.vista.getBtnEditar().addActionListener(p->abrirEditarUnaPersona(p));
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
@@ -52,6 +56,93 @@ public class Controlador implements ActionListener
 			llenarComboBoxTipoContacto();
 			ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
 			this.ventanaPersona.mostrarVentana();
+			
+			for (ActionListener listener : this.ventanaPersona.getBtnAgregarPersona().getActionListeners())
+		    {
+				this.ventanaPersona.getBtnAgregarPersona().removeActionListener(listener);
+		    }
+			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
+		}
+		
+		private void abrirEditarUnaPersona(ActionEvent a) {
+			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+			if(filasSeleccionadas.length == 0) {
+				return;
+			}
+			personaEditando = personasEnTabla.get(filasSeleccionadas[0]);
+			
+			ventanaPersona.getTxtAltura().setText(personaEditando.getAltura());
+			ventanaPersona.getTxtCalle().setText(personaEditando.getCalle());
+			ventanaPersona.getTxtDepto().setText(personaEditando.getDepto());
+			ventanaPersona.getTxtDireccionEmail().setText(personaEditando.getDireccionEmail());
+			ventanaPersona.getTxtNombre().setText(personaEditando.getNombre());
+			ventanaPersona.getTxtPiso().setText(personaEditando.getPiso());
+			ventanaPersona.getTxtTelefono().setText(personaEditando.getTelefono());
+			
+			int provinciaId = agenda.getLocalidad(personaEditando.getLocalidad()).getIdProvincia();
+			
+			int paisId = agenda.getProvincias(provinciaId).getIdPais();
+			this.ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
+			this.ventanaPersona.llenarComboBoxProvincia(agenda.obtenerProvinciaDePaises(paisId));
+			this.ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(provinciaId));
+			
+			ventanaPersona.getComboBoxPais().setSelectedItem(agenda.getPais(paisId));
+			ventanaPersona.getComboBoxProvincia().setSelectedItem(agenda.getProvincias(provinciaId));
+			ventanaPersona.getComboBoxLocalidad().setSelectedItem(agenda.getLocalidad(personaEditando.getLocalidad()));
+			
+			/*
+			ventanaPersona.getComboBoxMes().setSelectedIndex(personaEditando.ge);
+			ventanaPersona.getComboBoxAnio().setText();
+			ventanaPersona.getcBDia().setText();
+			*/
+			for (ActionListener listener : this.ventanaPersona.getBtnAgregarPersona().getActionListeners())
+		    {
+				this.ventanaPersona.getBtnAgregarPersona().removeActionListener(listener);
+		    }
+			
+			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->editarPersona(p));
+			ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
+			this.ventanaPersona.mostrarVentana();
+		}
+		
+		private void editarPersona(ActionEvent p) {
+			String nombre = this.ventanaPersona.getTxtNombre().getText();
+			String tel = ventanaPersona.getTxtTelefono().getText();
+			String calle = ventanaPersona.getTxtCalle().getText();
+			String altura = ventanaPersona.getTxtAltura().getText();
+			String piso = ventanaPersona.getTxtPiso().getText();
+			String depto = ventanaPersona.getTxtDepto().getText();
+			
+			int localidad = 0;
+			if(ventanaPersona.getComboBoxLocalidad().getSelectedIndex() == -1 || localidadEnLista.size() == 0) {
+				localidad = 0;
+			}else {
+				localidad = this.localidadEnLista.get(ventanaPersona.getComboBoxLocalidad().getSelectedIndex()).getId();
+			}
+			
+			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
+			String fechaCumple= ventanaPersona.TomarCombobox();
+			//p.ll
+			
+			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
+			String tipoContacto = ventanaPersona.getSeleccionadoTipoContacto();
+			int intTipoContacto = obtenerIdTipoContacto(tipoContacto);
+			
+			personaEditando.setAltura(altura);
+			personaEditando.setCalle(calle);
+			personaEditando.setDepto(depto);
+			personaEditando.setDireccionEmail(direccionEmail);
+			personaEditando.setFechaCumple(fechaCumple);
+			personaEditando.setLocalidad(localidad);
+			personaEditando.setNombre(nombre);
+			personaEditando.setPiso(piso);
+			personaEditando.setTelefono(tel);
+			personaEditando.setTipoContacto(intTipoContacto);
+			
+			agenda.editarPersona(personaEditando);
+			
+			this.refrescarTabla();
+			this.ventanaPersona.cerrar();
 		}
 
 		private void guardarPersona(ActionEvent p) { //Parece que lo ignora github

@@ -36,6 +36,8 @@ public class VentanaPersona extends JFrame
 	private JTextField txtDepto;
 	private JTextField txtDireccionEmail;
 	private JComboBox<String> cBDia;
+	
+
 	private JComboBox<String> comboBoxMes;
 	private JComboBox<String> comboBoxAnio;
 	
@@ -331,6 +333,12 @@ public class VentanaPersona extends JFrame
 		}
 	}
 	
-	
+	public JComboBox<String> getcBDia() {
+		return cBDia;
+	}
+
+	public JComboBox<String> getComboBoxAnio() {
+		return comboBoxAnio;
+	}
 }
 

@@ -143,4 +143,8 @@ public class Agenda
 		return this.ubicacion.readOnePais(idPais);
 	}
 	
+	public void editarPersona(PersonaDTO persona) {
+		this.persona.edit(persona);
+	}
+	
 }

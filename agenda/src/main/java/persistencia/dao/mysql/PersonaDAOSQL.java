@@ -125,7 +125,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	
 	private static final String editPersona = "UPDATE personas SET Nombre = ?, Telefono = ?, Calle = ?,"
 			+ " Altura = ?, Piso = ?, Depto = ?, Localidad = ?, DireccionEmail = ?, tipoContacto = ?, "
-			+ "fechaCumple = ?,  WHERE idPersona = ?";
+			+ "fechaCumple = ? WHERE idPersona = ?";
 	
 	public boolean edit(PersonaDTO persona) {
 		PreparedStatement statement;
@@ -134,21 +134,20 @@ public class PersonaDAOSQL implements PersonaDAO
 		try
 		{
 			statement = conexion.prepareStatement(editPersona);
-			statement.setInt(1, persona.getIdPersona());
-			statement.setString(2, persona.getNombre());
-			statement.setString(3, persona.getTelefono());
+			statement.setString(1, persona.getNombre());
+			statement.setString(2, persona.getTelefono());
 			
-			statement.setString(4, persona.getCalle());
-			statement.setString(5, persona.getAltura());
-			statement.setString(6, persona.getPiso());
-			statement.setString(7, persona.getDepto());
-			statement.setInt(8, persona.getLocalidad());
-			statement.setString(9, persona.getDireccionEmail());
+			statement.setString(3, persona.getCalle());
+			statement.setString(4, persona.getAltura());
+			statement.setString(5, persona.getPiso());
+			statement.setString(6, persona.getDepto());
+			statement.setInt(7, persona.getLocalidad());
+			statement.setString(8, persona.getDireccionEmail());
 			//java. sql. Date fecha;
 			statement.setString(10, persona.getFechaCumple()); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
-			statement.setInt(11, persona.getTipoContacto());
+			statement.setInt(9, persona.getTipoContacto());
 			
-			statement.setInt(12, persona.getIdPersona());
+			statement.setInt(11, persona.getIdPersona());
 			
 			if(statement.executeUpdate() > 0)
 			{
