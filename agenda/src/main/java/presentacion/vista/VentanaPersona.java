@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dto.LocalidadDTO;
+import dto.PaisDTO;
 import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
@@ -16,6 +18,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 public class VentanaPersona extends JFrame 
@@ -34,6 +38,10 @@ public class VentanaPersona extends JFrame
 	private JComboBox<String> cBDia;
 	private JComboBox<String> comboBoxMes;
 	private JComboBox<String> comboBoxAnio;
+	
+	private JComboBox comboBoxPais;
+	private JComboBox comboBoxProvincia;
+	private JComboBox comboBoxLocalidad;
 	
 	
 	private JComboBox<String> comboBoxTipoContacto;
@@ -128,7 +136,7 @@ public class VentanaPersona extends JFrame
 		lblLocalidad.setBounds(10, 304, 113, 14);
 		panel.add(lblLocalidad);
 		
-		JComboBox comboBoxLocalidad = new JComboBox();
+		comboBoxLocalidad = new JComboBox();
 		comboBoxLocalidad.setBounds(157, 300, 180, 22);
 		panel.add(comboBoxLocalidad);
 		
@@ -157,7 +165,7 @@ public class VentanaPersona extends JFrame
 		lblProvincia.setBounds(10, 274, 113, 14);
 		panel.add(lblProvincia);
 		
-		JComboBox comboBoxProvincia = new JComboBox();
+		comboBoxProvincia = new JComboBox();
 		comboBoxProvincia.setBounds(157, 267, 180, 22);
 		panel.add(comboBoxProvincia);
 		
@@ -165,7 +173,7 @@ public class VentanaPersona extends JFrame
 		lblPais.setBounds(10, 226, 113, 14);
 		panel.add(lblPais);
 		
-		JComboBox comboBoxPais = new JComboBox();
+		comboBoxPais = new JComboBox();
 		comboBoxPais.setBounds(157, 222, 180, 22);
 		panel.add(comboBoxPais);
 		
@@ -244,6 +252,22 @@ public class VentanaPersona extends JFrame
 		return txtDireccionEmail;
 	}
 	
+	public JComboBox<String> getComboBoxMes() {
+		return comboBoxMes;
+	}
+
+	public JComboBox getComboBoxPais() {
+		return comboBoxPais;
+	}
+	
+	public JComboBox getComboBoxProvincia() {
+		return comboBoxProvincia;
+	}
+
+	public JComboBox getComboBoxLocalidad() {
+		return comboBoxLocalidad;
+	}
+	
 	public JComboBox<String> getComboBoxTipoContacto() {//Parece que lo ignora github
 		return comboBoxTipoContacto;
 	}
@@ -270,7 +294,6 @@ public class VentanaPersona extends JFrame
 	public void reiniciarComboBoxTipoContacto() {//Parece que lo ignora github
 		this.comboBoxTipoContacto.removeAllItems();
 	}
-	//FALTA PROVINCIA PAIS LOCALIDAD FECHA DE CUMPLEAÑOS Y TIPO DE CONTACTO
 	
 	public void cerrar()
 	{
@@ -278,5 +301,36 @@ public class VentanaPersona extends JFrame
 		this.txtTelefono.setText(null);
 		this.dispose();
 	}
+	
+	
+	
+	
+	
+	
+	public void llenarComboBoxPais(List<PaisDTO> paises) {
+		JComboBox com = getComboBoxPais();
+		com.removeAllItems();
+		for (PaisDTO p: paises) {
+			com.addItem(p.getNombrePais());
+		}
+	}
+	
+	public void llenarComboBoxProvincia(List<ProvinciaDTO> provincias) {
+		JComboBox com = this.getComboBoxProvincia();
+		com.removeAllItems();
+		for (ProvinciaDTO p: provincias) {
+			com.addItem(p.getNombreProvincia());
+		}
+	}
+	
+	public void llenarComboBoxLocalidad(List<LocalidadDTO> localidad) {
+		JComboBox com = getComboBoxLocalidad();
+		com.removeAllItems();
+		for (LocalidadDTO p: localidad) {
+			com.addItem(p.getNombreLocalidad());
+		}
+	}
+	
+	
 }
 

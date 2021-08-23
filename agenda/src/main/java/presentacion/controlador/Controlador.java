@@ -2,6 +2,8 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Date;
 import java.util.List;
 
@@ -36,11 +38,13 @@ public class Controlador implements ActionListener
 			this.ventanaPersona = VentanaPersona.getInstance();
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
 			this.agenda = agenda;
+			asignarCodigoAComboBoxes();
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
 			this.ventanaPersona.reiniciarComboBoxTipoContacto();
 			llenarComboBoxTipoContacto();
+			ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
 			this.ventanaPersona.mostrarVentana();
 		}
 
@@ -123,6 +127,32 @@ public class Controlador implements ActionListener
 		
 		public PaisDTO getPais(int idPais) {
 			return agenda.getPais(idPais);
+		}
+		
+		public void cambioUnPais(ItemEvent e) {
+			int idPaisSeleccionado = ventanaPersona.getComboBoxPais().getSelectedIndex();
+			if(idPaisSeleccionado == -1) {
+				return;
+			}
+			ventanaPersona.llenarComboBoxProvincia(agenda.obtenerProvinciaDePaises(agenda.getPais(idPaisSeleccionado+1).getId()));
+			int idProvincia = ventanaPersona.getComboBoxProvincia().getSelectedIndex();
+			if(idProvincia == -1) {
+				return;
+			}
+			ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(-1));
+		}
+		
+		public void cambioUnProvincia(ItemEvent e) {
+			int idProvincia = ventanaPersona.getComboBoxProvincia().getSelectedIndex();
+			if(idProvincia == -1) {
+				return;
+			}
+			ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(agenda.getProvincias(idProvincia+1).getId()));
+		}
+		
+		public void asignarCodigoAComboBoxes() {
+			ventanaPersona.getComboBoxPais().addItemListener(e->cambioUnPais(e));
+			ventanaPersona.getComboBoxProvincia().addItemListener(e->cambioUnProvincia(e));
 		}
 
 		@Override
