@@ -61,15 +61,21 @@ public class Controlador implements ActionListener
 			String altura = ventanaPersona.getTxtAltura().getText();
 			String piso = ventanaPersona.getTxtPiso().getText();
 			String depto = ventanaPersona.getTxtDepto().getText();
-			int localidad = 1; //FALTA
+			
+			int localidad = 0;
+			if(ventanaPersona.getComboBoxLocalidad().getSelectedIndex() == -1 || localidadEnLista.size() == 0) {
+				localidad = 0;
+			}else {
+				localidad = this.localidadEnLista.get(ventanaPersona.getComboBoxLocalidad().getSelectedIndex()).getId();
+			}
+			
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
-			String fechaCumple= ventanaPersona.TomarCombobox(); //FALTA
+			String fechaCumple= ventanaPersona.TomarCombobox();
 			//p.ll
 			
 			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
-			String tipoContacto = ventanaPersona.getSeleccionadoTipoContacto(); //Parece que lo ignora github
+			String tipoContacto = ventanaPersona.getSeleccionadoTipoContacto();
 			int intTipoContacto = obtenerIdTipoContacto(tipoContacto);
-			
 			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
 					direccionEmail, fechaCumple, intTipoContacto);
@@ -114,7 +120,10 @@ public class Controlador implements ActionListener
 		private void refrescarTabla()
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
-			this.vista.llenarTabla(this.personasEnTabla);
+			List<PaisDTO> paises = agenda.obtenerPaises();
+			List<ProvinciaDTO> provincias = agenda.obtenerProvincia();
+			List<LocalidadDTO> localidades = agenda.obtenerLocalidad();
+			this.vista.llenarTabla(this.personasEnTabla, paises, provincias, localidades, agenda.obtenerTiposDeContacto());
 		}
 		
 		private void llenarComboBoxTipoContacto()//Parece que lo ignora github

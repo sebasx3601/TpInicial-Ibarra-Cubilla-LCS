@@ -12,7 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.LocalidadDTO;
+import dto.PaisDTO;
 import dto.PersonaDTO;
+import dto.ProvinciaDTO;
+import dto.TipoContactoDTO;
 
 import javax.swing.JButton;
 
@@ -140,7 +144,7 @@ public class Vista
 	}
 
 
-	public void llenarTabla(List<PersonaDTO> personasEnTabla) {
+	public void llenarTabla(List<PersonaDTO> personasEnTabla, List<PaisDTO> paises, List<ProvinciaDTO> provincias, List<LocalidadDTO> localidades, List<TipoContactoDTO> tipos) {
 		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
 		this.getModelPersonas().setColumnCount(0);
 		this.getModelPersonas().setColumnIdentifiers(this.getNombreColumnas());
@@ -154,27 +158,40 @@ public class Vista
 			String piso = p.getPiso();
 			String departamento = p.getDepto();
 			String cumple= p.getFechaCumple();
-			int localidad = p.getLocalidad();
+			int IDlocalidad = p.getLocalidad();
 			String direccion = p.getDireccionEmail();
+			
 			String tipoCont = "nada";
-			
-			
-			if (p.getTipoContacto()==1) {
-				 tipoCont= "trabajo";
+			int intTipoCont = p.getTipoContacto();
+			for(TipoContactoDTO tip: tipos) {
+				if(tip.getIdContacto() == intTipoCont) {
+					tipoCont = tip.getNombreTipoContacto();
+				}
 			}
-			 if ( p.getTipoContacto()==2) {
-				 tipoCont= "familia";
-			 }
-			 if (p.getTipoContacto()==3) {
-				  tipoCont = "amigos";
-			 }
 			
+			String pais = "";
+			String provincia = "";
+			String localidad = "";
 			
+			//List<PaisDTO> paises, List<ProvinciaDTO> provincias, List<LocalidadDTO> localidades
+			for(LocalidadDTO loc: localidades) {
+				if(loc.getId() == IDlocalidad) {
+					localidad = loc.getNombreLocalidad();
+					for(ProvinciaDTO pro: provincias) {
+						if(pro.getId() == loc.getIdProvincia()) {
+							provincia = pro.getNombreProvincia();
+							for(PaisDTO pai: paises) {
+								if(pai.getId() == pro.getIdPais()) {
+									pais = pai.getNombrePais();
+								}
+							}
+						}
+					}
+				}
+			}
 			
-			
-			Object[] fila = {nombre, tel,calle,altura,piso,departamento,localidad, "asd" ,"asd", direccion, cumple, tipoCont}; //aca tambien
+			Object[] fila = {nombre, tel,calle,altura,piso,departamento,pais,provincia,localidad, direccion, cumple, tipoCont};
 			this.getModelPersonas().addRow(fila);
 		}
-		
 	}
 }
