@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
-import persistencia.conexion.Conexion;
-
 public class inicializador {
 	
 	public static inicializador instancia;
@@ -57,23 +55,32 @@ public class inicializador {
 		instancia = null;
 	}
 	
+	private void conectarConBase()
+	{
+		try
+		{
+			cerrarConexion();
+			Class.forName("com.mysql.cj.jdbc.Driver"); // quitar si no es necesario
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda","root","root");
+			this.connection.setAutoCommit(false);
+			log.info("Conexión exitosa");
+		}
+		catch(Exception e)
+		{
+			log.error("Conexión fallida", e);
+		}
+	}
+	
 	private static final String eliminarBase = "drop database if exists `agenda`;";
 	private static final String crearBase = "CREATE DATABASE `agenda`;";
-	private static final String crearTablaPersona = "CREATE TABLE `personas`\r\n"
-			+ "(\r\n"
-			+ "  `idPersona` int(11) NOT NULL AUTO_INCREMENT,\r\n"
-			+ "  `Nombre` varchar(45) NOT NULL,\r\n"
-			+ "  `Telefono` varchar(20) NOT NULL,\r\n"
-			+ "  `Calle` varchar(20) NOT NULL,\r\n"
-			+ "  `Altura` varchar(20) NOT NULL,\r\n"
-			+ "  `Piso` varchar(20) NOT NULL,\r\n"
-			+ "  `Depto` varchar(20) NOT NULL,\r\n"
-			+ "  `Localidad` int(11) NOT NULL,\r\n"
-			+ "  `DireccionEmail` varchar(20) NOT NULL,\r\n"
-			+ "  `tipoContacto` int(20) NOT NULL,\r\n"
-			+ "  `fechaCumple` DATE NOT NULL,\r\n"
-			+ "  PRIMARY KEY (`idPersona`)\r\n"
-			+ ");";
+	private static final String crearTablaPersona = "CREATE TABLE `personas` "
+			+ "(`idPersona` int(11) NOT NULL AUTO_INCREMENT, "
+			+ "`Nombre` varchar(45) NOT NULL, `Telefono` varchar(20) NOT NULL, "
+			+ "`Calle` varchar(20) NOT NULL, `Altura` varchar(20) NOT NULL, `Piso` varchar(20) NOT NULL, "
+			+ "`Depto` varchar(20) NOT NULL, `Localidad` int(11) NOT NULL, "
+			+ "`DireccionEmail` varchar(20) NOT NULL, `tipoContacto` int(20) NOT NULL, "
+			+ "`fechaCumple` DATE NOT NULL, PRIMARY KEY (`idPersona`));";
+	
 	private static final String crearTablaTipoContacto = "CREATE TABLE `tipo_contacto`\r\n"
 			+ "(\r\n"
 			+ "	`IdContacto` int(11) NOT NULL AUTO_INCREMENT,\r\n"
@@ -106,7 +113,7 @@ public class inicializador {
 	
 	public boolean crearBaseDatos() {
 		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Connection conexion = inicializador.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
@@ -131,7 +138,7 @@ public class inicializador {
 	
 	public boolean borrarBaseDatos() {
 		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Connection conexion = inicializador.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
@@ -152,6 +159,61 @@ public class inicializador {
 			}
 		}
 		return isInsertExitoso;
+	}
+	
+	public boolean ejecutarInstruccion(String instruccion) {
+		PreparedStatement statement;
+		Connection conexion = inicializador.getConexion().getSQLConexion();
+		boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(instruccion);
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isInsertExitoso;
+	}
+	
+	public boolean crearTablaPersona() {
+		return ejecutarInstruccion(crearTablaPersona);
+	}
+	
+	public boolean crearTablaTipoContacto() {
+		return ejecutarInstruccion(crearTablaTipoContacto);
+	}
+	
+	public boolean crearTablaPais() {
+		return ejecutarInstruccion(crearTablaPais);
+	}
+	
+	public boolean crearTablaProvincia() {
+		return ejecutarInstruccion(crearTablaProvincia);
+	}
+	
+	public boolean crearTablaLocalidad() {
+		return ejecutarInstruccion(crearTablaLocalidad);
+	}
+	
+	public void crearTodaLaBaseDeDatos() {
+		conectarConBase();
+		this.ejecutarInstruccion("USE `agenda`;");
+		crearTablaPersona();
+		crearTablaTipoContacto();
+		crearTablaPais();
+		crearTablaProvincia();
+		crearTablaLocalidad();
 	}
 	
 	

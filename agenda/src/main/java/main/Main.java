@@ -17,7 +17,11 @@ public class Main
 
 	public static void main(String[] args) 
 	{
-		/*
+		inicializador proto = new inicializador();
+		proto.borrarBaseDatos();
+		proto.crearBaseDatos();
+		proto.crearTodaLaBaseDeDatos();
+		
 		Vista vista = new Vista();
 		Agenda modelo = new Agenda(new DAOSQLFactory());
 		Controlador controlador = new Controlador(vista, modelo);
@@ -28,10 +32,6 @@ public class Main
 		
 		ControladorUbicacion lastContro = new ControladorUbicacion(new VistaDomicilio(), modelo);
 		lastContro.inicializar();
-		*/
-		inicializador proto = new inicializador();
-		proto.borrarBaseDatos();
-		proto.crearBaseDatos();
 	}
 }
 //prueba para poder pushearlas carpetas que el git no descarga
