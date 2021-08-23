@@ -78,8 +78,8 @@ public class inicializador {
 			+ "`Nombre` varchar(45) NOT NULL, `Telefono` varchar(20) NOT NULL, "
 			+ "`Calle` varchar(20) NOT NULL, `Altura` varchar(20) NOT NULL, `Piso` varchar(20) NOT NULL, "
 			+ "`Depto` varchar(20) NOT NULL, `Localidad` int(11) NOT NULL, "
-			+ "`DireccionEmail` varchar(20) NOT NULL, `tipoContacto` int(20) NOT NULL, "
-			+ "`fechaCumple` DATE NOT NULL, PRIMARY KEY (`idPersona`));";
+			+ "`DireccionEmail` varchar(100) NOT NULL, `tipoContacto` int(20) NOT NULL, "
+			+ "`fechaCumple` varchar(20) NOT NULL, PRIMARY KEY (`idPersona`));";
 	
 	private static final String crearTablaTipoContacto = "CREATE TABLE `tipo_contacto`\r\n"
 			+ "(\r\n"
