@@ -11,7 +11,10 @@ import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
+import dto.LocalidadDTO;
+import dto.PaisDTO;
 import dto.PersonaDTO;
+import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 
 
@@ -107,6 +110,18 @@ public class Controlador implements ActionListener
 		{
 			this.tiposDeContacto = agenda.obtenerTiposDeContacto();
 			this.ventanaPersona.llenarComboBoxTipoContacto(tiposDeContacto);
+		}
+		
+		public LocalidadDTO getLocalidad(int idLocalidad) {
+			return agenda.getLocalidad(idLocalidad);
+		}
+		
+		public ProvinciaDTO getProvincias(int idProvincia) {
+			return agenda.getProvincias(idProvincia);
+		}
+		
+		public PaisDTO getPais(int idPais) {
+			return agenda.getPais(idPais);
 		}
 
 		@Override

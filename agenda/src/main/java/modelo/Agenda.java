@@ -131,4 +131,16 @@ public class Agenda
 		this.ubicacion.editLocalidad(localidad);
 	}
 	
+	public LocalidadDTO getLocalidad(int idLocalidad) {
+		return this.ubicacion.readOneLocalidad(idLocalidad);
+	}
+	
+	public ProvinciaDTO getProvincias(int idProvincia) {
+		return this.ubicacion.readOneProvincia(idProvincia);
+	}
+	
+	public PaisDTO getPais(int idPais) {
+		return this.ubicacion.readOnePais(idPais);
+	}
+	
 }
