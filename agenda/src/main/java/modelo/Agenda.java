@@ -127,4 +127,8 @@ public class Agenda
 		return this.ubicacion.readLocalidad(idProvincia);
 	}
 	
+	public void editarLocalidad(LocalidadDTO localidad) {
+		this.ubicacion.editLocalidad(localidad);
+	}
+	
 }

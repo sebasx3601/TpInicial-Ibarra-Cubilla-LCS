@@ -31,6 +31,7 @@ public class ControladorUbicacion implements ActionListener {
 	
 	private PaisDTO paisEditando;
 	private ProvinciaDTO provinciaEditando;
+	private LocalidadDTO localidadEditando;
 	
 	public ControladorUbicacion(VistaDomicilio vista, Agenda agenda) {
 		this.vista = vista;
@@ -57,6 +58,8 @@ public class ControladorUbicacion implements ActionListener {
 		this.vista.getBtnEditarPais().addActionListener(s->abrirVentanaEditarPais(s));
 		this.vista.getBtnEditarProvincia().addActionListener(s->editarProvinciaBoton(s));
 		
+		this.vista.getBtnEditarLocalidad().addActionListener(s->editarLocalidadBoton(s));
+		vistaAgregarLocalidad.setAgenda(agenda);
 	}
 	
 	public void inicializar()
@@ -248,7 +251,9 @@ public class ControladorUbicacion implements ActionListener {
 	}
 	
 	private void abrirVentanaLocalidad(ActionEvent s) {
-		vistaAgregarLocalidad.setAgenda(agenda);
+		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().addActionListener(a->agregarLocalidad(a));
+		this.vistaAgregarLocalidad.getLblAgregarLocalidad().setText("Agregar localidad");
+		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().setText("Agregar");
 		vistaAgregarLocalidad.llenarComboBoxPais(agenda.obtenerPaises());
 		this.vistaAgregarLocalidad.mostrarVentana();
 	}
@@ -256,7 +261,7 @@ public class ControladorUbicacion implements ActionListener {
 	private void agregarLocalidad(ActionEvent s) {
 		String nombre = this.vistaAgregarLocalidad.getTxtLocalidad().getText();
 		int idProvincia = this.vistaAgregarLocalidad.getIdProvinciaSeleccionado();
-		if(nombre == null || nombre.equals("")) {
+		if(!esNombreValidoLocalidad(nombre,idProvincia)) {
 			return;
 		}
 		if(idProvincia == -1) {
@@ -264,16 +269,25 @@ public class ControladorUbicacion implements ActionListener {
 		}
 		
 		agenda.agregarLocalidad(new LocalidadDTO(0,nombre,idProvincia));
-		refrescarTablaPais();
-		refrescarTablaProvincia(-1);
 		refrescarTablaLocalidad(-1);
+		vistaAgregarLocalidad.cerrar();
 	}
 	
-	private boolean yaExisteLocalidadConNombre(String nombreLocalidad) {
+	private boolean esNombreValidoLocalidad(String nombre,int idProvincia) {
+		if(nombre == null || nombre.equals("")) {
+			return false;
+		}
+		if(yaExisteLocalidadConNombre(nombre, idProvincia)) {
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean yaExisteLocalidadConNombre(String nombreLocalidad, int idProvincia) {
 		boolean yaExiste = false;
 		List<LocalidadDTO> listaLocalidad = agenda.obtenerLocalidad();
 		for(LocalidadDTO p: listaLocalidad) {
-			if(p.getNombreLocalidad().equals(nombreLocalidad)) {
+			if(p.getNombreLocalidad().equals(nombreLocalidad) && p.getIdProvincia() == idProvincia) {
 				yaExiste = true;
 			}
 		}
@@ -358,7 +372,58 @@ public class ControladorUbicacion implements ActionListener {
 	}
 	
 	private void editarLocalidadBoton(ActionEvent s) {
+		this.vistaAgregarLocalidad.getBtnAgregarLocalidad().addActionListener(a->editarLocalidad(a));
+		int[] filasSeleccionadas = this.vista.getTablaLocalidad().getSelectedRows();
+		if(filasSeleccionadas.length == 0) {
+			return;
+		}
+		localidadEditando = localidadEnTablas.get(filasSeleccionadas[0]);
+		vistaAgregarLocalidad.getLblAgregarLocalidad().setText("Editar localidad");
+		vistaAgregarLocalidad.getBtnAgregarLocalidad().setText("Editar");
+		vistaAgregarLocalidad.getTxtLocalidad().setText(localidadEditando.getNombreLocalidad());
+		vistaAgregarLocalidad.llenarComboBoxPais(agenda.obtenerPaises());
 		
+		List<ProvinciaDTO> prov = agenda.obtenerProvincia();
+		ProvinciaDTO provinciaPerteneciente = prov.get(0);
+		int idPais = 0;
+		for(ProvinciaDTO pr: prov) {
+			if(pr.getId() == localidadEditando.getIdProvincia()) {
+				idPais = pr.getIdPais();
+				provinciaPerteneciente = pr;
+			}
+		}
+		if(idPais == 0) {	//No hay paises no abrir ventana
+			return;
+		}
+		
+		List<PaisDTO> pai = agenda.obtenerPaises();
+		int indexPais = 0;
+		for(PaisDTO pa: pai) {
+			if(pa.getId() == idPais) {
+				indexPais = pa.getId();
+			}
+		}
+		if(indexPais == 0) {
+			return;
+		}
+		vistaAgregarLocalidad.getComboBoxPais().setSelectedIndex(indexPais-1);
+		vistaAgregarLocalidad.getComboBoxProvincia().setSelectedItem(provinciaPerteneciente.getNombreProvincia());
+		vistaAgregarLocalidad.mostrarVentana();
+		
+	}
+	
+	private void editarLocalidad(ActionEvent s) {
+		String nombre = vistaAgregarLocalidad.getTxtLocalidad().getText();
+		int idProv = vistaAgregarLocalidad.getIdProvinciaSeleccionado();
+		if(!esNombreValidoLocalidad(nombre, idProv)) {
+			return;
+		}
+		localidadEditando.setNombreLocalidad(nombre);
+		localidadEditando.setIdProvincia(idProv);
+		agenda.editarLocalidad(localidadEditando);
+		refrescarTablaPais();
+		refrescarTablaProvincia(-1);
+		refrescarTablaLocalidad(-1);
 	}
 	
 	@Override
