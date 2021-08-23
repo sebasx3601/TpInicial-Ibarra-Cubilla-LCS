@@ -26,7 +26,7 @@ public class Vista
 	private JButton btnBorrar;
 	private JButton btnReporte;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Calle","altura","piso","departamento"};
 
 	public Vista() 
 	{
@@ -38,17 +38,17 @@ public class Vista
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 907, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 262);
+		panel.setBounds(0, 0, 881, 262);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 414, 182);
+		spPersonas.setBounds(10, 11, 861, 182);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
@@ -58,6 +58,15 @@ public class Vista
 		tablaPersonas.getColumnModel().getColumn(0).setResizable(false);
 		tablaPersonas.getColumnModel().getColumn(1).setPreferredWidth(100);
 		tablaPersonas.getColumnModel().getColumn(1).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(2).setPreferredWidth(100);
+		tablaPersonas.getColumnModel().getColumn(2).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(3).setPreferredWidth(100);
+		tablaPersonas.getColumnModel().getColumn(3).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(4).setPreferredWidth(100);
+		tablaPersonas.getColumnModel().getColumn(4).setResizable(false);
+		tablaPersonas.getColumnModel().getColumn(5).setPreferredWidth(100);
+		tablaPersonas.getColumnModel().getColumn(5).setResizable(false);
+		
 		
 		spPersonas.setViewportView(tablaPersonas);
 		
@@ -138,7 +147,13 @@ public class Vista
 		{
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
+			String calle= p.getCalle(); //aca
+			String altura= p.getAltura(); 
+			String piso = p.getPiso();
+			String departamento = p.getDepto();
+			
+			
+			Object[] fila = {nombre, tel,calle,altura,piso,departamento}; //aca tambien
 			this.getModelPersonas().addRow(fila);
 		}
 		
