@@ -1,6 +1,7 @@
 package main;
 
 import modelo.Agenda;
+import modelo.inicializador;
 import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.ControladorTipoContacto;
@@ -16,6 +17,7 @@ public class Main
 
 	public static void main(String[] args) 
 	{
+		/*
 		Vista vista = new Vista();
 		Agenda modelo = new Agenda(new DAOSQLFactory());
 		Controlador controlador = new Controlador(vista, modelo);
@@ -26,6 +28,10 @@ public class Main
 		
 		ControladorUbicacion lastContro = new ControladorUbicacion(new VistaDomicilio(), modelo);
 		lastContro.inicializar();
+		*/
+		inicializador proto = new inicializador();
+		proto.borrarBaseDatos();
+		proto.crearBaseDatos();
 	}
 }
 //prueba para poder pushearlas carpetas que el git no descarga
