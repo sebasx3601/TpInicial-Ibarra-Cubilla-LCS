@@ -113,7 +113,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		
 		String calle = resultSet.getString("Calle");
 		String altura = resultSet.getString("Altura");
-		String piso = resultSet.getString("Altura");
+		String piso = resultSet.getString("Piso");
 		String depto = resultSet.getString("Depto");
 		int localidad = resultSet.getInt("Localidad");
 		String direccionEmail = resultSet.getString("DireccionEmail");
