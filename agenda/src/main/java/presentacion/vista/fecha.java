@@ -57,7 +57,7 @@ public class fecha extends JFrame
 		panel.add(btnElegir);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(261, 7, 49, 22);
+		comboBox.setBounds(248, 7, 89, 22);
 		panel.add(comboBox);
 		
 		this.setVisible(false);

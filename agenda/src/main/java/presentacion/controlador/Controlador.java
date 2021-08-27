@@ -4,15 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
+import presentacion.vista.fecha;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.PersonaDTO;
@@ -37,6 +40,8 @@ public class Controlador implements ActionListener
 		
 		private PersonaDTO personaEditando;
 		
+		private fecha ventanaParaCumple;
+		
 		public Controlador(Vista vista, Agenda agenda)
 		{
 			this.vista = vista;
@@ -49,6 +54,9 @@ public class Controlador implements ActionListener
 			asignarCodigoAComboBoxes();
 			
 			this.vista.getBtnEditar().addActionListener(p->abrirEditarUnaPersona(p));
+			
+			this.ventanaParaCumple = fecha.getInstance();
+			seleccionarAnio();
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
@@ -298,6 +306,29 @@ public class Controlador implements ActionListener
 			ventanaPersona.getComboBoxPais().addItemListener(e->cambioUnPais(e));
 			ventanaPersona.getComboBoxProvincia().addItemListener(e->cambioUnProvincia(e));
 		}
+		
+		public void seleccionarAnio() {
+			ventanaParaCumple.getLblFecha().setText("Seleccione año");
+			ventanaParaCumple.getComboBox().removeAllItems();
+			DefaultComboBoxModel valores = new DefaultComboBoxModel();
+			ArrayList<String> val = new ArrayList<String>();
+			for(int x = 0; x < 121; x++) {
+				val.add(Integer.toString(x + 1900));
+			}
+			valores.addAll(val);
+			ventanaParaCumple.getComboBox().setModel(valores);
+			ventanaParaCumple.getComboBox().setSelectedIndex(1);
+			ventanaParaCumple.getBtnElegir().addActionListener(e->elegirAnio(e));
+			ventanaParaCumple.mostrarVentana();
+		}
+		
+		private String anioCumpleCreado = "";
+		
+		public void elegirAnio(ActionEvent a) {
+			anioCumpleCreado = ventanaParaCumple.getComboBox().getSelectedItem().toString();
+			System.out.println(anioCumpleCreado);
+		}
+		
 
 		@Override
 		public void actionPerformed(ActionEvent e) { }
