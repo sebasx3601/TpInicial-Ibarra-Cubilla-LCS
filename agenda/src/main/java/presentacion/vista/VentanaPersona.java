@@ -35,11 +35,6 @@ public class VentanaPersona extends JFrame
 	private JTextField txtPiso;
 	private JTextField txtDepto;
 	private JTextField txtDireccionEmail;
-	private JComboBox<String> cBDia;
-	
-
-	private JComboBox<String> comboBoxMes;
-	private JComboBox<String> comboBoxAnio;
 	
 	private JComboBox comboBoxPais;
 	private JComboBox comboBoxProvincia;
@@ -48,6 +43,8 @@ public class VentanaPersona extends JFrame
 	
 	private JComboBox<String> comboBoxTipoContacto;
 	
+	private JLabel lblFechaCumpleElegido;
+	private JButton btnCumple;
 	
 	public static VentanaPersona getInstance()
 	{
@@ -179,32 +176,13 @@ public class VentanaPersona extends JFrame
 		comboBoxPais.setBounds(157, 222, 180, 22);
 		panel.add(comboBoxPais);
 		
-		cBDia = new JComboBox();
-		cBDia.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-		cBDia.setBounds(157, 350, 49, 22);
-		panel.add(cBDia);
+		lblFechaCumpleElegido = new JLabel("YYYY-MM-DD");
+		lblFechaCumpleElegido.setBounds(262, 351, 75, 14);
+		panel.add(lblFechaCumpleElegido);
 		
-		comboBoxMes = new JComboBox();
-		comboBoxMes.setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diembre"}));
-		comboBoxMes.setBounds(208, 350, 61, 22);
-		panel.add(comboBoxMes);
-		
-		comboBoxAnio = new JComboBox();
-		comboBoxAnio.setModel(new DefaultComboBoxModel(new String[] {"1900", "1901", "1902", "1903", "1904", "1905", "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918", "1919", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"}));
-		comboBoxAnio.setBounds(276, 350, 61, 22);
-		panel.add(comboBoxAnio);
-		
-		
-	}
-	
-	public String TomarCombobox() {
-		
-		String dias = cBDia.getItemAt(cBDia.getSelectedIndex());
-		
-		String mes = comboBoxMes.getItemAt(comboBoxMes.getSelectedIndex());
-		String anio = comboBoxAnio.getItemAt(comboBoxAnio.getSelectedIndex());
-		
-		return dias + " / " + mes + " / " + anio;
+		btnCumple = new JButton("Agregar");
+		btnCumple.setBounds(157, 350, 89, 23);
+		panel.add(btnCumple);
 		
 		
 	}
@@ -252,10 +230,6 @@ public class VentanaPersona extends JFrame
 	public JTextField getTxtDireccionEmail() 
 	{
 		return txtDireccionEmail;
-	}
-	
-	public JComboBox<String> getComboBoxMes() {
-		return comboBoxMes;
 	}
 
 	public JComboBox getComboBoxPais() {
@@ -333,12 +307,12 @@ public class VentanaPersona extends JFrame
 		}
 	}
 	
-	public JComboBox<String> getcBDia() {
-		return cBDia;
+	public JLabel getLblFechaCumpleElegido() {
+		return lblFechaCumpleElegido;
 	}
 
-	public JComboBox<String> getComboBoxAnio() {
-		return comboBoxAnio;
+	public JButton getBtnCumple() {
+		return btnCumple;
 	}
 }
 

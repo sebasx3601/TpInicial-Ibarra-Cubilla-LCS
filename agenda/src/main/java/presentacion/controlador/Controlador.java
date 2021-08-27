@@ -42,6 +42,10 @@ public class Controlador implements ActionListener
 		
 		private fecha ventanaParaCumple;
 		
+		private String anioCumpleCreado = "";
+		private String mesCumpleCreado = "";
+		private String diaCumpleCreado = "";
+		
 		public Controlador(Vista vista, Agenda agenda)
 		{
 			this.vista = vista;
@@ -56,7 +60,8 @@ public class Controlador implements ActionListener
 			this.vista.getBtnEditar().addActionListener(p->abrirEditarUnaPersona(p));
 			
 			this.ventanaParaCumple = fecha.getInstance();
-			seleccionarAnio();
+			
+			this.ventanaPersona.getBtnCumple().addActionListener(r->seleccionarAnio(r));
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
@@ -72,9 +77,18 @@ public class Controlador implements ActionListener
 				this.ventanaPersona.getBtnAgregarPersona().removeActionListener(listener);
 		    }
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
+			
+			anioCumpleCreado = "";
+			mesCumpleCreado = "";
+			diaCumpleCreado = "";
+			this.ventanaPersona.getLblFechaCumpleElegido().setText("YYYY-MM-DD");
 		}
 		
 		private void abrirEditarUnaPersona(ActionEvent a) {
+			anioCumpleCreado = "";
+			mesCumpleCreado = "";
+			diaCumpleCreado = "";
+			this.ventanaPersona.getLblFechaCumpleElegido().setText("YYYY-MM-DD");
 			int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 			if(filasSeleccionadas.length == 0) {
 				return;
@@ -138,7 +152,8 @@ public class Controlador implements ActionListener
 			}
 			
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
-			String fechaCumple= ventanaPersona.TomarCombobox();
+			//String fechaCumple= ventanaPersona.TomarCombobox();
+			String fechaCumple= "";
 			//p.ll
 			
 			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
@@ -163,6 +178,9 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarPersona(ActionEvent p) { //Parece que lo ignora github
+			anioCumpleCreado = "";
+			mesCumpleCreado = "";
+			diaCumpleCreado = "";
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String calle = ventanaPersona.getTxtCalle().getText();
@@ -178,7 +196,8 @@ public class Controlador implements ActionListener
 			}
 			
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
-			String fechaCumple= ventanaPersona.TomarCombobox();
+			//String fechaCumple= ventanaPersona.TomarCombobox();
+			String fechaCumple= "";
 			//p.ll
 			
 			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
@@ -307,7 +326,7 @@ public class Controlador implements ActionListener
 			ventanaPersona.getComboBoxProvincia().addItemListener(e->cambioUnProvincia(e));
 		}
 		
-		public void seleccionarAnio() {
+		public void seleccionarAnio(ActionEvent a) {
 			ventanaParaCumple.getLblFecha().setText("Seleccione año");
 			ventanaParaCumple.getComboBox().removeAllItems();
 			DefaultComboBoxModel valores = new DefaultComboBoxModel();
@@ -326,10 +345,6 @@ public class Controlador implements ActionListener
 			ventanaParaCumple.getBtnElegir().addActionListener(e->elegirAnio(e));
 			ventanaParaCumple.mostrarVentana();
 		}
-		
-		private String anioCumpleCreado = "";
-		private String mesCumpleCreado = "";
-		private String diaCumpleCreado = "";
 		
 		public void elegirAnio(ActionEvent a) {
 			anioCumpleCreado = ventanaParaCumple.getComboBox().getSelectedItem().toString();
@@ -427,6 +442,8 @@ public class Controlador implements ActionListener
 		public void elegirDia(ActionEvent a) {
 			diaCumpleCreado = Integer.toString(ventanaParaCumple.getComboBox().getSelectedIndex()+1);
 			System.out.println(anioCumpleCreado + " " + mesCumpleCreado + " " + diaCumpleCreado);
+			ventanaParaCumple.cerrar();
+			this.ventanaPersona.getLblFechaCumpleElegido().setText(formarFecha());
 		}
 		
 		public boolean anioBisiesto(int anio) {
@@ -440,6 +457,10 @@ public class Controlador implements ActionListener
 				return true;
 			}
 			return false;
+		}
+		
+		public String formarFecha() {
+			return anioCumpleCreado+"-"+mesCumpleCreado+"-"+diaCumpleCreado;
 		}
 
 		@Override
