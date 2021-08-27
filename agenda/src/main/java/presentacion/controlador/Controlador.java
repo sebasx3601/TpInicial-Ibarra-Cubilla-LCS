@@ -178,9 +178,6 @@ public class Controlador implements ActionListener
 		}
 
 		private void guardarPersona(ActionEvent p) { //Parece que lo ignora github
-			anioCumpleCreado = "";
-			mesCumpleCreado = "";
-			diaCumpleCreado = "";
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
 			String calle = ventanaPersona.getTxtCalle().getText();
@@ -197,7 +194,7 @@ public class Controlador implements ActionListener
 			
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
 			//String fechaCumple= ventanaPersona.TomarCombobox();
-			String fechaCumple= "";
+			String fechaCumple= this.formarFecha();
 			//p.ll
 			
 			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
@@ -460,6 +457,9 @@ public class Controlador implements ActionListener
 		}
 		
 		public String formarFecha() {
+			if(diaCumpleCreado.equals("")) {
+				return "0000-00-00";
+			}
 			return anioCumpleCreado+"-"+mesCumpleCreado+"-"+diaCumpleCreado;
 		}
 

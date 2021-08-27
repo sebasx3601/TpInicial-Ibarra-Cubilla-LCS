@@ -79,7 +79,7 @@ public class inicializador {
 			+ "`Calle` varchar(30) NOT NULL, `Altura` varchar(20) NOT NULL, `Piso` varchar(20) NOT NULL, "
 			+ "`Depto` varchar(30) NOT NULL, `Localidad` int(11) NOT NULL, "
 			+ "`DireccionEmail` varchar(100) NOT NULL, `tipoContacto` int(20) NOT NULL, "
-			+ "`fechaCumple` varchar(30) NOT NULL, PRIMARY KEY (`idPersona`));";
+			+ "`fechaCumple` DATE NOT NULL, PRIMARY KEY (`idPersona`));";
 	
 	private static final String crearTablaTipoContacto = "CREATE TABLE `tipo_contacto`\r\n"
 			+ "(\r\n"
