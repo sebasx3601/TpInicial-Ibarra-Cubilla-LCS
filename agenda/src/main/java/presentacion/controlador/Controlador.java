@@ -57,6 +57,8 @@ public class Controlador implements ActionListener
 			ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
 			this.ventanaPersona.mostrarVentana();
 			
+			this.ventanaPersona.getBtnAgregarPersona().setText("Agregar");
+			
 			for (ActionListener listener : this.ventanaPersona.getBtnAgregarPersona().getActionListeners())
 		    {
 				this.ventanaPersona.getBtnAgregarPersona().removeActionListener(listener);
@@ -99,7 +101,7 @@ public class Controlador implements ActionListener
 		    {
 				this.ventanaPersona.getBtnAgregarPersona().removeActionListener(listener);
 		    }
-			
+			this.ventanaPersona.getBtnAgregarPersona().setText("Editar");
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->editarPersona(p));
 			ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
 			this.ventanaPersona.mostrarVentana();
