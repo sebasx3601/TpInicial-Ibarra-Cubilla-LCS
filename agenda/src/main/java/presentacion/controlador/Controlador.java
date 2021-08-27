@@ -102,6 +102,7 @@ public class Controlador implements ActionListener
 			ventanaPersona.getTxtNombre().setText(personaEditando.getNombre());
 			ventanaPersona.getTxtPiso().setText(personaEditando.getPiso());
 			ventanaPersona.getTxtTelefono().setText(personaEditando.getTelefono());
+			this.ventanaPersona.getLblFechaCumpleElegido().setText(personaEditando.getFechaCumple());
 			/*
 			for(ActionListener i: ventanaPersona.getComboBoxPais().getActionListeners()) {
 				ventanaPersona.getComboBoxPais().removeActionListener(i);
@@ -153,7 +154,7 @@ public class Controlador implements ActionListener
 			
 			String direccionEmail = ventanaPersona.getTxtDireccionEmail().getText();
 			//String fechaCumple= ventanaPersona.TomarCombobox();
-			String fechaCumple= "";
+			String fechaCumple= ventanaPersona.getLblFechaCumpleElegido().getText();
 			//p.ll
 			
 			//String tipoContacto = ventanaPersona.getValorSeleccionadoTipoContacto();
