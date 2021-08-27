@@ -318,17 +318,129 @@ public class Controlador implements ActionListener
 			valores.addAll(val);
 			ventanaParaCumple.getComboBox().setModel(valores);
 			ventanaParaCumple.getComboBox().setSelectedIndex(1);
+			
+			for(ActionListener i: ventanaParaCumple.getBtnElegir().getActionListeners()) {
+				ventanaParaCumple.getBtnElegir().removeActionListener(i);
+			}
+			
 			ventanaParaCumple.getBtnElegir().addActionListener(e->elegirAnio(e));
 			ventanaParaCumple.mostrarVentana();
 		}
 		
 		private String anioCumpleCreado = "";
+		private String mesCumpleCreado = "";
+		private String diaCumpleCreado = "";
 		
 		public void elegirAnio(ActionEvent a) {
 			anioCumpleCreado = ventanaParaCumple.getComboBox().getSelectedItem().toString();
 			System.out.println(anioCumpleCreado);
+			
+			seleccionarMes();
 		}
 		
+		public void seleccionarMes() {
+			ventanaParaCumple.getLblFecha().setText("Seleccione mes");
+			ventanaParaCumple.getComboBox().removeAllItems();
+			DefaultComboBoxModel valores = new DefaultComboBoxModel();
+			ventanaParaCumple.getComboBox().setModel(new DefaultComboBoxModel(new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}));
+			ventanaParaCumple.getComboBox().setSelectedIndex(0);
+			
+			for(ActionListener i: ventanaParaCumple.getBtnElegir().getActionListeners()) {
+				ventanaParaCumple.getBtnElegir().removeActionListener(i);
+			}
+			ventanaParaCumple.getBtnElegir().addActionListener(e->elegirMes(e));
+			
+			ventanaParaCumple.mostrarVentana();
+		}
+		
+		public void elegirMes(ActionEvent a) {
+			mesCumpleCreado = Integer.toString(ventanaParaCumple.getComboBox().getSelectedIndex()+1);
+			System.out.println(anioCumpleCreado);
+			seleccionarDia();
+		}
+		
+		public void seleccionarDia() {
+			ventanaParaCumple.getLblFecha().setText("Seleccione dia");
+			ventanaParaCumple.getComboBox().removeAllItems();
+			
+			int diaMaximo = 0;
+			switch(mesCumpleCreado) {
+				case("1"):
+					diaMaximo = 31;
+					break;
+				case("2"):
+					//28 o 29
+					if(anioBisiesto(Integer.parseInt(anioCumpleCreado))) {
+						diaMaximo = 29;
+					}else {
+						diaMaximo = 28;
+					}
+					break;
+				case("3"):
+					diaMaximo = 31;
+					break;
+				case("4"):
+					diaMaximo = 30;
+					break;
+				case("5"):
+					diaMaximo = 31;
+					break;
+				case("6"):
+					diaMaximo = 30;
+					break;
+				case("7"):
+					diaMaximo = 31;
+					break;
+				case("8"):
+					diaMaximo = 31;
+					break;
+				case("9"):
+					diaMaximo = 30;
+					break;
+				case("10"):
+					diaMaximo = 31;
+					break;
+				case("11"):
+					diaMaximo = 30;
+					break;
+				case("12"):
+					diaMaximo = 31;
+					break;
+			}
+			DefaultComboBoxModel valores = new DefaultComboBoxModel();
+			ArrayList<String> val = new ArrayList<String>();
+			for(int x = 1; x <= diaMaximo; x++) {
+				val.add(Integer.toString(x));
+			}
+			valores.addAll(val);
+			ventanaParaCumple.getComboBox().setModel(valores);
+			ventanaParaCumple.getComboBox().setSelectedIndex(0);
+			
+			for(ActionListener i: ventanaParaCumple.getBtnElegir().getActionListeners()) {
+				ventanaParaCumple.getBtnElegir().removeActionListener(i);
+			}
+			ventanaParaCumple.getBtnElegir().addActionListener(e->elegirDia(e));
+			
+			ventanaParaCumple.mostrarVentana();
+		}
+		
+		public void elegirDia(ActionEvent a) {
+			diaCumpleCreado = Integer.toString(ventanaParaCumple.getComboBox().getSelectedIndex()+1);
+			System.out.println(anioCumpleCreado + " " + mesCumpleCreado + " " + diaCumpleCreado);
+		}
+		
+		public boolean anioBisiesto(int anio) {
+			if(anio % 4 == 0) {
+				if(anio % 100 == 0) {
+					if(anio % 400 == 0) {
+						return true;
+					}
+					return false;
+				}
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) { }
