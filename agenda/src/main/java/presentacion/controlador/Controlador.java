@@ -80,17 +80,25 @@ public class Controlador implements ActionListener
 			ventanaPersona.getTxtNombre().setText(personaEditando.getNombre());
 			ventanaPersona.getTxtPiso().setText(personaEditando.getPiso());
 			ventanaPersona.getTxtTelefono().setText(personaEditando.getTelefono());
+			/*
+			for(ActionListener i: ventanaPersona.getComboBoxPais().getActionListeners()) {
+				ventanaPersona.getComboBoxPais().removeActionListener(i);
+			}
+			for(ActionListener i: ventanaPersona.getComboBoxProvincia().getActionListeners()) {
+				ventanaPersona.getComboBoxProvincia().removeActionListener(i);
+			}
+			*/
 			
 			int provinciaId = agenda.getLocalidad(personaEditando.getLocalidad()).getIdProvincia();
-			
 			int paisId = agenda.getProvincias(provinciaId).getIdPais();
 			this.ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
-			this.ventanaPersona.llenarComboBoxProvincia(agenda.obtenerProvinciaDePaises(paisId));
-			this.ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(provinciaId));
+			ventanaPersona.getComboBoxPais().setSelectedItem(agenda.getPais(paisId).getNombrePais());
 			
-			ventanaPersona.getComboBoxPais().setSelectedItem(agenda.getPais(paisId));
-			ventanaPersona.getComboBoxProvincia().setSelectedItem(agenda.getProvincias(provinciaId));
-			ventanaPersona.getComboBoxLocalidad().setSelectedItem(agenda.getLocalidad(personaEditando.getLocalidad()));
+			this.ventanaPersona.llenarComboBoxProvincia(agenda.obtenerProvinciaDePaises(paisId));
+			ventanaPersona.getComboBoxProvincia().setSelectedItem(agenda.getProvincias(provinciaId).getNombreProvincia());
+			
+			this.ventanaPersona.llenarComboBoxLocalidad(agenda.obtenerLocalidadDeProvincia(provinciaId));
+			ventanaPersona.getComboBoxLocalidad().setSelectedItem(agenda.getLocalidad(personaEditando.getLocalidad()).getNombreLocalidad());
 			
 			/*
 			ventanaPersona.getComboBoxMes().setSelectedIndex(personaEditando.ge);
@@ -103,7 +111,6 @@ public class Controlador implements ActionListener
 		    }
 			this.ventanaPersona.getBtnAgregarPersona().setText("Editar");
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->editarPersona(p));
-			ventanaPersona.llenarComboBoxPais(agenda.obtenerPaises());
 			this.ventanaPersona.mostrarVentana();
 		}
 		
