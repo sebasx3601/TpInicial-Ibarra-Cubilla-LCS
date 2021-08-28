@@ -187,7 +187,7 @@ public class VentanaPersona extends JFrame
 		btnCumple.setBounds(157, 350, 89, 23);
 		panel.add(btnCumple);
 		
-		JLabel lblGenero = new JLabel("Tipo de contacto");
+		JLabel lblGenero = new JLabel("Genero");
 		lblGenero.setBounds(10, 424, 113, 14);
 		panel.add(lblGenero);
 		
