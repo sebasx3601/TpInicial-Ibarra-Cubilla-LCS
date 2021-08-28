@@ -144,6 +144,15 @@ public class Controlador implements ActionListener
 			
 			this.ventanaPersona.llenarComboBoxGenero(agenda.getGenero());
 			generosEnLista = agenda.getGenero();
+			int indexGenero = 0;
+			int cont = 0;
+			for(GeneroDTO g: generosEnLista) {
+				cont++;
+				if(g.getId() == personaEditando.getIdGenero()) {
+					indexGenero = cont;
+				}
+			}
+			this.ventanaPersona.getComboBoxGenero().setSelectedIndex(indexGenero-1);
 		}
 		
 		private void editarPersona(ActionEvent p) {
@@ -180,6 +189,14 @@ public class Controlador implements ActionListener
 			personaEditando.setPiso(piso);
 			personaEditando.setTelefono(tel);
 			personaEditando.setTipoContacto(intTipoContacto);
+			
+			int idGenero = 0;
+			if(ventanaPersona.getComboBoxGenero().getSelectedIndex() == -1 || generosEnLista.size() == 0) {
+				idGenero = 0;
+			}else {
+				idGenero = generosEnLista.get(ventanaPersona.getComboBoxGenero().getSelectedIndex()).getId();
+			}
+			personaEditando.setIdGenero(idGenero);
 			
 			agenda.editarPersona(personaEditando);
 			

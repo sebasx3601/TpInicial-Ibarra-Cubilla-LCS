@@ -128,7 +128,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	
 	private static final String editPersona = "UPDATE personas SET Nombre = ?, Telefono = ?, Calle = ?,"
 			+ " Altura = ?, Piso = ?, Depto = ?, Localidad = ?, DireccionEmail = ?, tipoContacto = ?, "
-			+ "fechaCumple = ? WHERE idPersona = ?";
+			+ "fechaCumple = ?, IdGenero = ? WHERE idPersona = ?";
 	
 	public boolean edit(PersonaDTO persona) {
 		PreparedStatement statement;
@@ -149,8 +149,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			//java. sql. Date fecha;
 			statement.setString(10, persona.getFechaCumple()); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
 			statement.setInt(9, persona.getTipoContacto());
+			statement.setInt(11, persona.getIdGenero());
 			
-			statement.setInt(11, persona.getIdPersona());
+			statement.setInt(12, persona.getIdPersona());
 			
 			if(statement.executeUpdate() > 0)
 			{
