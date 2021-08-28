@@ -16,6 +16,7 @@ import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
 import presentacion.vista.fecha;
+import dto.GeneroDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.PersonaDTO;
@@ -45,6 +46,8 @@ public class Controlador implements ActionListener
 		private String anioCumpleCreado = "";
 		private String mesCumpleCreado = "";
 		private String diaCumpleCreado = "";
+		
+		private List<GeneroDTO> generosEnLista;
 		
 		public Controlador(Vista vista, Agenda agenda)
 		{
@@ -463,6 +466,8 @@ public class Controlador implements ActionListener
 			}
 			return anioCumpleCreado+"-"+mesCumpleCreado+"-"+diaCumpleCreado;
 		}
+		
+		//generosEnLista
 
 		@Override
 		public void actionPerformed(ActionEvent e) { }
