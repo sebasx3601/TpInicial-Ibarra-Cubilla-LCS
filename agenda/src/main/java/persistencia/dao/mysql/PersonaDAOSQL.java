@@ -121,7 +121,9 @@ public class PersonaDAOSQL implements PersonaDAO
 		String fechaCumple = resultSet.getString("fechaCumple");
 		int tipoContacto = resultSet.getInt("tipoContacto");
 		
-		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto);
+		int idGenero = resultSet.getInt("IdGenero");
+		
+		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto, idGenero);
 	}
 	
 	private static final String editPersona = "UPDATE personas SET Nombre = ?, Telefono = ?, Calle = ?,"

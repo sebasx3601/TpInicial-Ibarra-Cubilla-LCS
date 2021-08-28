@@ -20,8 +20,12 @@ public class PersonaDTO
 	private String fechaCumple;
 	private int tipoContacto;
 	
+	private int idGenero;
+	private String descrGenero;
+	
+	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, String altura,
-			String piso, String depto, int localidad, String direccionEmail, String fechaCumple2, int tipoContacto)
+			String piso, String depto, int localidad, String direccionEmail, String fechaCumple2, int tipoContacto, int idGenero)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -34,6 +38,9 @@ public class PersonaDTO
 		this.direccionEmail = direccionEmail;
 		this.fechaCumple = fechaCumple2;
 		this.tipoContacto = tipoContacto;
+		
+		this.idGenero = idGenero;
+		descrGenero = "";
 	}
 	
 	public int getIdPersona() 
@@ -136,5 +143,21 @@ public class PersonaDTO
 
 	public void setTipoContacto(int tipoContacto) {
 		this.tipoContacto = tipoContacto;
+	}
+	
+	public int getIdGenero() {
+		return idGenero;
+	}
+
+	public void setIdGenero(int idGenero) {
+		this.idGenero = idGenero;
+	}
+
+	public String getDescrGenero() {
+		return descrGenero;
+	}
+
+	public void setDescrGenero(String descrGenero) {
+		this.descrGenero = descrGenero;
 	}
 }

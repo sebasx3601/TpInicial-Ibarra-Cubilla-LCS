@@ -203,7 +203,7 @@ public class Controlador implements ActionListener
 			int intTipoContacto = obtenerIdTipoContacto(tipoContacto);
 			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
-					direccionEmail, fechaCumple, intTipoContacto);
+					direccionEmail, fechaCumple, intTipoContacto, 1); //EL ULTIMO ES IDGENERO
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
