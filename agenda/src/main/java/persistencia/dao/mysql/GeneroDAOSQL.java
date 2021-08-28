@@ -65,7 +65,7 @@ public class GeneroDAOSQL implements GeneroDAO {
 		return isdeleteExitoso;
 	}
 	
-	public List<GeneroDTO> readAll(GeneroDTO genero) {
+	public List<GeneroDTO> readAll() {
 		ArrayList<GeneroDTO> ret = new ArrayList<GeneroDTO>();
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query

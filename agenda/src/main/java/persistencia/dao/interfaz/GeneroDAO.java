@@ -11,7 +11,7 @@ public interface GeneroDAO {
 	
 	public boolean update(GeneroDTO genero);
 	
-	public List<GeneroDTO> readAll(GeneroDTO genero);
+	public List<GeneroDTO> readAll();
 	
 	//public GeneroDTO readOne(int id);
 

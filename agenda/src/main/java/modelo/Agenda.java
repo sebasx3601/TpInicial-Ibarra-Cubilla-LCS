@@ -2,12 +2,14 @@ package modelo;
 
 import java.util.List;
 
+import dto.GeneroDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.PersonaDTO;
 import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
 import persistencia.dao.interfaz.DAOAbstractFactory;
+import persistencia.dao.interfaz.GeneroDAO;
 import persistencia.dao.interfaz.PersonaDAO;
 import persistencia.dao.interfaz.TipoContactoDAO;
 import persistencia.dao.interfaz.UbicacionDAO;
@@ -23,11 +25,14 @@ public class Agenda
 	
 	private UbicacionDAO ubicacion;
 	
+	private GeneroDAO genero;
+	
 	public Agenda(DAOAbstractFactory metodo_persistencia)
 	{
 		this.persona = metodo_persistencia.createPersonaDAO();
 		this.tiposDeContacto =  metodo_persistencia.createTipoContactoDAO();
 		this.ubicacion = metodo_persistencia.createUbicacionDAO();
+		this.genero = metodo_persistencia.createGeneroDAO();
 		
 	}
 	
@@ -146,5 +151,23 @@ public class Agenda
 	public void editarPersona(PersonaDTO persona) {
 		this.persona.edit(persona);
 	}
+	
+	//Genero
+	public void agregarGenero(GeneroDTO genero) {
+		this.genero.insert(genero);
+	}
+	
+	public void borrarGenero(GeneroDTO genero) {
+		this.genero.delete(genero);
+	}
+	
+	public List<GeneroDTO> getGenero() {
+		return this.genero.readAll();
+	}
+	
+	public void editarGenero(GeneroDTO genero) {
+		this.genero.update(genero);
+	}
+	
 	
 }
