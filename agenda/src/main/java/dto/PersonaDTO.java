@@ -23,6 +23,12 @@ public class PersonaDTO
 	private int idGenero;
 	private String descrGenero;
 	
+	private int idProv;
+	private String descrProv;
+	
+	private int idPais;
+	private String descrPais;
+	
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, String altura,
 			String piso, String depto, int localidad, String direccionEmail, String fechaCumple2, int tipoContacto, int idGenero)
@@ -160,4 +166,41 @@ public class PersonaDTO
 	public void setDescrGenero(String descrGenero) {
 		this.descrGenero = descrGenero;
 	}
+	
+	
+	
+	
+	
+	public int getIdProv() {
+		return idProv;
+	}
+
+	public void setIdProv(int idProv) {
+		this.idProv = idProv;
+	}
+
+	public String getDescrProv() {
+		return descrProv;
+	}
+
+	public void setDescrProv(String descrProv) {
+		this.descrProv = descrProv;
+	}
+
+	public int getIdPais() {
+		return idPais;
+	}
+
+	public void setIdPais(int idPais) {
+		this.idPais = idPais;
+	}
+
+	public String getDescrPais() {
+		return descrPais;
+	}
+
+	public void setDescrPais(String descrPais) {
+		this.descrPais = descrPais;
+	}
+
 }
