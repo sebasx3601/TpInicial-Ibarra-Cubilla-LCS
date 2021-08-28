@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.GeneroDTO;
 import dto.TipoContactoDTO;
 
 import javax.swing.JButton;
@@ -125,19 +126,19 @@ public class VistaGenero
 		return btnEditar;
 	}
 
-	public void llenarTabla(List<TipoContactoDTO> TipoContactoEnTabla) {
-		/*
+	public void llenarTabla(List<GeneroDTO> generos) {
+		
 		this.getModelTipoContacto().setRowCount(0);
 		this.getModelTipoContacto().setColumnCount(0);
 		this.getModelTipoContacto().setColumnIdentifiers(this.getNombreColumnas());
 
-		for (TipoContactoDTO p : TipoContactoEnTabla)
+		for (GeneroDTO p : generos)
 		{
-			String idTipoContacto = String.valueOf(p.getIdContacto());
-			String nombreContacto = p.getNombreTipoContacto();
-			Object[] fila = {idTipoContacto, nombreContacto};
+			String id = String.valueOf(p.getId());
+			String nombre = p.getNombre();
+			Object[] fila = {id, nombre};
 			this.getModelTipoContacto().addRow(fila);
 		}
-		*/
+		
 	}
 }

@@ -4,6 +4,7 @@ import modelo.Agenda;
 import modelo.inicializador;
 import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.controlador.Controlador;
+import presentacion.controlador.ControladorGenero;
 import presentacion.controlador.ControladorTipoContacto;
 import presentacion.controlador.ControladorUbicacion;
 import presentacion.vista.VentanaAgregarTipoContacto;
@@ -32,6 +33,9 @@ public class Main
 		
 		ControladorUbicacion lastContro = new ControladorUbicacion(new VistaDomicilio(), modelo);
 		lastContro.inicializar();
+		
+		ControladorGenero ep = new ControladorGenero(modelo);
+		ep.inicializar();
 	}
 }
 //prueba para poder pushearlas carpetas que el git no descarga
