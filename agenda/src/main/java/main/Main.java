@@ -34,6 +34,7 @@ public class Main
 		ControladorUbicacion lastContro = new ControladorUbicacion(new VistaDomicilio(), modelo);
 		lastContro.inicializar();
 		
+		
 		ControladorGenero ep = new ControladorGenero(modelo);
 		ep.inicializar();
 	}
