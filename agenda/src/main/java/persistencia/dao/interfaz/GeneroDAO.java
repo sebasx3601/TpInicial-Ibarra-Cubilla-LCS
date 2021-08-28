@@ -13,6 +13,6 @@ public interface GeneroDAO {
 	
 	public List<GeneroDTO> readAll(GeneroDTO genero);
 	
-	public GeneroDTO readOne(int id);
+	//public GeneroDTO readOne(int id);
 
 }

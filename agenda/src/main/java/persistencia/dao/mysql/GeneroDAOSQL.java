@@ -1,7 +1,6 @@
 package persistencia.dao.mysql;
 
 import dto.GeneroDTO;
-import dto.TipoContactoDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.GeneroDAO;
 
@@ -17,7 +16,8 @@ public class GeneroDAOSQL implements GeneroDAO {
 	private static final String insert = "INSERT INTO genero(Id, Descrip) VALUES(?, ?)";
 	private static final String delete = "DELETE FROM genero WHERE Id = ?";
 	private static final String readall = "SELECT * FROM genero";
-	private static final String readone = "SELECT * FROM genero WHERE Id = ?";
+	//private static final String readone = "SELECT * FROM genero WHERE Id = ?";
+	private static final String edit = "UPDATE genero SET Descrip = ? WHERE Id = ?";
 	
 	public boolean insert(GeneroDTO genero) {
 		PreparedStatement statement;
@@ -92,13 +92,33 @@ public class GeneroDAOSQL implements GeneroDAO {
 		String nombre = resultSet.getString("Descrip");
 		return new GeneroDTO(id,nombre);
 	}
-	
+	/*
 	public GeneroDTO readOne(int id) {
 		return new GeneroDTO(1,"no");
 	}
-	
+	*/
 	public boolean update(GeneroDTO genero) {
-		return true;
+		String nuevoNombre = genero.getNombre();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean iseditExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(edit);
+			statement.setString(1, nuevoNombre);
+			statement.setString(2, Integer.toString(genero.getId()));
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				iseditExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return iseditExitoso;
 	}
 
 }
