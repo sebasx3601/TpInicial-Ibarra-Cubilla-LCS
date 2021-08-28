@@ -18,6 +18,7 @@ public class ControladorGenero {
 	VistaGenero vista;
 	VentanaGenero ventanaAux;
 	private List<GeneroDTO> listaGenero;
+	GeneroDTO generoEditando;
 	
 	public ControladorGenero(Agenda agenda) {
 		this.agenda = agenda;
@@ -26,7 +27,7 @@ public class ControladorGenero {
 	}
 	
 	public void inicializarBotones() {
-		this.vista.getBtnEditar().addActionListener(p->ejemplo(p));
+		this.vista.getBtnEditar().addActionListener(p->abrirVentanaEditar(p));
 		this.vista.getBtnAgregar().addActionListener(p->abrirVentanaAgregar(p));
 		this.vista.getBtnBorrar().addActionListener(p->borrarGenero(p));
 	}
@@ -92,12 +93,37 @@ public class ControladorGenero {
 	
 	public void borrarGenero(ActionEvent s)
 	{
-		int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+		int[] filasSeleccionadas = this.vista.getTabla().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
 			this.agenda.borrarGenero(this.listaGenero.get(fila));
 		}
 		this.refrescarTablaGenero();
+	}
+	
+	public void abrirVentanaEditar(ActionEvent a) {
+		int[] filasSeleccionadas = this.vista.getTabla().getSelectedRows();
+		if (filasSeleccionadas.length == 0) {
+			return;
+		}
+		generoEditando = listaGenero.get(filasSeleccionadas[0]);
+		ventanaAux.getLbl().setText("Nuevo nombre genero");
+		ventanaAux.getBtn().setText("Editar");
+		ventanaAux.getTxt().setText(generoEditando.getNombre());
+		reiniciarBoton(ventanaAux.getBtn());
+		ventanaAux.getBtn().addActionListener(p->editarGenero(p));
+		ventanaAux.mostrarVentana();
+	}
+	
+	public void editarGenero(ActionEvent a) {
+		String nuevoNombre = ventanaAux.getTxt().getText();
+		if(!esNombreValido(nuevoNombre)) {
+			return;
+		}
+		generoEditando.setNombre(nuevoNombre);
+		agenda.editarGenero(generoEditando);
+		refrescarTablaGenero();
+		ventanaAux.cerrar();
 	}
 
 }

@@ -112,7 +112,7 @@ public class VistaGenero
 		return modelTipoContacto;
 	}
 	
-	public JTable getTablaPersonas()
+	public JTable getTabla()
 	{
 		return tabla;
 	}
