@@ -17,6 +17,7 @@ public class ControladorGenero {
 	Agenda agenda;
 	VistaGenero vista;
 	VentanaGenero ventanaAux;
+	private List<GeneroDTO> listaGenero;
 	
 	public ControladorGenero(Agenda agenda) {
 		this.agenda = agenda;
@@ -27,7 +28,7 @@ public class ControladorGenero {
 	public void inicializarBotones() {
 		this.vista.getBtnEditar().addActionListener(p->ejemplo(p));
 		this.vista.getBtnAgregar().addActionListener(p->abrirVentanaAgregar(p));
-		this.vista.getBtnBorrar().addActionListener(p->ejemplo(p));
+		this.vista.getBtnBorrar().addActionListener(p->borrarGenero(p));
 	}
 	
 	public void inicializar()
@@ -48,6 +49,7 @@ public class ControladorGenero {
 	}
 	
 	public void refrescarTablaGenero() {
+		listaGenero = agenda.getGenero();
 		vista.llenarTabla(agenda.getGenero());
 	}
 	
@@ -86,6 +88,16 @@ public class ControladorGenero {
 		}
 		
 		return ret;		
+	}
+	
+	public void borrarGenero(ActionEvent s)
+	{
+		int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
+		for (int fila : filasSeleccionadas)
+		{
+			this.agenda.borrarGenero(this.listaGenero.get(fila));
+		}
+		this.refrescarTablaGenero();
 	}
 
 }
