@@ -254,7 +254,36 @@ public class Controlador implements ActionListener
 		}
 
 		private void mostrarReporte(ActionEvent r) {
-			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
+			List<PersonaDTO> listaPersonas = agenda.obtenerPersonas();
+			
+			
+			for(PersonaDTO p: listaPersonas) {
+				int idLocalidad = 0;
+				String descrLoc = "";
+				int idPais = 0;
+				String descrPais = "";
+				int idProvincia = 0;
+				String descrProv = "";
+				
+				idLocalidad = p.getLocalidad();
+				LocalidadDTO localidad = agenda.getLocalidad(idLocalidad);
+				descrLoc = localidad.getNombreLocalidad();
+				idLocalidad = localidad.getId();
+				ProvinciaDTO provincia = agenda.getProvincias(localidad.getIdProvincia());
+				idProvincia = provincia.getId();
+				descrProv = provincia.getNombreProvincia();
+				PaisDTO pais = agenda.getPais(provincia.getIdPais());
+				idPais = pais.getId();
+				descrPais = pais.getNombrePais();
+				
+				p.setDescrPais(descrPais);
+				p.setIdPais(idPais);
+				p.setDescrProv(descrProv);
+				p.setIdProv(idProvincia);
+				p.setDescrLocalidad(descrLoc);
+			}
+			
+			ReporteAgenda reporte = new ReporteAgenda(listaPersonas);
 			reporte.mostrar();	
 		}
 

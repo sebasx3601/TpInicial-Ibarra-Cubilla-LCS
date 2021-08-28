@@ -28,7 +28,7 @@ public class PersonaDTO
 	
 	private int idPais;
 	private String descrPais;
-	
+	private String descrLocalidad;
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, String altura,
 			String piso, String depto, int localidad, String direccionEmail, String fechaCumple2, int tipoContacto, int idGenero)
@@ -201,6 +201,14 @@ public class PersonaDTO
 
 	public void setDescrPais(String descrPais) {
 		this.descrPais = descrPais;
+	}
+	
+	public String getDescrLocalidad() {
+		return descrLocalidad;
+	}
+
+	public void setDescrLocalidad(String descrLocalidad) {
+		this.descrLocalidad = descrLocalidad;
 	}
 
 }
