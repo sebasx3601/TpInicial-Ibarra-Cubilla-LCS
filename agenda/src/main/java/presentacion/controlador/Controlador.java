@@ -281,6 +281,25 @@ public class Controlador implements ActionListener
 			List<PaisDTO> paises = agenda.obtenerPaises();
 			List<ProvinciaDTO> provincias = agenda.obtenerProvincia();
 			List<LocalidadDTO> localidades = agenda.obtenerLocalidad();
+			
+			int idGenero = 0;
+			String descrGenero = "";
+			generosEnLista = agenda.getGenero();
+			for(PersonaDTO p: personasEnTabla) {
+				descrGenero = "";
+				idGenero = p.getIdGenero();
+				for(GeneroDTO g: generosEnLista) {
+					if(g.getId() == idGenero) {
+						p.setDescrGenero(g.getNombre());
+						descrGenero = g.getNombre();
+					}
+					if(descrGenero.equals("")) {
+						p.setDescrGenero("Borrado");
+					}
+				}
+				
+			}
+			
 			this.vista.llenarTabla(this.personasEnTabla, paises, provincias, localidades, agenda.obtenerTiposDeContacto());
 		}
 		
