@@ -85,6 +85,9 @@ public class Controlador implements ActionListener
 			mesCumpleCreado = "";
 			diaCumpleCreado = "";
 			this.ventanaPersona.getLblFechaCumpleElegido().setText("YYYY-MM-DD");
+			
+			this.ventanaPersona.llenarComboBoxGenero(agenda.getGenero());
+			generosEnLista = agenda.getGenero();
 		}
 		
 		private void abrirEditarUnaPersona(ActionEvent a) {
@@ -138,6 +141,9 @@ public class Controlador implements ActionListener
 			this.ventanaPersona.getBtnAgregarPersona().setText("Editar");
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->editarPersona(p));
 			this.ventanaPersona.mostrarVentana();
+			
+			this.ventanaPersona.llenarComboBoxGenero(agenda.getGenero());
+			generosEnLista = agenda.getGenero();
 		}
 		
 		private void editarPersona(ActionEvent p) {
@@ -205,8 +211,15 @@ public class Controlador implements ActionListener
 			String tipoContacto = ventanaPersona.getSeleccionadoTipoContacto();
 			int intTipoContacto = obtenerIdTipoContacto(tipoContacto);
 			
+			int idGenero = 0;
+			if(ventanaPersona.getComboBoxGenero().getSelectedIndex() == -1 || generosEnLista.size() == 0) {
+				idGenero = 0;
+			}else {
+				idGenero = generosEnLista.get(ventanaPersona.getComboBoxGenero().getSelectedIndex()).getId();
+			}
+			
 			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, altura, piso, depto, localidad, 
-					direccionEmail, fechaCumple, intTipoContacto, 1); //EL ULTIMO ES IDGENERO
+					direccionEmail, fechaCumple, intTipoContacto, idGenero); //EL ULTIMO ES IDGENERO
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();

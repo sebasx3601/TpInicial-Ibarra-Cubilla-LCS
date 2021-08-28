@@ -41,7 +41,7 @@ public class PersonaDAOSQL implements PersonaDAO
 			//java. sql. Date fecha;
 			statement.setString(10, persona.getFechaCumple()); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
 			statement.setInt(11, persona.getTipoContacto());
-			statement.setInt(12, 1);	//idgenero
+			statement.setInt(12, persona.getIdGenero());
 			
 			if(statement.executeUpdate() > 0)
 			{

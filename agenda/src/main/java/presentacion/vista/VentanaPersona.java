@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import dto.GeneroDTO;
 import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
@@ -46,6 +47,8 @@ public class VentanaPersona extends JFrame
 	private JLabel lblFechaCumpleElegido;
 	private JButton btnCumple;
 	
+	private JComboBox comboBoxGenero;
+	
 	public static VentanaPersona getInstance()
 	{
 		if(INSTANCE == null)
@@ -62,14 +65,14 @@ public class VentanaPersona extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 408, 504);
+		setBounds(100, 100, 408, 573);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 372, 443);
+		panel.setBounds(10, 11, 372, 512);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -92,7 +95,7 @@ public class VentanaPersona extends JFrame
 		txtTelefono.setColumns(10);
 		
 		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 409, 89, 23);
+		btnAgregarPersona.setBounds(208, 478, 89, 23);
 		panel.add(btnAgregarPersona);
 		
 		txtCalle = new JTextField();
@@ -183,6 +186,14 @@ public class VentanaPersona extends JFrame
 		btnCumple = new JButton("Agregar");
 		btnCumple.setBounds(157, 350, 89, 23);
 		panel.add(btnCumple);
+		
+		JLabel lblGenero = new JLabel("Tipo de contacto");
+		lblGenero.setBounds(10, 424, 113, 14);
+		panel.add(lblGenero);
+		
+		comboBoxGenero = new JComboBox();
+		comboBoxGenero.setBounds(157, 420, 180, 22);
+		panel.add(comboBoxGenero);
 		
 		
 	}
@@ -304,6 +315,18 @@ public class VentanaPersona extends JFrame
 		com.removeAllItems();
 		for (LocalidadDTO p: localidad) {
 			com.addItem(p.getNombreLocalidad());
+		}
+	}
+	
+	public JComboBox getComboBoxGenero() {
+		return comboBoxGenero;
+	}
+	
+	public void llenarComboBoxGenero(List<GeneroDTO> genero) {
+		JComboBox com = getComboBoxGenero();
+		com.removeAllItems();
+		for (GeneroDTO p: genero) {
+			com.addItem(p.getNombre());
 		}
 	}
 	
