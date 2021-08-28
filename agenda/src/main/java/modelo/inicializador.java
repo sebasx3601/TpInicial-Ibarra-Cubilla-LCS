@@ -79,6 +79,7 @@ public class inicializador {
 			+ "`Calle` varchar(30) NOT NULL, `Altura` varchar(20) NOT NULL, `Piso` varchar(20) NOT NULL, "
 			+ "`Depto` varchar(30) NOT NULL, `Localidad` int(11) NOT NULL, "
 			+ "`DireccionEmail` varchar(100) NOT NULL, `tipoContacto` int(20) NOT NULL, "
+			+ "`IdGenero` int(20) NOT NULL, "
 			+ "`fechaCumple` DATE NOT NULL, PRIMARY KEY (`idPersona`));";
 	
 	private static final String crearTablaTipoContacto = "CREATE TABLE `tipo_contacto`\r\n"
@@ -109,6 +110,13 @@ public class inicializador {
 			+ "	`NombreLocalidad` varchar(30) NOT NULL,\r\n"
 			+ "	`IdProvincia` varchar(20) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdLocalidad`)\r\n"
+			+ ");";
+	
+	private static final String crearTablaGenero = "CREATE TABLE `genero`\r\n"
+			+ "(\r\n"
+			+ "	`Id` int(11) NOT NULL AUTO_INCREMENT,\r\n"
+			+ "	`Descrip` varchar(30) NOT NULL,\r\n"
+			+ "	PRIMARY KEY (`Id`)\r\n"
 			+ ");";
 	
 	public boolean crearBaseDatos() {
@@ -206,6 +214,10 @@ public class inicializador {
 		return ejecutarInstruccion(crearTablaLocalidad);
 	}
 	
+	public boolean crearTablaGenero() {
+		return ejecutarInstruccion(crearTablaGenero);
+	}
+	
 	public void crearTodaLaBaseDeDatos() {
 		conectarConBase();
 		this.ejecutarInstruccion("USE `agenda`;");
@@ -214,6 +226,8 @@ public class inicializador {
 		crearTablaPais();
 		crearTablaProvincia();
 		crearTablaLocalidad();
+		
+		crearTablaGenero();
 		
 		insertarTiposDeContacto();
 		insertarPaises();

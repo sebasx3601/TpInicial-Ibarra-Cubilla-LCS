@@ -16,7 +16,7 @@ import java. util. Date;
 public class PersonaDAOSQL implements PersonaDAO
 {
 	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, "
-			+ "piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "piso, depto, localidad, direccionEmail, fechaCumple, tipoContacto, idgenero) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 		
@@ -41,6 +41,7 @@ public class PersonaDAOSQL implements PersonaDAO
 			//java. sql. Date fecha;
 			statement.setString(10, persona.getFechaCumple()); //+persona.getFechaCumple().getYear()+"-"+persona.getFechaCumple().getMonth()+"-"+persona.getFechaCumple().getDay()
 			statement.setInt(11, persona.getTipoContacto());
+			statement.setInt(12, 1);	//idgenero
 			
 			if(statement.executeUpdate() > 0)
 			{
