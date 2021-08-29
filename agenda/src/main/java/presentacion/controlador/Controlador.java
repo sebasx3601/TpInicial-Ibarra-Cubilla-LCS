@@ -86,6 +86,14 @@ public class Controlador implements ActionListener
 			diaCumpleCreado = "";
 			this.ventanaPersona.getLblFechaCumpleElegido().setText("YYYY-MM-DD");
 			
+			ventanaPersona.getTxtAltura().setText("");
+			ventanaPersona.getTxtCalle().setText("");
+			ventanaPersona.getTxtDepto().setText("");
+			ventanaPersona.getTxtDireccionEmail().setText("");
+			ventanaPersona.getTxtNombre().setText("");
+			ventanaPersona.getTxtPiso().setText("");
+			ventanaPersona.getTxtTelefono().setText("");
+			
 			this.ventanaPersona.llenarComboBoxGenero(agenda.getGenero());
 			generosEnLista = agenda.getGenero();
 		}
