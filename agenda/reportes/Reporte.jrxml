@@ -40,7 +40,7 @@ WHERE
 	 a.IdProvincia = b.IdProvincia 
 	 AND c.Localidad = a.IdLocalidad 
      AND d.IdPais = b.IdPais
-ORDER BY b.`IdProvincia` ASC]]>
+ORDER BY b.`NombreProvincia` ASC]]>
 	</queryString>
 	<field name="Nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
