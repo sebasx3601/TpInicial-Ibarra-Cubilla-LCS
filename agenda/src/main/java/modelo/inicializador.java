@@ -100,7 +100,7 @@ public class inicializador {
 			+ "(\r\n"
 			+ "	`IdProvincia` int(11) NOT NULL AUTO_INCREMENT,\r\n"
 			+ "	`NombreProvincia` varchar(30) NOT NULL,\r\n"
-			+ "	`IdPais` varchar(20) NOT NULL,\r\n"
+			+ "	`IdPais` int(11) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdProvincia`)\r\n"
 			+ ");";
 	
@@ -108,7 +108,7 @@ public class inicializador {
 			+ "(\r\n"
 			+ "	`IdLocalidad` int(11) NOT NULL AUTO_INCREMENT,\r\n"
 			+ "	`NombreLocalidad` varchar(30) NOT NULL,\r\n"
-			+ "	`IdProvincia` varchar(20) NOT NULL,\r\n"
+			+ "	`IdProvincia` int(11) NOT NULL,\r\n"
 			+ "	PRIMARY KEY (`IdLocalidad`)\r\n"
 			+ ");";
 	
