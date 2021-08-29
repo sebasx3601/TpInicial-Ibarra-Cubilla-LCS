@@ -3,6 +3,32 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="284e0c88-a4b2-4ff8-98a2-d67b80bcffaf">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Agenda SQL"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="Contador" uuid="af4d5e7c-2a88-4819-bfef-4a35a7546d00">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Agenda SQL"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT count(*), b.`NombreProvincia`
+FROM agenda.localidad as a,
+	agenda.provincia as b,
+	agenda.personas as c,
+    agenda.pais as d
+WHERE 
+	 a.IdProvincia = b.IdProvincia 
+	 AND c.Localidad = a.IdLocalidad 
+     AND d.IdPais = b.IdPais
+GROUP BY b.`NombreProvincia`]]>
+		</queryString>
+		<field name="count(*)" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="count(*)"/>
+			<property name="com.jaspersoft.studio.field.label" value="count(*)"/>
+		</field>
+		<field name="NombreProvincia" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="NombreProvincia"/>
+			<property name="com.jaspersoft.studio.field.label" value="NombreProvincia"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="provincia"/>
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT c.Nombre, c.Telefono, c.Localidad, a.NombreLocalidad, b.NombreProvincia, d.NombrePais, b.IdProvincia
@@ -14,7 +40,7 @@ WHERE
 	 a.IdProvincia = b.IdProvincia 
 	 AND c.Localidad = a.IdLocalidad 
      AND d.IdPais = b.IdPais
-ORDER BY b.`IdProvincia` DESC]]>
+ORDER BY b.`IdProvincia` ASC]]>
 	</queryString>
 	<field name="Nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
@@ -153,7 +179,27 @@ ORDER BY b.`IdProvincia` DESC]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch"/>
+		<band height="281" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="294" y="81" width="200" height="200" uuid="66186a9f-0528-4a29-bff4-58468ea63178"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Contador" uuid="007f7b64-ad27-40e2-afe8-fa21d4e4ea76"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{NombreProvincia}]]></keyExpression>
+					<valueExpression><![CDATA[$F{count(*)}]]></valueExpression>
+				</pieDataset>
+				<piePlot labelFormat="{2}" legendLabelFormat="{0}">
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="33" splitType="Stretch">
