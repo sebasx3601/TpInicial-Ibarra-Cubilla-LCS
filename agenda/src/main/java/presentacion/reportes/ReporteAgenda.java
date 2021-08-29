@@ -18,6 +18,8 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import dto.PersonaDTO;
 
+import persistencia.conexion.Conexion;
+
 public class ReporteAgenda
 {
 	private JasperReport reporte;
@@ -30,10 +32,12 @@ public class ReporteAgenda
     	//Hardcodeado
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
-    	try		{
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "ReporteAgenda.jasper" );
-			this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
-					new JRBeanCollectionDataSource(personas));
+    	try		{																					//ReporteAgenda.jasper
+			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "Reporte.jasper" );
+			//this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
+			//		new JRBeanCollectionDataSource(personas));
+            this.reporteLleno = JasperFillManager.fillReport(this.reporte,parametersMap,Conexion.getConexion().getSQLConexion());
+            
     		log.info("Se cargó correctamente el reporte");
 		}
 		catch( JRException ex ) 
