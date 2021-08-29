@@ -244,44 +244,47 @@ public class inicializador {
 	}
 	
 	public void insertarPaises() {
-		ejecutarInstruccion("insert into pais values(1,'argentina');");
-		ejecutarInstruccion("insert into pais values(2,'brasil');");
+		ejecutarInstruccion("insert into pais values(1,'Sin especificar');");
+		ejecutarInstruccion("insert into pais values(2,'argentina');");
+		ejecutarInstruccion("insert into pais values(3,'brasil');");
 	}
 	
 	public void insertarProvincia() {
-		ejecutarInstruccion("insert into provincia values(1,'Buenos Aires',1);");
-		ejecutarInstruccion("insert into provincia values(2,'Catamarca',1);");
-		ejecutarInstruccion("insert into provincia values(3,'Chaco',1);");
-		ejecutarInstruccion("insert into provincia values(4,'Chubut',1);");
+		ejecutarInstruccion("insert into provincia values(1,'Sin especificar',1);");
+		ejecutarInstruccion("insert into provincia values(2,'Buenos Aires',2);");
+		ejecutarInstruccion("insert into provincia values(3,'Catamarca',2);");
+		ejecutarInstruccion("insert into provincia values(4,'Chaco',2);");
+		ejecutarInstruccion("insert into provincia values(5,'Chubut',2);");
 		
-		ejecutarInstruccion("insert into provincia values(5,'Arapiraca',2);");
-		ejecutarInstruccion("insert into provincia values(6,'Coruripe',2);");
-		ejecutarInstruccion("insert into provincia values(7,'Maceió',2);");
+		ejecutarInstruccion("insert into provincia values(6,'Arapiraca',3);");
+		ejecutarInstruccion("insert into provincia values(7,'Coruripe',3);");
+		ejecutarInstruccion("insert into provincia values(8,'Maceió',3);");
 	}
 	
 	public void insertarLocalidades() {
-		ejecutarInstruccion("insert into localidad values(1,'Alejandro Petión',1);");
-		ejecutarInstruccion("insert into localidad values(2,'Alto Los Cardales',1);");
-		ejecutarInstruccion("insert into localidad values(3,'Arribeños',1);");
-		ejecutarInstruccion("insert into localidad values(4,'Ascensión',1);");
-		ejecutarInstruccion("insert into localidad values(5,'El Remanso',1);");
+		ejecutarInstruccion("insert into localidad values(1,'Sin especificar',1);");
+		ejecutarInstruccion("insert into localidad values(2,'Alejandro Petión',2);");
+		ejecutarInstruccion("insert into localidad values(3,'Alto Los Cardales',2);");
+		ejecutarInstruccion("insert into localidad values(4,'Arribeños',2);");
+		ejecutarInstruccion("insert into localidad values(5,'Ascensión',2);");
+		ejecutarInstruccion("insert into localidad values(6,'El Remanso',2);");
 		
-		ejecutarInstruccion("insert into localidad values(6,'Aconquija',2);");
-		ejecutarInstruccion("insert into localidad values(7,'Alijilan',2);");
-		ejecutarInstruccion("insert into localidad values(8,'Ancasti',2);");
-		ejecutarInstruccion("insert into localidad values(9,'Andalgala',2);");
-		ejecutarInstruccion("insert into localidad values(10,'Antofagasta',2);");
+		ejecutarInstruccion("insert into localidad values(7,'Aconquija',3);");
+		ejecutarInstruccion("insert into localidad values(8,'Alijilan',3);");
+		ejecutarInstruccion("insert into localidad values(9,'Ancasti',3);");
+		ejecutarInstruccion("insert into localidad values(10,'Andalgala',3);");
+		ejecutarInstruccion("insert into localidad values(11,'Antofagasta',3);");
 		
-		ejecutarInstruccion("insert into localidad values(11,'Campo Largo',3);");
-		ejecutarInstruccion("insert into localidad values(12,'Charata',3);");
-		ejecutarInstruccion("insert into localidad values(13,'Colonia Benítez',3);");
-		ejecutarInstruccion("insert into localidad values(14,'Colonia Elisa',3);");
-		ejecutarInstruccion("insert into localidad values(15,'Colonias Unidas',3);");
+		ejecutarInstruccion("insert into localidad values(12,'Campo Largo',4);");
+		ejecutarInstruccion("insert into localidad values(13,'Charata',4);");
+		ejecutarInstruccion("insert into localidad values(14,'Colonia Benítez',4);");
+		ejecutarInstruccion("insert into localidad values(15,'Colonia Elisa',4);");
+		ejecutarInstruccion("insert into localidad values(16,'Colonias Unidas',4);");
 		
-		ejecutarInstruccion("insert into localidad values(16,'Alto Río Senguer',4);");
-		ejecutarInstruccion("insert into localidad values(17,'Bahía Bustamante',4);");
-		ejecutarInstruccion("insert into localidad values(18,'Camarones',4);");
-		ejecutarInstruccion("insert into localidad values(19,'Cholila',4);");
-		ejecutarInstruccion("insert into localidad values(20,'Comodoro Rivadavia',4);");
+		ejecutarInstruccion("insert into localidad values(17,'Alto Río Senguer',5);");
+		ejecutarInstruccion("insert into localidad values(18,'Bahía Bustamante',5);");
+		ejecutarInstruccion("insert into localidad values(19,'Camarones',5);");
+		ejecutarInstruccion("insert into localidad values(20,'Cholila',5);");
+		ejecutarInstruccion("insert into localidad values(21,'Comodoro Rivadavia',5);");
 	}
 }

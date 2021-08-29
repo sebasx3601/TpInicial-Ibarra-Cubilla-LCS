@@ -29,9 +29,9 @@ public class Main
 		modelo.agregarPersona(new PersonaDTO(0,"Sebastian","550436","","","","",1,"","1999-05-27",1,1));
 		modelo.agregarPersona(new PersonaDTO(0,"Pehuen","02320 456123","","","","",2,"","1995-03-13",1,1));
 		modelo.agregarPersona(new PersonaDTO(0,"Norma","123572","","","","",5,"","1998-01-12",1,1));
-		modelo.agregarPersona(new PersonaDTO(0,"Juan","442923","","","","",6,"","1995-09-22",1,1));
-		modelo.agregarPersona(new PersonaDTO(0,"Francisco","442923","","","","",6,"","1995-09-22",1,1));
-		modelo.agregarPersona(new PersonaDTO(0,"Manuel","442923","","","","",6,"","1995-09-22",1,1));
+		modelo.agregarPersona(new PersonaDTO(0,"Juan","442923","","","","",7,"","1995-09-22",1,1));
+		modelo.agregarPersona(new PersonaDTO(0,"Francisco","442923","","","","",7,"","1995-09-22",1,1));
+		modelo.agregarPersona(new PersonaDTO(0,"Manuel","442923","","","","",7,"","1995-09-22",1,1));
 		Controlador controlador = new Controlador(vista, modelo);
 		controlador.inicializar();
 		

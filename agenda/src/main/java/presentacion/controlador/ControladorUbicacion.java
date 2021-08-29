@@ -8,6 +8,7 @@ import java.util.List;
 
 import dto.LocalidadDTO;
 import dto.PaisDTO;
+import dto.PersonaDTO;
 import dto.ProvinciaDTO;
 import modelo.Agenda;
 import presentacion.vista.AgregarLocalidad;
@@ -150,9 +151,12 @@ public class ControladorUbicacion implements ActionListener {
 		int[] filasSeleccionadas = this.vista.getTablaPais().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
-			idPais = this.paisEnTablas.get(fila).getId();
-			borrarProvincias(idPais);
-			this.agenda.borrarPais(this.paisEnTablas.get(fila));
+			if(fila != 0) {
+				idPais = this.paisEnTablas.get(fila).getId();
+				borrarProvincias(idPais);
+				this.agenda.borrarPais(this.paisEnTablas.get(fila));
+			}
+			
 		}
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
@@ -175,6 +179,11 @@ public class ControladorUbicacion implements ActionListener {
 		localidadesABorrar = agenda.obtenerLocalidadDeProvincia(idProvincia);
 		for(LocalidadDTO l: localidadesABorrar) {
 			agenda.borrarLocalidad(l);
+			List<PersonaDTO> personas = agenda.obtenerPersonas();
+			for(PersonaDTO p: personas) {
+				p.setLocalidad(1);
+				agenda.editarPersona(p);
+			}
 		}
 	}
 	
@@ -183,9 +192,11 @@ public class ControladorUbicacion implements ActionListener {
 		int[] filasSeleccionadas = this.vista.getTablaProvincia().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
-			idProvincia = this.provinciaEnTablas.get(fila).getId();
-			borrarLocalidades(idProvincia);
-			this.agenda.borrarProvincia(this.provinciaEnTablas.get(fila));
+			if(fila != 0) {
+				idProvincia = this.provinciaEnTablas.get(fila).getId();
+				borrarLocalidades(idProvincia);
+				this.agenda.borrarProvincia(this.provinciaEnTablas.get(fila));
+			}
 		}
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
@@ -196,7 +207,9 @@ public class ControladorUbicacion implements ActionListener {
 		int[] filasSeleccionadas = this.vista.getTablaLocalidad().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
-			this.agenda.borrarLocalidad(this.localidadEnTablas.get(fila));
+			if(fila != 0) {
+				this.agenda.borrarLocalidad(this.localidadEnTablas.get(fila));
+			}
 		}
 		refrescarTablaPais();
 		refrescarTablaProvincia(-1);
