@@ -93,23 +93,9 @@ ORDER BY b.`IdProvincia` ASC]]>
 	<group name="Group2">
 		<groupExpression><![CDATA[$F{NombreProvincia}]]></groupExpression>
 		<groupHeader>
-			<band height="82">
+			<band height="60">
 				<frame>
-					<reportElement mode="Opaque" x="-12" y="10" width="568" height="62" forecolor="#030303" backcolor="#B09B9B" uuid="0bdde11e-64cd-4f3d-93f6-6f5ddcc264a4"/>
-					<staticText>
-						<reportElement x="1" y="40" width="161" height="21" uuid="fb94b267-45c0-4221-9e32-1dfabb7aeaa7"/>
-						<textElement textAlignment="Center">
-							<font size="14"/>
-						</textElement>
-						<text><![CDATA[Nombre y apellido]]></text>
-					</staticText>
-					<staticText>
-						<reportElement x="300" y="40" width="100" height="20" uuid="f33c004e-f722-4a3f-9712-6dfb14db8b80"/>
-						<textElement textAlignment="Center">
-							<font size="14"/>
-						</textElement>
-						<text><![CDATA[Teléfono]]></text>
-					</staticText>
+					<reportElement mode="Opaque" x="-12" y="10" width="568" height="50" forecolor="#030303" backcolor="#B09B9B" uuid="0bdde11e-64cd-4f3d-93f6-6f5ddcc264a4"/>
 					<staticText>
 						<reportElement x="-6" y="11" width="100" height="20" uuid="c87601d4-24e2-428c-aa27-12490853c95f"/>
 						<textElement textAlignment="Center">
@@ -125,14 +111,14 @@ ORDER BY b.`IdProvincia` ASC]]>
 						<text><![CDATA[Provincia:]]></text>
 					</staticText>
 					<textField>
-						<reportElement x="381" y="11" width="104" height="20" uuid="ea10e223-63a0-4d09-89c1-c41c4b1db89b"/>
+						<reportElement x="367" y="11" width="104" height="20" uuid="ea10e223-63a0-4d09-89c1-c41c4b1db89b"/>
 						<textElement>
 							<font size="14"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$F{NombreProvincia}]]></textFieldExpression>
 					</textField>
 					<textField>
-						<reportElement x="90" y="11" width="100" height="20" uuid="360f9ec2-f9ac-4b77-861d-ff2f35fb3e0d"/>
+						<reportElement x="70" y="11" width="100" height="20" uuid="360f9ec2-f9ac-4b77-861d-ff2f35fb3e0d"/>
 						<textElement>
 							<font size="14"/>
 						</textElement>
@@ -142,7 +128,7 @@ ORDER BY b.`IdProvincia` ASC]]>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="40">
+			<band height="49">
 				<frame>
 					<reportElement mode="Opaque" x="-11" y="6" width="566" height="34" backcolor="#918080" uuid="a556cc6c-3254-4015-8293-77b8055608a3"/>
 					<textField>
@@ -194,16 +180,31 @@ ORDER BY b.`IdProvincia` ASC]]>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="29" splitType="Stretch"/>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="10" width="161" height="21" uuid="2615c326-58b5-4695-8c3d-c44eda9c8ef0"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Nombre y apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="10" width="100" height="20" uuid="f2f447e5-8675-4237-88f9-8246c0b1ad3c"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="24" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField>
 				<reportElement x="40" y="0" width="270" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
 				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="0" width="210" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
+				<reportElement x="310" y="1" width="210" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
 				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -212,7 +213,7 @@ ORDER BY b.`IdProvincia` ASC]]>
 		<band height="281" splitType="Stretch">
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="5" y="20" width="489" height="261" uuid="66186a9f-0528-4a29-bff4-58468ea63178"/>
+					<reportElement x="5" y="90" width="489" height="190" uuid="66186a9f-0528-4a29-bff4-58468ea63178"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
