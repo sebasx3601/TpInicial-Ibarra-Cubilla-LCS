@@ -31,7 +31,8 @@ GROUP BY b.`NombreProvincia`]]>
 	</subDataset>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT c.Nombre, c.Telefono, c.Localidad, a.NombreLocalidad, b.NombreProvincia, d.NombrePais, b.IdProvincia
+		<![CDATA[SELECT c.Nombre, c.Telefono, c.Localidad, a.NombreLocalidad, b.NombreProvincia, d.NombrePais, b.IdProvincia,
+c.Calle, c.Altura, c.Piso, c.Depto, c.DireccionEmail, date(c.fechaCumple)
 FROM agenda.localidad as a,
 	agenda.provincia as b,
 	agenda.personas as c,
@@ -83,6 +84,40 @@ ORDER BY b.`NombreProvincia`, c.`Nombre` ASC]]>
 		<property name="com.jaspersoft.studio.field.label" value="IdProvincia"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="provincia"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Calle" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Calle"/>
+		<property name="com.jaspersoft.studio.field.label" value="Calle"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Altura" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Altura"/>
+		<property name="com.jaspersoft.studio.field.label" value="Altura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Piso" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Piso"/>
+		<property name="com.jaspersoft.studio.field.label" value="Piso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Depto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Depto"/>
+		<property name="com.jaspersoft.studio.field.label" value="Depto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DireccionEmail" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DireccionEmail"/>
+		<property name="com.jaspersoft.studio.field.label" value="DireccionEmail"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="date(c.fechaCumple)" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date(c.fechaCumple)"/>
+		<property name="com.jaspersoft.studio.field.label" value="date(c.fechaCumple)"/>
 	</field>
 	<variable name="Contador de personas" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{NombreProvincia}]]></variableExpression>
@@ -180,32 +215,76 @@ ORDER BY b.`NombreProvincia`, c.`Nombre` ASC]]>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="32" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="5" y="10" width="161" height="21" uuid="2615c326-58b5-4695-8c3d-c44eda9c8ef0"/>
+				<reportElement x="-12" y="10" width="122" height="21" uuid="2615c326-58b5-4695-8c3d-c44eda9c8ef0"/>
 				<textElement textAlignment="Center">
-					<font size="14"/>
+					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Nombre y apellido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="280" y="10" width="100" height="20" uuid="f2f447e5-8675-4237-88f9-8246c0b1ad3c"/>
-				<textElement textAlignment="Center">
-					<font size="14"/>
+				<reportElement x="110" y="10" width="100" height="20" uuid="f2f447e5-8675-4237-88f9-8246c0b1ad3c"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="10" width="100" height="20" uuid="e8b70ec2-656c-4379-8e83-e1f7f44bc43b"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Calle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="10" width="50" height="20" uuid="1488cae2-49d0-42b1-8ead-764380cba21f"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Altura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="10" width="100" height="20" uuid="8db3b1f7-8200-4f63-b2eb-595a24b74f10"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="10" width="76" height="20" uuid="1c96e417-7986-4714-aeba-476c8dc7cae2"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cumple]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="24" splitType="Stretch">
 			<textField>
-				<reportElement x="40" y="0" width="270" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
+				<reportElement x="-11" y="1" width="121" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
 				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="1" width="210" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
+				<reportElement x="110" y="1" width="100" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
 				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="1" width="100" height="18" uuid="b168339f-9f62-46f8-ae13-2781a17971e4"/>
+				<textFieldExpression><![CDATA[$F{Calle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="1" width="50" height="18" uuid="0653423e-8ada-43fd-9cee-76f0b0551dad"/>
+				<textFieldExpression><![CDATA[$F{Altura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="1" width="120" height="18" uuid="740bd1e0-5195-4a3d-a606-397594390409"/>
+				<textFieldExpression><![CDATA[$F{DireccionEmail}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="1" width="76" height="18" uuid="ae8774b3-165b-40dd-a371-10acdb9d8a75"/>
+				<textFieldExpression><![CDATA[$F{date(c.fechaCumple)}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
