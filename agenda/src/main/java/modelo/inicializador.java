@@ -236,11 +236,12 @@ public class inicializador {
 	}
 	
 	public void insertarTiposDeContacto() {
-		ejecutarInstruccion("insert into tipo_contacto values(1,'trabajo');");
-		ejecutarInstruccion("insert into tipo_contacto values(2,'familia');");
-		ejecutarInstruccion("insert into tipo_contacto values(3,'amigos');");
-		ejecutarInstruccion("insert into tipo_contacto values(4,'Compañeros de tp');");
-		ejecutarInstruccion("insert into tipo_contacto values(5,'Ayudantes');");
+		ejecutarInstruccion("insert into tipo_contacto values(1,'Sin especificar');");
+		ejecutarInstruccion("insert into tipo_contacto values(2,'trabajo');");
+		ejecutarInstruccion("insert into tipo_contacto values(3,'familia');");
+		ejecutarInstruccion("insert into tipo_contacto values(4,'amigos');");
+		ejecutarInstruccion("insert into tipo_contacto values(5,'Compañeros de tp');");
+		ejecutarInstruccion("insert into tipo_contacto values(6,'Ayudantes');");
 	}
 	
 	public void insertarPaises() {

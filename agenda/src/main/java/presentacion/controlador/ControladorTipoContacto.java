@@ -3,6 +3,7 @@ package presentacion.controlador;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
+import dto.PersonaDTO;
 import dto.TipoContactoDTO;
 import modelo.Agenda;
 import presentacion.vista.VentanaAgregarTipoContacto;
@@ -74,7 +75,15 @@ public class ControladorTipoContacto {
 		int[] filasSeleccionadas = this.vista.getTablaPersonas().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
-			this.agenda.borrarTipoContacto(this.tiposContacto.get(fila));
+			if(fila != 0) {
+				this.agenda.borrarTipoContacto(this.tiposContacto.get(fila));
+				List<PersonaDTO> personas = agenda.obtenerPersonas();
+				for(PersonaDTO p: personas) {
+					p.setTipoContacto(1);
+					agenda.editarPersona(p);
+				}
+			}
+			
 		}
 		
 		this.refrescarTabla();
