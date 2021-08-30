@@ -32,15 +32,17 @@ GROUP BY b.`NombreProvincia`]]>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT c.Nombre, c.Telefono, c.Localidad, a.NombreLocalidad, b.NombreProvincia, d.NombrePais, b.IdProvincia,
-c.Calle, c.Altura, c.Piso, c.Depto, c.DireccionEmail, date(c.fechaCumple)
+c.Calle, c.Altura, c.Piso, c.Depto, c.DireccionEmail, date(fechaCumple), e.NombreContacto
 FROM agenda.localidad as a,
 	agenda.provincia as b,
 	agenda.personas as c,
-    agenda.pais as d
+    agenda.pais as d,
+    agenda.tipo_contacto as e
 WHERE 
 	 a.IdProvincia = b.IdProvincia 
 	 AND c.Localidad = a.IdLocalidad 
      AND d.IdPais = b.IdPais
+     AND e.IdContacto = c.tipoContacto
 ORDER BY b.`NombreProvincia`, c.`Nombre` ASC]]>
 	</queryString>
 	<field name="Nombre" class="java.lang.String">
@@ -115,9 +117,15 @@ ORDER BY b.`NombreProvincia`, c.`Nombre` ASC]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="date(c.fechaCumple)" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.name" value="date(c.fechaCumple)"/>
-		<property name="com.jaspersoft.studio.field.label" value="date(c.fechaCumple)"/>
+	<field name="date(fechaCumple)" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date(fechaCumple)"/>
+		<property name="com.jaspersoft.studio.field.label" value="date(fechaCumple)"/>
+	</field>
+	<field name="NombreContacto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NombreContacto"/>
+		<property name="com.jaspersoft.studio.field.label" value="NombreContacto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_contacto"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="Contador de personas" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
 		<variableExpression><![CDATA[$F{NombreProvincia}]]></variableExpression>
@@ -217,74 +225,120 @@ ORDER BY b.`NombreProvincia`, c.`Nombre` ASC]]>
 	<columnHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="-12" y="10" width="122" height="21" uuid="2615c326-58b5-4695-8c3d-c44eda9c8ef0"/>
+				<reportElement x="-12" y="10" width="72" height="21" uuid="2615c326-58b5-4695-8c3d-c44eda9c8ef0"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Nombre y apellido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="110" y="10" width="100" height="20" uuid="f2f447e5-8675-4237-88f9-8246c0b1ad3c"/>
+				<reportElement x="60" y="10" width="70" height="20" uuid="f2f447e5-8675-4237-88f9-8246c0b1ad3c"/>
 				<textElement textAlignment="Left">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Teléfono]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="10" width="100" height="20" uuid="e8b70ec2-656c-4379-8e83-e1f7f44bc43b"/>
+				<reportElement x="130" y="10" width="60" height="20" uuid="e8b70ec2-656c-4379-8e83-e1f7f44bc43b"/>
 				<textElement textAlignment="Left">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Calle]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="10" width="50" height="20" uuid="1488cae2-49d0-42b1-8ead-764380cba21f"/>
+				<reportElement x="190" y="10" width="50" height="20" uuid="1488cae2-49d0-42b1-8ead-764380cba21f"/>
 				<textElement textAlignment="Left">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Altura]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="360" y="10" width="100" height="20" uuid="8db3b1f7-8200-4f63-b2eb-595a24b74f10"/>
+				<reportElement x="240" y="10" width="90" height="20" uuid="8db3b1f7-8200-4f63-b2eb-595a24b74f10"/>
 				<textElement textAlignment="Left">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Correo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="10" width="76" height="20" uuid="1c96e417-7986-4714-aeba-476c8dc7cae2"/>
+				<reportElement x="330" y="10" width="76" height="20" uuid="1c96e417-7986-4714-aeba-476c8dc7cae2"/>
 				<textElement textAlignment="Left">
-					<font size="12"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Cumple]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="10" width="64" height="20" uuid="17c7973d-989f-4159-b4e1-52b517152d81"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Localidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="10" width="64" height="20" uuid="bd91512e-7d24-4f1b-bbb5-46302d12ed5e"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tipo de contacto]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="24" splitType="Stretch">
 			<textField>
-				<reportElement x="-11" y="1" width="121" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
+				<reportElement x="-11" y="1" width="71" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="1" width="100" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
+				<reportElement x="60" y="1" width="70" height="18" uuid="dd3f7d4c-c2c3-4ee6-8d98-1b88fe0228ec"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="210" y="1" width="100" height="18" uuid="b168339f-9f62-46f8-ae13-2781a17971e4"/>
+				<reportElement x="130" y="1" width="60" height="18" uuid="b168339f-9f62-46f8-ae13-2781a17971e4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Calle}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="1" width="50" height="18" uuid="0653423e-8ada-43fd-9cee-76f0b0551dad"/>
+				<reportElement x="190" y="1" width="50" height="18" uuid="0653423e-8ada-43fd-9cee-76f0b0551dad"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Altura}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="360" y="1" width="120" height="18" uuid="740bd1e0-5195-4a3d-a606-397594390409"/>
+				<reportElement x="240" y="1" width="90" height="18" uuid="740bd1e0-5195-4a3d-a606-397594390409"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{DireccionEmail}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="480" y="1" width="76" height="18" uuid="ae8774b3-165b-40dd-a371-10acdb9d8a75"/>
-				<textFieldExpression><![CDATA[$F{date(c.fechaCumple)}]]></textFieldExpression>
+				<reportElement x="330" y="1" width="76" height="18" uuid="ae8774b3-165b-40dd-a371-10acdb9d8a75"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date(fechaCumple)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="1" width="64" height="18" uuid="92291e02-993a-4cde-80ad-38a18ab39e1c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreLocalidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="1" width="64" height="18" uuid="b74870be-6aa9-48d7-a1f3-2d8a4abb2cc5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreContacto}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
