@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JButton;
 
 import dto.GeneroDTO;
+import dto.PersonaDTO;
 import modelo.Agenda;
 import presentacion.vista.VentanaGenero;
 import presentacion.vista.VistaGenero;
@@ -96,7 +97,14 @@ public class ControladorGenero {
 		int[] filasSeleccionadas = this.vista.getTabla().getSelectedRows();
 		for (int fila : filasSeleccionadas)
 		{
-			this.agenda.borrarGenero(this.listaGenero.get(fila));
+			if(fila != 0) {
+				this.agenda.borrarGenero(this.listaGenero.get(fila));
+				List<PersonaDTO> personas = agenda.obtenerPersonas();
+				for(PersonaDTO p: personas) {
+					p.setIdGenero(1);
+					agenda.editarPersona(p);
+				}
+			}
 		}
 		this.refrescarTablaGenero();
 	}
