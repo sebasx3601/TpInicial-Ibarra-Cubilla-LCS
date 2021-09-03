@@ -12,12 +12,26 @@ public class inicializador {
 	private Connection connection;
 	private Logger log = Logger.getLogger(inicializador.class);
 	
-	public inicializador()
+	String usuario;
+	String contra;
+	String servidor;
+	String puerto;
+	
+	String direccionServidor = "";
+	
+	public inicializador(String us, String con, String ser, String pue)
 	{
+		usuario = us;
+		contra = con;
+		servidor = ser;
+		puerto = pue;
+		
+		direccionServidor = "jdbc:mysql://"+servidor+":"+puerto+"/";
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver"); // quitar si no es necesario
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","root");
+			//this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","root");
+			this.connection = DriverManager.getConnection(direccionServidor,usuario,contra);
 			this.connection.setAutoCommit(false);
 			log.info("Conexión exitosa");
 		}
@@ -26,7 +40,7 @@ public class inicializador {
 			log.error("Conexión fallida", e);
 		}
 	}
-	
+	/*
 	public static inicializador getConexion()   
 	{								
 		if(instancia == null)
@@ -35,7 +49,7 @@ public class inicializador {
 		}
 		return instancia;
 	}
-
+*/
 	public Connection getSQLConexion() 
 	{
 		return this.connection;
@@ -173,7 +187,8 @@ public class inicializador {
 	
 	public boolean ejecutarInstruccion(String instruccion) {
 		PreparedStatement statement;
-		Connection conexion = inicializador.getConexion().getSQLConexion();
+		//Connection conexion = inicializador.getConexion().getSQLConexion();
+		Connection conexion = getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{

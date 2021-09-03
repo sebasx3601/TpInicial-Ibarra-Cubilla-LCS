@@ -7,6 +7,7 @@ import modelo.inicializador;
 import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.controlador.Controlador;
 import presentacion.controlador.ControladorGenero;
+import presentacion.controlador.ControladorInicializador;
 import presentacion.controlador.ControladorTipoContacto;
 import presentacion.controlador.ControladorUbicacion;
 import presentacion.vista.VentanaAgregarTipoContacto;
@@ -20,11 +21,13 @@ public class Main
 
 	public static void main(String[] args) 
 	{
-		inicializador proto = new inicializador();
+		ControladorInicializador inicio = new ControladorInicializador();
+		//inicializador proto = new inicializador();
 		//proto.borrarBaseDatos();
 		//proto.crearBaseDatos();
-		proto.crearTodaLaBaseDeDatos();
+		//proto.crearTodaLaBaseDeDatos();
 		
+		/*
 		Vista vista = new Vista();
 		Agenda modelo = new Agenda(new DAOSQLFactory());
 		modelo.agregarPersona(new PersonaDTO(0,"Sebastian","550436","Jose Hernandez","1234","piso 1","No dept",1,"sebas@hotmail.com","1999-05-27",2,2));
@@ -51,6 +54,7 @@ public class Main
 		
 		ControladorGenero ep = new ControladorGenero(modelo);
 		ep.inicializar();
+		*/
 	}
 }
 //prueba para poder pushearlas carpetas que el git no descarga
