@@ -59,8 +59,15 @@ public class ControladorInicializador implements ActionListener{
 		//proto.borrarBaseDatos(); las funciones borrar y crear fueron comentadas
 		//proto.crearBaseDatos();
 		proto.crearTodaLaBaseDeDatos();
-		
-		Vista vista = new Vista();
+		insertarDatosIniciales();
+		abrirVentanas();
+	}
+	
+	public void abrirVentanaInicio() {
+		vista.show();
+	}
+	
+	public void insertarDatosIniciales() {
 		Agenda modelo = new Agenda(new DAOSQLFactory());
 		modelo.agregarPersona(new PersonaDTO(0,"Sebastian","550436","Jose Hernandez","1234","piso 1","No dept",1,"sebas@hotmail.com","1999-05-27",2,2));
 		modelo.agregarPersona(new PersonaDTO(0,"Pehuen","02320 456123","Ituzaingo","1009","3","-",2,"Pehuen@gmail.com","1995-03-13",3,2));
@@ -73,6 +80,12 @@ public class ControladorInicializador implements ActionListener{
 		modelo.agregarGenero(new GeneroDTO(2,"Masculino"));
 		modelo.agregarGenero(new GeneroDTO(3,"Femenino"));
 		modelo.agregarGenero(new GeneroDTO(4,"Otro"));
+	}
+	
+	public void abrirVentanas() {
+		this.vista.cerrar();
+		Vista vista = new Vista();
+		Agenda modelo = new Agenda(new DAOSQLFactory());
 		
 		Controlador controlador = new Controlador(vista, modelo);
 		controlador.inicializar();
@@ -86,16 +99,6 @@ public class ControladorInicializador implements ActionListener{
 		
 		ControladorGenero ep = new ControladorGenero(modelo);
 		ep.inicializar();
-		
-		abrirVentanas();
-	}
-	
-	public void abrirVentanaInicio() {
-		vista.show();
-	}
-	
-	public void abrirVentanas() {
-		
 	}
 
 }

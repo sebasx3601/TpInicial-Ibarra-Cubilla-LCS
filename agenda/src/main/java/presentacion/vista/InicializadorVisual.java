@@ -163,4 +163,10 @@ public class InicializadorVisual
 	public void inicializarPrograma() {
 		
 	}
+	
+	public void cerrar()
+	{
+		frame.dispose();
+	}
+	
 }
