@@ -21,8 +21,8 @@ public class Main
 	public static void main(String[] args) 
 	{
 		inicializador proto = new inicializador();
-		proto.borrarBaseDatos();
-		proto.crearBaseDatos();
+		//proto.borrarBaseDatos();
+		//proto.crearBaseDatos();
 		proto.crearTodaLaBaseDeDatos();
 		
 		Vista vista = new Vista();

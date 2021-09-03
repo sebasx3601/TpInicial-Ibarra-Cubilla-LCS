@@ -119,6 +119,7 @@ public class inicializador {
 			+ "	PRIMARY KEY (`Id`)\r\n"
 			+ ");";
 	
+	/*
 	public boolean crearBaseDatos() {
 		PreparedStatement statement;
 		Connection conexion = inicializador.getConexion().getSQLConexion();
@@ -168,6 +169,7 @@ public class inicializador {
 		}
 		return isInsertExitoso;
 	}
+	*/
 	
 	public boolean ejecutarInstruccion(String instruccion) {
 		PreparedStatement statement;
@@ -219,6 +221,9 @@ public class inicializador {
 	}
 	
 	public void crearTodaLaBaseDeDatos() {
+		ejecutarInstruccion(eliminarBase);
+		ejecutarInstruccion(crearBase);
+		
 		conectarConBase();
 		this.ejecutarInstruccion("USE `agenda`;");
 		crearTablaPersona();
