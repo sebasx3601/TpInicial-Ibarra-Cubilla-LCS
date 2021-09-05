@@ -58,13 +58,13 @@ public class ControladorInicializador implements ActionListener{
 		String servidor = vista.getTxtServidor().getText();
 		String puerto = vista.getTxtPuerto().getText();
 		
-		inicializador proto = new inicializador(usuario, contra, servidor, puerto);
+		//2do comentado inicializador proto = new inicializador(usuario, contra, servidor, puerto);
 		//proto.borrarBaseDatos(); las funciones borrar y crear fueron comentadas
 		//proto.crearBaseDatos();
-		proto.crearTodaLaBaseDeDatos();
+		//2do comentado proto.crearTodaLaBaseDeDatos();
 		
 		modelo = new Agenda(new DAOSQLFactory());
-		insertarDatosIniciales();
+		//2do comentado insertarDatosIniciales();
 		abrirVentanas();
 	}
 	
