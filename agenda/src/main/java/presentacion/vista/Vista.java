@@ -21,6 +21,8 @@ import dto.TipoContactoDTO;
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Vista
 {
@@ -33,6 +35,10 @@ public class Vista
 	private  String[] nombreColumnas = {"Nombre y apellido","Telefono","Calle","altura","piso","departamento","pais","provincia","localidad","E-Mail","cumpleaños","Tipo de contacto", "Genero"};
 
 	private JButton btnEditar;
+	
+	private JButton btnUbicaciones;
+	private JButton btnTipoContactos;
+	private JButton btnGenero;
 
 	public Vista() 
 	{
@@ -93,6 +99,22 @@ public class Vista
 		btnReporte = new JButton("Reporte");
 		btnReporte.setBounds(307, 228, 89, 23);
 		panel.add(btnReporte);
+		
+		btnUbicaciones = new JButton("ABM ubicaciones");
+		btnUbicaciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnUbicaciones.setBounds(455, 228, 125, 23);
+		panel.add(btnUbicaciones);
+		
+		btnTipoContactos = new JButton("ABM tipo contactos");
+		btnTipoContactos.setBounds(590, 228, 139, 23);
+		panel.add(btnTipoContactos);
+		
+		btnGenero = new JButton("AMB genero");
+		btnGenero.setBounds(739, 228, 125, 23);
+		panel.add(btnGenero);
 	}
 	
 	public void show()
@@ -198,5 +220,23 @@ public class Vista
 			Object[] fila = {nombre, tel,calle,altura,piso,departamento,pais,provincia,localidad, direccion, cumple, tipoCont, genero};
 			this.getModelPersonas().addRow(fila);
 		}
+	}
+	
+	public JButton getBtnUbicaciones() {
+		return btnUbicaciones;
+	}
+
+
+	public JButton getBtnTipoContactos() {
+		return btnTipoContactos;
+	}
+
+
+	public JButton getBtnGenero() {
+		return btnGenero;
+	}
+	
+	public void cerrarVentana() {
+		frame.dispose();
 	}
 }

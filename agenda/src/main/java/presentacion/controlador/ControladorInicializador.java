@@ -38,7 +38,7 @@ public class ControladorInicializador implements ActionListener{
 	public void actionPerformed(ActionEvent e) { }
 	
 	public void inicializarBotones() {
-		vista.getBtnEmpezarDeNuevo().addActionListener(r->botonEmpezarDeNuevo(r));
+		//vista.getBtnEmpezarDeNuevo().addActionListener(r->botonEmpezarDeNuevo(r));
 		vista.getBtnIniciar().addActionListener(r->botonConectar(r));
 	}
 	
@@ -49,7 +49,8 @@ public class ControladorInicializador implements ActionListener{
 		String puerto = vista.getTxtPuerto().getText();
 		
 		modelo = new Agenda(new DAOSQLFactory());
-		abrirVentanas();
+		//abrirVentanas();
+		iniciarAgenda();
 	}
 	
 	public void botonEmpezarDeNuevo(ActionEvent a) {
@@ -65,7 +66,7 @@ public class ControladorInicializador implements ActionListener{
 		
 		modelo = new Agenda(new DAOSQLFactory());
 		//2do comentado insertarDatosIniciales();
-		abrirVentanas();
+		iniciarAgenda();
 	}
 	
 	public void abrirVentanaInicio() {
@@ -86,13 +87,13 @@ public class ControladorInicializador implements ActionListener{
 		modelo.agregarGenero(new GeneroDTO(4,"Otro"));
 	}
 	
-	public void abrirVentanas() {
+	public void iniciarAgenda() {
 		this.vista.cerrar();
 		Vista vista = new Vista();
 		
 		Controlador controlador = new Controlador(vista, modelo);
 		controlador.inicializar();
-		
+		/*
 		ControladorTipoContacto contro = new ControladorTipoContacto(new VistaContacto(), modelo);
 		contro.inicializar();
 		
@@ -102,6 +103,7 @@ public class ControladorInicializador implements ActionListener{
 		
 		ControladorGenero ep = new ControladorGenero(modelo);
 		ep.inicializar();
+		*/
 	}
 
 }

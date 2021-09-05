@@ -30,7 +30,6 @@ public class InicializadorVisual
 	private JTextField txtPuerto;
 	
 	private JButton btnIniciar;
-	private JButton btnEmpezarDeNuevo;
 
 	public InicializadorVisual() 
 	{
@@ -91,14 +90,6 @@ public class InicializadorVisual
 		txtPuerto.setBounds(173, 164, 136, 20);
 		panel.add(txtPuerto);
 		
-		btnEmpezarDeNuevo = new JButton("Empezar de nuevo");
-		btnEmpezarDeNuevo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnEmpezarDeNuevo.setBounds(280, 214, 144, 23);
-		panel.add(btnEmpezarDeNuevo);
-		
 		inicializarTxtFields();
 		inicializarBotones();
 	}
@@ -142,10 +133,6 @@ public class InicializadorVisual
 
 	public JTextField getTxtPuerto() {
 		return txtPuerto;
-	}
-
-	public JButton getBtnEmpezarDeNuevo() {
-		return btnEmpezarDeNuevo;
 	}
 	
 	public void inicializarTxtFields() {

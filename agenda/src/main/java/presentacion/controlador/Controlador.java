@@ -15,6 +15,8 @@ import modelo.Agenda;
 import presentacion.reportes.ReporteAgenda;
 import presentacion.vista.VentanaPersona;
 import presentacion.vista.Vista;
+import presentacion.vista.VistaContacto;
+import presentacion.vista.VistaDomicilio;
 import presentacion.vista.fecha;
 import dto.GeneroDTO;
 import dto.LocalidadDTO;
@@ -65,6 +67,29 @@ public class Controlador implements ActionListener
 			this.ventanaParaCumple = fecha.getInstance();
 			
 			this.ventanaPersona.getBtnCumple().addActionListener(r->seleccionarAnio(r));
+			
+			this.vista.getBtnTipoContactos().addActionListener(r->abrirTipoContactos(r));
+			this.vista.getBtnUbicaciones().addActionListener(r->abrirUbicaciones(r));
+			this.vista.getBtnGenero().addActionListener(r->abrirGenero(r));
+		}
+		
+		private void abrirTipoContactos(ActionEvent a) {
+			vista.cerrarVentana();
+			ControladorTipoContacto contro = new ControladorTipoContacto(new VistaContacto(), agenda);
+			contro.inicializar();
+		}
+		
+		private void abrirUbicaciones(ActionEvent a) {
+			vista.cerrarVentana();
+			ControladorUbicacion lastContro = new ControladorUbicacion(new VistaDomicilio(), agenda);
+			lastContro.inicializar();
+		}
+
+		private void abrirGenero(ActionEvent a) {
+			vista.cerrarVentana();
+			ControladorGenero ep = new ControladorGenero(agenda);
+			ep.inicializar();
+			
 		}
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
