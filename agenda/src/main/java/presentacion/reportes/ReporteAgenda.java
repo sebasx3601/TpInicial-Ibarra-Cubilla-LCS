@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -33,7 +34,11 @@ public class ReporteAgenda
 		Map<String, Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("Fecha", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));		
     	try		{																					//ReporteAgenda.jasper
-			this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "Reporte.jasper" );
+			
+    		File n = new File("");
+    		String dir = n.getAbsolutePath()+"\\reportes\\Reporte.jrxml";
+    		this.reporte = JasperCompileManager.compileReport(dir);
+    		//this.reporte = (JasperReport) JRLoader.loadObjectFromFile( "reportes" + File.separator + "Reporte.jasper" );
 			//this.reporteLleno = JasperFillManager.fillReport(this.reporte, parametersMap, 
 			//		new JRBeanCollectionDataSource(personas));
             this.reporteLleno = JasperFillManager.fillReport(this.reporte,parametersMap,Conexion.getConexion().getSQLConexion());
