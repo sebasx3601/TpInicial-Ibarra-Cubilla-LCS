@@ -7,11 +7,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+
+import dto.GeneroDTO;
 
 public class Conexion {
 	public static Conexion instancia;
@@ -25,7 +30,6 @@ public class Conexion {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // quitar si no es necesario
 			this.connection = DriverManager.getConnection("jdbc:mysql://"+servidor+":"+puerto+"/agenda", "root", "root");
 			this.connection.setAutoCommit(false);
-			log.info("Conexión exitosa");
 		} catch (Exception e) {
 			log.error("Conexión fallida", e);
 		}
@@ -79,5 +83,30 @@ public class Conexion {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+	
+	private static final String consultar = "SELECT contra FROM usuario WHERE nombre = ?;";
+	
+	public static boolean esUsuarioValido() {
+		ArrayList<GeneroDTO> ret = new ArrayList<GeneroDTO>();
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		String contraTabla = "";
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(consultar);
+			statement.setString(1, Conexion.leerDatosInicio("usuario"));
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				contraTabla = resultSet.getString("contra");
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return contraTabla.equals(Conexion.leerDatosInicio("contra"));
 	}
 }

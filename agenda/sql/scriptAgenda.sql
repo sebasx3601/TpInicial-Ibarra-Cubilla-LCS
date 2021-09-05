@@ -117,3 +117,12 @@ fechaCumple, tipoContacto, idgenero) VALUES(0, 'Manuel', '442923',
 'Uruguay', '135', '', 
 '', 7, 'No tiene', 
 '1995-09-22', 1, 1);
+
+CREATE TABLE `usuario`
+(
+	`nombre`  varchar(30) NOT NULL,
+	`contra` varchar(30) NOT NULL,
+	PRIMARY KEY (`nombre`)
+);
+
+INSERT INTO usuario(nombre, contra) VALUES('Sebas', 'no');

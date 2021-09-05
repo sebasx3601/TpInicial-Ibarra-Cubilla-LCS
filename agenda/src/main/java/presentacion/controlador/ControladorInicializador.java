@@ -54,6 +54,8 @@ public class ControladorInicializador implements ActionListener{
 		Map<String, String> datosConexion = new HashMap<String, String>();
 		datosConexion.put("servidor", servidor);
 		datosConexion.put("puerto", puerto);
+		datosConexion.put("usuario", usuario);
+		datosConexion.put("contra", contra);
 		Conexion.guardarDatosInicio(datosConexion);
 		
 		modelo = new Agenda(new DAOSQLFactory());
@@ -96,11 +98,15 @@ public class ControladorInicializador implements ActionListener{
 	}
 	
 	public void iniciarAgenda() {
-		this.vista.cerrar();
-		Vista vista = new Vista();
 		
-		Controlador controlador = new Controlador(vista, modelo);
-		controlador.inicializar();
+		if(Conexion.esUsuarioValido()) {
+			this.vista.cerrar();
+			Vista vista = new Vista();
+			
+			Controlador controlador = new Controlador(vista, modelo);
+			controlador.inicializar();
+		}
+		
 		/*
 		ControladorTipoContacto contro = new ControladorTipoContacto(new VistaContacto(), modelo);
 		contro.inicializar();
