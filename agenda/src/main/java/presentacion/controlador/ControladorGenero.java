@@ -11,6 +11,7 @@ import dto.GeneroDTO;
 import dto.PersonaDTO;
 import modelo.Agenda;
 import presentacion.vista.VentanaGenero;
+import presentacion.vista.Vista;
 import presentacion.vista.VistaGenero;
 
 public class ControladorGenero {
@@ -25,6 +26,15 @@ public class ControladorGenero {
 		this.agenda = agenda;
 		vista = new VistaGenero();
 		this.ventanaAux = VentanaGenero.getInstance();
+		
+		this.vista.getBtnVolver().addActionListener(p->volverAPersona(p));
+	}
+	
+	private void volverAPersona(ActionEvent a) {
+		vista.cerrarVentana();
+		Vista vista = new Vista();
+		Controlador controlador = new Controlador(vista, agenda);
+		controlador.inicializar();
 	}
 	
 	public void inicializarBotones() {

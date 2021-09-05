@@ -28,7 +28,15 @@ public class ControladorTipoContacto {
 		
 		this.agenda = agenda;
 		refrescarTabla();
-		this.vista.getBtnEditar().addActionListener(p->mostrarVentanaEditarTipoContacto(p));
+		
+		this.vista.getBtnVolver().addActionListener(p->volverAPersona(p));
+	}
+	
+	private void volverAPersona(ActionEvent a) {
+		vista.cerrarVentana();
+		Vista vista = new Vista();
+		Controlador controlador = new Controlador(vista, agenda);
+		controlador.inicializar();
 	}
 	
 	private void mostrarVentanaAgregarTipoContacto(ActionEvent a) {

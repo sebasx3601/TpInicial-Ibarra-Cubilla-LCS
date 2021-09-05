@@ -30,6 +30,7 @@ public class VistaGenero
 	private  String[] nombreColumnas = {"Id genero","Nombre de genero"};
 	
 	private JButton btnEditar;
+	private JButton btnVolver;
 
 	public VistaGenero() 
 	{
@@ -75,8 +76,24 @@ public class VistaGenero
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(208, 228, 89, 23);
 		panel.add(btnBorrar);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnVolver.setBounds(335, 228, 89, 23);
+		panel.add(btnVolver);
 	}
 	
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+	public void cerrarVentana() {
+		frame.dispose();
+	}
+
 	public void show()
 	{
 		this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

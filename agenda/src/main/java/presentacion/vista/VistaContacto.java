@@ -30,6 +30,8 @@ public class VistaContacto
 	
 	private JButton btnEditar;
 
+	private JButton btnVolver;
+
 	public VistaContacto() 
 	{
 		super();
@@ -74,6 +76,10 @@ public class VistaContacto
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(208, 228, 89, 23);
 		panel.add(btnBorrar);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(335, 228, 89, 23);
+		panel.add(btnVolver);
 	}
 	
 	public void show()
@@ -138,5 +144,13 @@ public class VistaContacto
 			this.getModelTipoContacto().addRow(fila);
 		}
 		
+	}
+	
+	public void cerrarVentana() {
+		frame.dispose();
+	}
+	
+	public JButton getBtnVolver() {
+		return btnVolver;
 	}
 }

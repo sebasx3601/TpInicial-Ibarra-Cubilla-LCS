@@ -30,7 +30,6 @@ public class VistaDomicilio
 	private JButton btnAgregarPais;
 	private JButton btnEditarPais;
 	private JButton btnBorrarPais;
-	private JButton btnSalir;
 	private DefaultTableModel modelPais;
 	private DefaultTableModel modelProvincia;
 	private DefaultTableModel modelLocalidad;
@@ -52,6 +51,7 @@ public class VistaDomicilio
 	
 	private JScrollPane spPais;
 	private JButton btnMostrarLocalidades;
+	private JButton btnVolver;
 
 	public VistaDomicilio() 
 	{
@@ -119,14 +119,6 @@ public class VistaDomicilio
 		btnBorrarPais.setBounds(10, 457, 130, 38);
 		panel.add(btnBorrarPais);
 		
-		btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSalir.setBounds(376, 521, 89, 23);
-		panel.add(btnSalir);
-		
 		
 		
 		spLocalidad = new JScrollPane();
@@ -177,8 +169,20 @@ public class VistaDomicilio
 		});
 		btnMostrarLocalidades.setBounds(168, 506, 130, 38);
 		panel.add(btnMostrarLocalidades);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(376, 521, 89, 23);
+		panel.add(btnVolver);
 	}
 	
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+	public void cerrarVentana() {
+		frame.dispose();
+	}
+
 	public JButton getBtnEditarLocalidad() {
 		return btnEditarLocalidad;
 	}
@@ -246,11 +250,6 @@ public class VistaDomicilio
 	public JButton getBtnBorrarPais() 
 	{
 		return btnBorrarPais;
-	}
-	
-	public JButton getBtnSalir() 
-	{
-		return btnSalir;
 	}
 	
 	public DefaultTableModel getModelPais() 

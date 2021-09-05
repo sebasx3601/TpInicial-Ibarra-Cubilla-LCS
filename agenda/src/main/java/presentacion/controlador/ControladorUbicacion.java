@@ -61,6 +61,15 @@ public class ControladorUbicacion implements ActionListener {
 		
 		this.vista.getBtnEditarLocalidad().addActionListener(s->editarLocalidadBoton(s));
 		vistaAgregarLocalidad.setAgenda(agenda);
+		
+		this.vista.getBtnVolver().addActionListener(p->volverAPersona(p));
+	}
+	
+	private void volverAPersona(ActionEvent a) {
+		vista.cerrarVentana();
+		Vista vista = new Vista();
+		Controlador controlador = new Controlador(vista, agenda);
+		controlador.inicializar();
 	}
 	
 	public void inicializar()
