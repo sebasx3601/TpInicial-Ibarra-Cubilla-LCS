@@ -548,7 +548,7 @@ public class Controlador implements ActionListener
 		
 		public String formarFecha() {
 			if(diaCumpleCreado.equals("")) {
-				return "0000-00-00";
+				return "1000-10-10";
 			}
 			return anioCumpleCreado+"-"+mesCumpleCreado+"-"+diaCumpleCreado;
 		}
