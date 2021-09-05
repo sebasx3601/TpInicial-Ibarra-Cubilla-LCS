@@ -2,11 +2,14 @@ package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import dto.GeneroDTO;
 import dto.PersonaDTO;
 import modelo.Agenda;
 import modelo.inicializador;
+import persistencia.conexion.Conexion;
 import persistencia.dao.mysql.DAOSQLFactory;
 import presentacion.vista.InicializadorVisual;
 import presentacion.vista.Vista;
@@ -47,6 +50,11 @@ public class ControladorInicializador implements ActionListener{
 		String contra = vista.getTxtContra().getText();
 		String servidor = vista.getTxtServidor().getText();
 		String puerto = vista.getTxtPuerto().getText();
+		
+		Map<String, String> datosConexion = new HashMap<String, String>();
+		datosConexion.put("servidor", servidor);
+		datosConexion.put("puerto", puerto);
+		Conexion.guardarDatosInicio(datosConexion);
 		
 		modelo = new Agenda(new DAOSQLFactory());
 		//abrirVentanas();
