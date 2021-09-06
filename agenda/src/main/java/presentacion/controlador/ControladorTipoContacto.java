@@ -1,6 +1,7 @@
 package presentacion.controlador;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import dto.PersonaDTO;
@@ -24,6 +25,7 @@ public class ControladorTipoContacto {
 		this.vista = vista;
 		this.vista.getBtnAgregar().addActionListener(a->mostrarVentanaAgregarTipoContacto(a));
 		this.vista.getBtnBorrar().addActionListener(s->borrarTipoContacto(s));
+		this.vista.getBtnEditar().addActionListener(s->mostrarVentanaEditarTipoContacto(s));
 		this.ventanaContacto = VentanaAgregarTipoContacto.getInstance();
 		
 		this.agenda = agenda;
@@ -124,6 +126,9 @@ public class ControladorTipoContacto {
 		this.ventanaContacto.getBtnAgregarContacto().setText("Editar");
 		this.ventanaContacto.getTxtContacto().setText(tiposContacto.get(filasSeleccionadas[0]).getNombreTipoContacto());
 		
+		for(ActionListener l: this.ventanaContacto.getBtnAgregarContacto().getActionListeners()) {
+			this.ventanaContacto.getBtnAgregarContacto().removeActionListener(l);
+		}
 		this.ventanaContacto.getBtnAgregarContacto().addActionListener(p->editarTipoContacto(p));
 		
 		contactoSiendoEditado = tiposContacto.get(filasSeleccionadas[0]);
