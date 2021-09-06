@@ -60,7 +60,9 @@ public class ControladorInicializador implements ActionListener{
 		
 		modelo = new Agenda(new DAOSQLFactory());
 		//abrirVentanas();
-		iniciarAgenda();
+		if(Conexion.esUsuarioValido(usuario,contra)) {
+			iniciarAgenda();
+		}
 	}
 	
 	public void botonEmpezarDeNuevo(ActionEvent a) {
@@ -99,13 +101,13 @@ public class ControladorInicializador implements ActionListener{
 	
 	public void iniciarAgenda() {
 		
-		if(Conexion.esUsuarioValido()) {
+		
 			this.vista.cerrar();
 			Vista vista = new Vista();
 			
 			Controlador controlador = new Controlador(vista, modelo);
 			controlador.inicializar();
-		}
+		
 		
 		/*
 		ControladorTipoContacto contro = new ControladorTipoContacto(new VistaContacto(), modelo);

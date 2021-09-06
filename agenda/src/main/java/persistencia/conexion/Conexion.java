@@ -103,7 +103,7 @@ public class Conexion {
 	
 	private static final String consultar = "SELECT contra FROM usuario WHERE nombre = ?;";
 	
-	public static boolean esUsuarioValido() {
+	public static boolean esUsuarioValido(String nombre, String contra) {
 		ArrayList<GeneroDTO> ret = new ArrayList<GeneroDTO>();
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
@@ -112,7 +112,8 @@ public class Conexion {
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(consultar);
-			statement.setString(1, Conexion.leerDatosInicio("usuario"));
+			//statement.setString(1, Conexion.leerDatosInicio("usuario"));
+			statement.setString(1, nombre);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
@@ -123,6 +124,7 @@ public class Conexion {
 		{
 			e.printStackTrace();
 		}
-		return contraTabla.equals(Conexion.leerDatosInicio("contra"));
+		//return contraTabla.equals(Conexion.leerDatosInicio("contra"));
+		return contraTabla.equals(contra);
 	}
 }
