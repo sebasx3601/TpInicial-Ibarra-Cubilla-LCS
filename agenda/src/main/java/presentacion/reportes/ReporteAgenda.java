@@ -43,6 +43,15 @@ public class ReporteAgenda
 			//		new JRBeanCollectionDataSource(personas));
             this.reporteLleno = JasperFillManager.fillReport(this.reporte,parametersMap,Conexion.getConexion().getSQLConexion());
             
+            /* Intento de poder trasladar el report a una carpeta source foulder intento fallido
+            File n = new File("");
+    		//this.reporte = (JasperReport) JRLoader.loadObject(this.getClass().getResource(n.getAbsolutePath()+"\\src\\main\\resources\\reporte\\Reporte.jasper")); // Como se suponia que queria
+    		String dir = n.getAbsolutePath()+"\\reporte\\Reporte.jrxml";	//Como aparentemente funciona
+    		//\\src\\main\\resources
+    		this.reporte = JasperCompileManager.compileReport(dir);
+    		
+            this.reporteLleno = JasperFillManager.fillReport(this.reporte,parametersMap,Conexion.getConexion().getSQLConexion());
+             */
     		log.info("Se cargó correctamente el reporte");
 		}
 		catch( JRException ex ) 
