@@ -27,7 +27,8 @@ public class Conexion {
 		try {
 			String servidor = Conexion.leerDatosInicio("servidor");
 			String puerto = Conexion.leerDatosInicio("puerto");
-			Class.forName("com.mysql.cj.jdbc.Driver"); // quitar si no es necesario
+			Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
+			//Class.forName("com.mysql.cj.jdbc.Driver"); // PARA VERSIONES MAS AVANZADAS
 			this.connection = DriverManager.getConnection("jdbc:mysql://"+servidor+":"+puerto+"/agenda", "root", "root");
 			this.connection.setAutoCommit(false);
 		} catch (Exception e) {
