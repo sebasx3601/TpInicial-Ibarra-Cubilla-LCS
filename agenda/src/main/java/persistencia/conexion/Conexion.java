@@ -67,6 +67,14 @@ public class Conexion {
 			nuevosDatosInicio.store(ret, null);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+            if (ret != null) {
+                try {
+                    ret.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 		}
 	}
 
@@ -81,6 +89,14 @@ public class Conexion {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+            if (ent != null) {
+                try {
+                	ent.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 		}
 		return ret;
 	}
